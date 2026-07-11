@@ -34,7 +34,7 @@ import { AdvancedStadium } from "@/components/arena-verse/AdvancedStadium";
 import { useLanguage } from "@/context/LanguageContext";
 import { collection, onSnapshot, query, limit } from "firebase/firestore";
 import { db } from "@/services/firebase";
-import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
+import { ProtectedRoute as AuthGuard } from "@/components/auth/ProtectedRoute";
 import { useAuth } from "@/context/AuthContext";
 import * as THREE from "three";
 
@@ -339,7 +339,7 @@ export default function ArenaVersePage() {
 
   // Performance optimization: only render what's visible
   return (
-    <ProtectedRoute>
+    <AuthGuard>
       <div className="relative w-full h-screen bg-black overflow-hidden font-sans text-white">
         {/* 3D Engine */}
         <div className="absolute inset-0 z-0">
@@ -359,6 +359,7 @@ export default function ArenaVersePage() {
                 Retry Connection
               </button>
             </div>
+          ) : (
             <Canvas
               shadows
               gl={{
@@ -719,7 +720,7 @@ export default function ArenaVersePage() {
           </button>
         )}
       </div>
-    </ProtectedRoute>
+    </AuthGuard>
   );
 }
 
