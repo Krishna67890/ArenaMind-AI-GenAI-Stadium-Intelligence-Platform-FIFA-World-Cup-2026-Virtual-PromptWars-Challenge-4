@@ -1,0 +1,45 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Allow authenticated users to read and write their own data
+    match /users/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+
+    // Allow public read for stadium alerts to enable demo visualization
+    match /stadium_alerts/{alertId} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    // Allow public read for security alerts to enable demo visualization
+    match /security_alerts/{alertId} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    // Allow anyone to submit a demo request (public form)
+    match /demo_requests/{requestId} {
+      allow create: if true;
+      allow read, update, delete: if request.auth != null;
+    }
+
+    // Allow anyone to book an experience
+    match /experience_bookings/{bookingId} {
+      allow create: if true;
+      allow read: if request.auth != null;
+    }
+
+    // Allow anyone to submit a rating (guest feedback)
+    match /ratings/{ratingId} {
+      allow read: if true;
+      allow create: if true;
+    }
+
+    // Default deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
