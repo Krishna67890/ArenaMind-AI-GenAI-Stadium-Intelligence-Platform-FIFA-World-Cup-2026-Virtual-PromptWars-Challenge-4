@@ -46,11 +46,12 @@ const useWebGLStatus = () => {
     const checkWebGL = () => {
       try {
         const canvas = document.createElement("canvas");
-        const gl = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
+        // Use a more explicit type cast to resolve the Vercel build error
+        const gl = (canvas.getContext("webgl") || canvas.getContext("experimental-webgl")) as any;
 
-        if (!gl) return false;
+        if (!gl || typeof gl.getExtension !== 'function') return false;
 
-        const debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
+        const debugInfo = gl.getExtension("WEBGL_debug_renderer_info");
         if (debugInfo) {
           const renderer = gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL);
           if (typeof renderer === 'string' && (renderer.toLowerCase().includes('disabled') || renderer === '')) {
