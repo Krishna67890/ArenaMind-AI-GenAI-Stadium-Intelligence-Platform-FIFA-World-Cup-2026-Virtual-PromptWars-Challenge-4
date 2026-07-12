@@ -252,7 +252,10 @@ export default function ArenaVersePage() {
       const q = query(collection(db, "stadium_alerts"), limit(3));
       unsubscribe = onSnapshot(q,
         (snapshot) => {
-          const alerts = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+          const alerts = snapshot.docs.map(doc => ({
+            id: doc.id,
+            ...doc.data()
+          })) as { id: string; message: string }[];
           setLiveAlerts(alerts);
         },
         (error) => {
