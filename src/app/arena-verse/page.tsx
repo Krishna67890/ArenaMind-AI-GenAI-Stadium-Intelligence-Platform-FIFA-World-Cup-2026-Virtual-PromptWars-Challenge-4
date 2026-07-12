@@ -735,7 +735,7 @@ export default function ArenaVersePage() {
 }
 
 interface ControlButtonProps {
-  icon: React.ElementType;
+  icon: React.ElementType | any;
   active?: boolean;
   onClick: () => void;
   label: string;
