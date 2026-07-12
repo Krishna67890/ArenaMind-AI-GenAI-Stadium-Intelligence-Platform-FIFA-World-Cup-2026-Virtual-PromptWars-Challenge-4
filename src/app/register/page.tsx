@@ -35,6 +35,7 @@ const InputField = ({ icon: Icon, label, placeholder, type = "text", value, onCh
       </div>
     </div>
   );
+};
 
 export default function RegisterPage() {
   const [formData, setFormData] = useState({

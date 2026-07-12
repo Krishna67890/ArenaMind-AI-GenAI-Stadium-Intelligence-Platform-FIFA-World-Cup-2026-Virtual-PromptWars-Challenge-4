@@ -295,9 +295,10 @@ const StatCard = ({ icon: Icon, label, value, change, color }: StatCardProps) =>
         <span className="text-[10px] font-black text-green-500 uppercase tracking-widest">{change}</span>
       </div>
       <div className="text-4xl font-black italic tracking-tighter uppercase mb-2">{value}</div>
-    <div className="text-[10px] font-black text-white/20 uppercase tracking-[0.3em]">{label}</div>
-  </motion.div>
-);
+      <div className="text-[10px] font-black text-white/20 uppercase tracking-[0.3em]">{label}</div>
+    </motion.div>
+  );
+};
 
 interface StadiumTwinCardProps {
   title: string;
