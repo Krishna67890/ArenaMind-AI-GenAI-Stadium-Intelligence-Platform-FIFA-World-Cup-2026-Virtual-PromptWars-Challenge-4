@@ -35,13 +35,6 @@ const InputField = ({ icon: Icon, label, placeholder, type = "text", value, onCh
       </div>
     </div>
   );
-};
-        className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 pl-14 pr-6 text-white focus:border-blue-500/50 transition-all outline-none"
-        required
-      />
-    </div>
-  </div>
-);
 
 export default function RegisterPage() {
   const [formData, setFormData] = useState({
