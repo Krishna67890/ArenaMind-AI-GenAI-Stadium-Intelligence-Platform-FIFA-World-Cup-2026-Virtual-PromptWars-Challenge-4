@@ -15,7 +15,7 @@ interface HostCity {
   vector: THREE.Vector3;
 }
 
-const hostCities = [
+const hostCities: Omit<HostCity, "vector">[] = [
   { name: "New York", pos: [40.7128, -74.0060], color: "#3b82f6", stadium: "MetLife", traffic: "High", altitude: 0.2 },
   { name: "Los Angeles", pos: [34.0522, -118.2437], color: "#ef4444", stadium: "SoFi", traffic: "Moderate", altitude: 0.15 },
   { name: "Mexico City", pos: [19.4326, -99.1332], color: "#10b981", stadium: "Azteca", traffic: "Low", altitude: 0.3 },
@@ -77,9 +77,10 @@ export const WorldGlobe = ({ activeRoute, onCitySelect }: { activeRoute?: string
     }
   });
 
-  const cityPoints = useMemo(() =>
+  const cityPoints = useMemo<HostCity[]>(() =>
     hostCities.map(city => ({
       ...city,
+      pos: [city.pos[0], city.pos[1]] as [number, number],
       vector: latLongToVector3(city.pos[0], city.pos[1], radius)
     }))
   , [radius]);

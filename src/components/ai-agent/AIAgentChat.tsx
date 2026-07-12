@@ -32,6 +32,15 @@ interface ISpeechRecognition extends EventTarget {
   stop: () => void;
 }
 
+interface SpeechRecognitionConstructor {
+  new (): ISpeechRecognition;
+}
+
+interface WindowWithSpeechRecognition extends Window {
+  webkitSpeechRecognition?: SpeechRecognitionConstructor;
+  speechRecognition?: SpeechRecognitionConstructor;
+}
+
 export const AIAgentChat = () => {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
@@ -51,9 +60,10 @@ export const AIAgentChat = () => {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const SpeechRecognition = (window as any).WebKitSpeechRecognition || (window as any).speechRecognition;
+      const win = window as unknown as WindowWithSpeechRecognition;
+      const SpeechRecognition = win.webkitSpeechRecognition || win.speechRecognition;
       if (SpeechRecognition) {
-        recognitionRef.current = new (SpeechRecognition as any)() as ISpeechRecognition;
+        recognitionRef.current = new SpeechRecognition();
         if (recognitionRef.current) {
           recognitionRef.current.continuous = false;
           recognitionRef.current.interimResults = false;

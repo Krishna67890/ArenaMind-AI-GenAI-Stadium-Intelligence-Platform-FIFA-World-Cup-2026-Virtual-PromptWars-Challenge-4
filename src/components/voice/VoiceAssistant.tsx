@@ -25,6 +25,15 @@ interface ISpeechRecognition extends EventTarget {
   stop: () => void;
 }
 
+interface SpeechRecognitionConstructor {
+  new (): ISpeechRecognition;
+}
+
+interface WindowWithSpeechRecognition extends Window {
+  WebKitSpeechRecognition?: SpeechRecognitionConstructor;
+  SpeechRecognition?: SpeechRecognitionConstructor;
+}
+
 export const VoiceAssistant = ({ onCommand }: { onCommand?: (command: string) => void }) => {
   const router = useRouter();
   const [isListening, setIsListening] = useState(false);
@@ -56,9 +65,10 @@ export const VoiceAssistant = ({ onCommand }: { onCommand?: (command: string) =>
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const SpeechRecognition = (window as any).WebKitSpeechRecognition || (window as any).SpeechRecognition;
+      const win = window as unknown as WindowWithSpeechRecognition;
+      const SpeechRecognition = win.WebKitSpeechRecognition || win.SpeechRecognition;
       if (SpeechRecognition) {
-        recognitionRef.current = new (SpeechRecognition as any)() as ISpeechRecognition;
+        recognitionRef.current = new SpeechRecognition();
         if (recognitionRef.current) {
           recognitionRef.current.continuous = false;
           recognitionRef.current.interimResults = false;
