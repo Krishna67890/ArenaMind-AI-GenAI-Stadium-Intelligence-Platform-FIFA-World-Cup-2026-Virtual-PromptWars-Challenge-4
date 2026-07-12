@@ -58,7 +58,7 @@ export const VoiceAssistant = ({ onCommand }: { onCommand?: (command: string) =>
     if (typeof window !== "undefined") {
       const SpeechRecognition = (window as any).WebKitSpeechRecognition || (window as any).SpeechRecognition;
       if (SpeechRecognition) {
-        recognitionRef.current = new SpeechRecognition() as ISpeechRecognition;
+        recognitionRef.current = new (SpeechRecognition as any)() as ISpeechRecognition;
         if (recognitionRef.current) {
           recognitionRef.current.continuous = false;
           recognitionRef.current.interimResults = false;

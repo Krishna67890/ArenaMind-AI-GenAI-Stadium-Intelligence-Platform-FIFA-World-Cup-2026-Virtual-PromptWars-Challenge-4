@@ -194,7 +194,9 @@ export default function ProfilePage() {
                     </div>
                     <div className="flex justify-between items-center">
                        <span className="text-xs text-white/60">Joined</span>
-                       <span className="text-[10px] text-white font-bold">{new Date(userData?.joinedDate).toLocaleDateString()}</span>
+                       <span className="text-[10px] text-white font-bold">
+                         {userData?.joinedDate ? new Date(userData.joinedDate).toLocaleDateString() : "---"}
+                       </span>
                     </div>
                  </div>
               </div>

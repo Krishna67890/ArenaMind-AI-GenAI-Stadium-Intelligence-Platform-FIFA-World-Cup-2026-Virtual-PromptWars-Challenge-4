@@ -53,7 +53,7 @@ export const AIAgentChat = () => {
     if (typeof window !== "undefined") {
       const SpeechRecognition = (window as any).WebKitSpeechRecognition || (window as any).speechRecognition;
       if (SpeechRecognition) {
-        recognitionRef.current = new SpeechRecognition() as ISpeechRecognition;
+        recognitionRef.current = new (SpeechRecognition as any)() as ISpeechRecognition;
         if (recognitionRef.current) {
           recognitionRef.current.continuous = false;
           recognitionRef.current.interimResults = false;
