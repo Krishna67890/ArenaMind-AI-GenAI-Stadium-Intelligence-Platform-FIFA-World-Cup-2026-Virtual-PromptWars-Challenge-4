@@ -9,6 +9,32 @@ import { setDoc, doc } from "firebase/firestore";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
+interface InputFieldProps {
+  icon: React.ElementType;
+  label: string;
+  placeholder: string;
+  type?: string;
+  value: string;
+  onChange: (value: string) => void;
+}
+
+const InputField = ({ icon: Icon, label, placeholder, type = "text", value, onChange }: InputFieldProps) => (
+  <div className="space-y-2">
+    <label className="text-[10px] font-bold text-white/30 uppercase tracking-[0.2em] ml-4">{label}</label>
+    <div className="relative">
+      <Icon className="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-white/20" />
+      <input
+        type={type}
+        placeholder={placeholder}
+        value={value}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange(e.target.value)}
+        className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 pl-14 pr-6 text-white focus:border-blue-500/50 transition-all outline-none"
+        required
+      />
+    </div>
+  </div>
+);
+
 export default function RegisterPage() {
   const [formData, setFormData] = useState({
     name: "",
@@ -40,8 +66,8 @@ export default function RegisterPage() {
       });
 
       router.push("/dashboard");
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : String(err));
     } finally {
       setLoading(false);
     }
@@ -85,7 +111,7 @@ export default function RegisterPage() {
                 label="Identity"
                 placeholder="Full Name"
                 value={formData.name}
-                onChange={(v) => setFormData({...formData, name: v})}
+                onChange={(v: string) => setFormData({...formData, name: v})}
               />
               <InputField
                 icon={Mail}
@@ -93,7 +119,7 @@ export default function RegisterPage() {
                 placeholder="Email Address"
                 type="email"
                 value={formData.email}
-                onChange={(v) => setFormData({...formData, email: v})}
+                onChange={(v: string) => setFormData({...formData, email: v})}
               />
               <div className="space-y-2">
                 <label className="text-[10px] font-bold text-white/30 uppercase tracking-[0.2em] ml-4">Access Key</label>
@@ -117,7 +143,7 @@ export default function RegisterPage() {
                 label="Territory"
                 placeholder="Country"
                 value={formData.country}
-                onChange={(v) => setFormData({...formData, country: v})}
+                onChange={(v: string) => setFormData({...formData, country: v})}
               />
             </div>
 
@@ -157,19 +183,3 @@ export default function RegisterPage() {
   );
 }
 
-const InputField = ({ icon: Icon, label, placeholder, type = "text", value, onChange }: any) => (
-  <div className="space-y-2">
-    <label className="text-[10px] font-bold text-white/30 uppercase tracking-[0.2em] ml-4">{label}</label>
-    <div className="relative">
-      <Icon className="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-white/20" />
-      <input
-        type={type}
-        placeholder={placeholder}
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 pl-14 pr-6 text-white focus:border-blue-500/50 transition-all outline-none"
-        required
-      />
-    </div>
-  </div>
-);

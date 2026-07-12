@@ -34,16 +34,17 @@ export const RatingSystem = () => {
 
       // Notify success
       triggerNotification("Rating Received", "Your feedback has been synchronized with the neural core.", "success");
-    } catch (error: any) {
+    } catch (error) {
       console.error("Error submitting rating:", error);
 
       // Fallback for demo/permission issues
-      if (error.code === 'permission-denied' || error.message?.includes('permission')) {
+      const err = error as { code?: string; message?: string };
+      if (err.code === 'permission-denied' || err.message?.includes('permission')) {
         console.warn("Firebase permissions restricted. Simulating successful transmission.");
         setSubmitted(true);
         triggerNotification("Offline Sync Active", "Feedback saved to local neural buffer (Demo Mode).", "info");
       } else {
-        triggerNotification("Submission Error", error.message || "Failed to transmit feedback.", "error");
+        triggerNotification("Submission Error", err.message || "Failed to transmit feedback.", "error");
       }
     } finally {
       setIsSubmitting(false);

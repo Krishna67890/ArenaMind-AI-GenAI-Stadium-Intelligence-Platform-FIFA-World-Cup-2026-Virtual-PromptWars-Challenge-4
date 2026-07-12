@@ -32,8 +32,17 @@ import * as THREE from "three";
 import { Navbar } from "@/components/ui/Navbar";
 import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
 
+interface HostCity {
+  name: string;
+  lat: number;
+  lng: number;
+  stadium: string;
+  congestion: number;
+  status: string;
+}
+
 // Mock Traffic Data for FIFA 2026 Host Cities
-const HOST_CITIES = [
+const HOST_CITIES: HostCity[] = [
   { name: "Mexico City", lat: 19.4326, lng: -99.1332, stadium: "Azteca", congestion: 88, status: "Critical" },
   { name: "New York/New Jersey", lat: 40.7128, lng: -74.006, stadium: "MetLife", congestion: 65, status: "High" },
   { name: "Los Angeles", lat: 34.0522, lng: -118.2437, stadium: "SoFi", congestion: 72, status: "High" },
@@ -42,7 +51,12 @@ const HOST_CITIES = [
   { name: "Vancouver", lat: 49.2827, lng: -123.1207, stadium: "BC Place", congestion: 35, status: "Stable" },
 ];
 
-function GlobalTrafficGlobe({ selectedCity, onCityClick }: any) {
+interface GlobalTrafficGlobeProps {
+  selectedCity: HostCity | null;
+  onCityClick: (city: HostCity) => void;
+}
+
+function GlobalTrafficGlobe({ selectedCity, onCityClick }: GlobalTrafficGlobeProps) {
   const globeRef = useRef<THREE.Group>(null);
 
   useFrame((state) => {
@@ -131,7 +145,7 @@ function GlobalTrafficGlobe({ selectedCity, onCityClick }: any) {
 }
 
 export default function TrafficPredictionPage() {
-  const [selectedCity, setSelectedCity] = useState<any>(null);
+  const [selectedCity, setSelectedCity] = useState<HostCity | null>(null);
   const [activeTab, setActiveTab] = useState("overview");
 
   return (

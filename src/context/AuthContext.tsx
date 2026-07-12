@@ -13,13 +13,28 @@ import { doc, getDoc, setDoc } from "firebase/firestore";
 
 export type UserRole = "organizer" | "staff" | "fan" | "guest";
 
+export interface UserData {
+  uid: string;
+  name: string;
+  email: string | null;
+  photo?: string | null;
+  role: UserRole;
+  joinedDate: string;
+  phone?: string;
+  address?: string;
+  city?: string;
+  country?: string;
+  organization?: string;
+  bio?: string;
+}
+
 interface AuthContextType {
   user: User | null;
   role: UserRole;
   loading: boolean;
   logout: () => Promise<void>;
-  userData: any;
-  updateUserData: (data: any) => Promise<void>;
+  userData: UserData | null;
+  updateUserData: (data: Partial<UserData>) => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -27,7 +42,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [role, setRole] = useState<UserRole>("guest");
-  const [userData, setUserData] = useState<any>(null);
+  const [userData, setUserData] = useState<UserData | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -64,20 +79,21 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           }
 
           if (userDoc.exists()) {
-            const data = userDoc.data();
+            const data = userDoc.data() as UserData;
             setUserData(data);
             setRole(data.role || "fan");
           }
-        } catch (error: any) {
+        } catch (error) {
           console.error("Error fetching user data:", error);
           // If it's a permission error, it might be a race condition.
           // We'll set a default userData so the UI doesn't break.
-          if (error.code === 'permission-denied') {
+          if (error && typeof error === 'object' && 'code' in error && error.code === 'permission-denied') {
              setUserData({
                 uid: firebaseUser.uid,
                 name: firebaseUser.displayName || "User",
                 email: firebaseUser.email,
-                role: "fan"
+                role: "fan",
+                joinedDate: new Date().toISOString()
              });
           }
           setRole("fan");
@@ -101,7 +117,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
-  const updateUserData = async (newData: any) => {
+  const updateUserData = async (newData: Partial<UserData>) => {
     if (!auth.currentUser) {
       console.error("Update failed: No authenticated user.");
       return;
@@ -117,10 +133,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       // Fetch fresh data to ensure local state is perfectly in sync with server
       const freshDoc = await getDoc(docRef);
       if (freshDoc.exists()) {
-        setUserData(freshDoc.data());
+        setUserData(freshDoc.data() as UserData);
       } else {
         // Fallback to optimistic update if fetch fails
-        setUserData((prev: any) => ({ ...prev, ...newData }));
+        setUserData((prev) => (prev ? { ...prev, ...newData } : null));
       }
     } catch (error) {
       console.error("Error updating user data:", error);

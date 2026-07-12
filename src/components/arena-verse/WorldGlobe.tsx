@@ -5,6 +5,16 @@ import { useFrame } from "@react-three/fiber";
 import { Sphere, Trail, Float, Line, Text, Html } from "@react-three/drei";
 import * as THREE from "three";
 
+interface HostCity {
+  name: string;
+  pos: [number, number];
+  color: string;
+  stadium: string;
+  traffic: string;
+  altitude: number;
+  vector: THREE.Vector3;
+}
+
 const hostCities = [
   { name: "New York", pos: [40.7128, -74.0060], color: "#3b82f6", stadium: "MetLife", traffic: "High", altitude: 0.2 },
   { name: "Los Angeles", pos: [34.0522, -118.2437], color: "#ef4444", stadium: "SoFi", traffic: "Moderate", altitude: 0.15 },
@@ -56,7 +66,7 @@ const CityLabel = ({ vector, name, stadium }: { vector: THREE.Vector3, name: str
   );
 };
 
-export const WorldGlobe = ({ activeRoute, onCitySelect }: { activeRoute?: string[], onCitySelect?: (city: any) => void }) => {
+export const WorldGlobe = ({ activeRoute, onCitySelect }: { activeRoute?: string[], onCitySelect?: (city: HostCity) => void }) => {
   const globeRef = useRef<THREE.Group>(null);
   const [hoveredCity, setHoveredCity] = React.useState<string | null>(null);
   const radius = 5;

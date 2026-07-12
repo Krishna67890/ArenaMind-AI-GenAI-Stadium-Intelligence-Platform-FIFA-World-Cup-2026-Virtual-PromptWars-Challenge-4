@@ -38,8 +38,8 @@ export const AuthModal = ({ isOpen, onClose }: AuthModalProps) => {
         await updateProfile(userCredential.user, { displayName: name });
       }
       onClose();
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : String(err));
     } finally {
       setLoading(false);
     }
@@ -50,8 +50,8 @@ export const AuthModal = ({ isOpen, onClose }: AuthModalProps) => {
     try {
       await signInWithPopup(auth, provider);
       onClose();
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : String(err));
     }
   };
 

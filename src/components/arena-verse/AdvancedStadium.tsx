@@ -130,7 +130,12 @@ const RainEffect = () => {
 };
 
 
-const PenaltyArea = ({ position, rotation }: any) => (
+interface PenaltyAreaProps {
+  position: [number, number, number];
+  rotation?: [number, number, number];
+}
+
+const PenaltyArea = ({ position, rotation }: PenaltyAreaProps) => (
   <group position={position} rotation={rotation}>
     <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0, 0]}>
       <planeGeometry args={[4, 0.05]} />
@@ -147,7 +152,12 @@ const PenaltyArea = ({ position, rotation }: any) => (
   </group>
 );
 
-const GoalPost = ({ position, rotation }: any) => (
+interface GoalPostProps {
+  position: [number, number, number];
+  rotation?: [number, number, number];
+}
+
+const GoalPost = ({ position, rotation }: GoalPostProps) => (
   <group position={position} rotation={rotation}>
     <mesh position={[0.8, 0.4, 0]}>
       <cylinderGeometry args={[0.02, 0.02, 0.8]} />
@@ -164,7 +174,12 @@ const GoalPost = ({ position, rotation }: any) => (
   </group>
 );
 
-const Stands = ({ position, rotation }: any) => (
+interface StandsProps {
+  position: [number, number, number];
+  rotation?: [number, number, number];
+}
+
+const Stands = ({ position, rotation }: StandsProps) => (
   <group position={position} rotation={rotation}>
     <mesh position={[0, 0.5, 0]}>
       <boxGeometry args={[12, 1, 2]} />
@@ -181,7 +196,13 @@ const Stands = ({ position, rotation }: any) => (
   </group>
 );
 
-const Floodlight = ({ position, color, intensity }: any) => (
+interface FloodlightProps {
+  position: [number, number, number];
+  color: string;
+  intensity: number;
+}
+
+const Floodlight = ({ position, color, intensity }: FloodlightProps) => (
   <group position={position}>
     <mesh>
       <cylinderGeometry args={[0.1, 0.15, 12]} />
@@ -238,7 +259,12 @@ const Crowd = ({ count, heatLevel }: { count: number, heatLevel: number }) => {
   );
 };
 
-const Scoreboard = ({ position, celebration }: any) => (
+interface ScoreboardProps {
+  position: [number, number, number];
+  celebration: boolean;
+}
+
+const Scoreboard = ({ position, celebration }: ScoreboardProps) => (
   <group position={position}>
     <Box args={[5, 2.5, 0.2]}>
       <meshStandardMaterial color="#000" emissive={celebration ? "#3b82f6" : "#111"} />

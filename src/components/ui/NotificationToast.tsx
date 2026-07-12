@@ -9,7 +9,7 @@ export const NotificationToast = () => {
   const [activeNotification, setActiveNotification] = useState<Notification | null>(null);
 
   useEffect(() => {
-    const handleNewNotif = (e: any) => {
+    const handleNewNotif = (e: CustomEvent<Notification>) => {
       setActiveNotification(e.detail);
       // Auto-hide after 5 seconds
       setTimeout(() => {
@@ -17,11 +17,11 @@ export const NotificationToast = () => {
       }, 5000);
     };
 
-    window.addEventListener("new-notification", handleNewNotif);
-    window.addEventListener("show-notification", handleNewNotif);
+    window.addEventListener("new-notification", handleNewNotif as EventListener);
+    window.addEventListener("show-notification", handleNewNotif as EventListener);
     return () => {
-      window.removeEventListener("new-notification", handleNewNotif);
-      window.removeEventListener("show-notification", handleNewNotif);
+      window.removeEventListener("new-notification", handleNewNotif as EventListener);
+      window.removeEventListener("show-notification", handleNewNotif as EventListener);
     };
   }, []);
 

@@ -273,7 +273,15 @@ export default function DashboardPage() {
   );
 }
 
-const StatCard = ({ icon: Icon, label, value, change, color }: any) => (
+interface StatCardProps {
+  icon: React.ElementType;
+  label: string;
+  value: string;
+  change: string;
+  color: string;
+}
+
+const StatCard = ({ icon: Icon, label, value, change, color }: StatCardProps) => (
   <motion.div
     whileHover={{ y: -5 }}
     className="glass-morphism p-8 rounded-[2rem] border-white/10"
@@ -289,7 +297,13 @@ const StatCard = ({ icon: Icon, label, value, change, color }: any) => (
   </motion.div>
 );
 
-const StadiumTwinCard = ({ title, location, embed }: any) => (
+interface StadiumTwinCardProps {
+  title: string;
+  location: string;
+  embed: string;
+}
+
+const StadiumTwinCard = ({ title, location, embed }: StadiumTwinCardProps) => (
   <div className="glass-morphism rounded-[3rem] border-white/10 overflow-hidden h-[600px] flex flex-col">
     <div className="p-8 border-b border-white/5 flex justify-between items-center">
       <div>

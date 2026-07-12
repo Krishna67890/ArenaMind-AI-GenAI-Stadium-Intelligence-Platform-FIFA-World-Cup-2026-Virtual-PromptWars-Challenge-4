@@ -12,6 +12,26 @@ interface Message {
   timestamp: Date;
 }
 
+interface SpeechRecognitionEvent extends Event {
+  results: {
+    [index: number]: {
+      [index: number]: {
+        transcript: string;
+      };
+    };
+  };
+}
+
+interface ISpeechRecognition extends EventTarget {
+  continuous: boolean;
+  interimResults: boolean;
+  onresult: (event: SpeechRecognitionEvent) => void;
+  onend: () => void;
+  onerror: (event: Event) => void;
+  start: () => void;
+  stop: () => void;
+}
+
 export const AIAgentChat = () => {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
@@ -26,24 +46,26 @@ export const AIAgentChat = () => {
   ]);
   const [isLoading, setIsLoading] = useState(false);
   const [isListening, setIsListening] = useState(false);
-  const recognitionRef = useRef<any>(null);
+  const recognitionRef = useRef<ISpeechRecognition | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (typeof window !== "undefined" && ("WebKitSpeechRecognition" in window || "speechRecognition" in window)) {
+    if (typeof window !== "undefined") {
       const SpeechRecognition = (window as any).WebKitSpeechRecognition || (window as any).speechRecognition;
-      recognitionRef.current = new SpeechRecognition();
-      recognitionRef.current.continuous = false;
-      recognitionRef.current.interimResults = false;
+      if (SpeechRecognition) {
+        recognitionRef.current = new SpeechRecognition() as ISpeechRecognition;
+        recognitionRef.current.continuous = false;
+        recognitionRef.current.interimResults = false;
 
-      recognitionRef.current.onresult = (event: any) => {
-        const text = event.results[0][0].transcript;
-        setInput(text);
-        setIsListening(false);
-      };
+        recognitionRef.current.onresult = (event: SpeechRecognitionEvent) => {
+          const text = event.results[0][0].transcript;
+          setInput(text);
+          setIsListening(false);
+        };
 
-      recognitionRef.current.onerror = () => setIsListening(false);
-      recognitionRef.current.onend = () => setIsListening(false);
+        recognitionRef.current.onerror = () => setIsListening(false);
+        recognitionRef.current.onend = () => setIsListening(false);
+      }
     }
   }, []);
 

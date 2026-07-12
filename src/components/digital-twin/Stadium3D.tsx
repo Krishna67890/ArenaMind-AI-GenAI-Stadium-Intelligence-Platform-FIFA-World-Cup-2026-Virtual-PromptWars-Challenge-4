@@ -7,7 +7,15 @@ import * as THREE from "three";
 import { AlertTriangle, Users, Thermometer, Wind } from "lucide-react";
 import { motion } from "framer-motion";
 
-const InfoTag = ({ position, title, value, icon: Icon, color }: any) => {
+interface InfoTagProps {
+  position: [number, number, number];
+  title: string;
+  value: string;
+  icon: React.ElementType;
+  color: string;
+}
+
+const InfoTag = ({ position, title, value, icon: Icon, color }: InfoTagProps) => {
   return (
     <Html position={position} center distanceFactor={10}>
       <motion.div

@@ -6,7 +6,17 @@ import { Navbar } from "@/components/ui/Navbar";
 import { Utensils, Clock, Star, Zap, ChevronRight, ShoppingBag, Plus, Minus, Search, Filter } from "lucide-react";
 import { useNotifications } from "@/context/NotificationContext";
 
-const MENU_ITEMS = [
+interface MenuItem {
+  id: number;
+  name: string;
+  category: string;
+  price: number;
+  cals: number;
+  icon: string;
+  tags: string[];
+}
+
+const MENU_ITEMS: MenuItem[] = [
   { id: 1, name: "Neural Burger", category: "Non-Veg", price: 18, cals: 650, icon: "🍔", tags: ["Popular", "High Protein"] },
   { id: 2, name: "Azteca Nachos", category: "Veg", price: 14, cals: 420, icon: "🌮", tags: ["Veg", "Gluten-Free"] },
   { id: 3, name: "Cyber Dogs", category: "Non-Veg", price: 12, cals: 380, icon: "🌭", tags: ["Quick"] },
@@ -24,14 +34,14 @@ const MENU_ITEMS = [
 export default function FoodMenuPage() {
   const { addNotification } = useNotifications();
   const [activeCategory, setActiveCategory] = useState("All");
-  const [cart, setCart] = useState<any[]>([]);
+  const [cart, setCart] = useState<MenuItem[]>([]);
   const categories = ["All", "Veg", "Non-Veg", "Drinks"];
 
   const filteredItems = activeCategory === "All"
     ? MENU_ITEMS
     : MENU_ITEMS.filter(item => item.category === activeCategory);
 
-  const addToCart = (item: any) => {
+  const addToCart = (item: MenuItem) => {
     setCart(prev => [...prev, item]);
     addNotification({
       title: "Order Updated",

@@ -11,6 +11,17 @@ import {
 } from "lucide-react";
 import { askGemini } from "@/services/gemini";
 
+interface ItineraryItem {
+  time: string;
+  task: string;
+  icon: React.ElementType;
+}
+
+interface Itinerary {
+  schedule: ItineraryItem[];
+  recommendations: string[];
+}
+
 export const Copilot = () => {
   const { t } = useLanguage();
   const [step, setStep] = useState(1);
@@ -24,7 +35,7 @@ export const Copilot = () => {
     food: "Vegetarian"
   });
   const [isGenerating, setIsGenerating] = useState(false);
-  const [itinerary, setItinerary] = useState<any>(null);
+  const [itinerary, setItinerary] = useState<Itinerary | null>(null);
 
   const handleGenerate = async () => {
     setIsGenerating(true);
@@ -278,7 +289,7 @@ export const Copilot = () => {
                         {t("matchdaySchedule")}
                       </h3>
                       <div className="space-y-4 relative before:absolute before:left-[19px] before:top-2 before:bottom-2 before:w-px before:bg-white/10">
-                        {itinerary.schedule.map((item: any, i: number) => (
+                        {itinerary.schedule.map((item: ItineraryItem, i: number) => (
                           <div key={i} className="flex gap-4 relative">
                             <div className="w-10 h-10 rounded-full bg-zinc-900 border border-white/10 flex items-center justify-center shrink-0 z-10">
                               <item.icon className="w-4 h-4 text-blue-400" />

@@ -4,15 +4,21 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, CreditCard, ShieldCheck, CheckCircle2, QrCode, Smartphone, ArrowRight, Loader2 } from "lucide-react";
 
+interface Plan {
+  name: string;
+  price: string;
+}
+
 export const PaymentModal = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [plan, setPlan] = useState<any>(null);
+  const [plan, setPlan] = useState<Plan | null>(null);
   const [step, setStep] = useState(1); // 1: Method, 2: QR, 3: Processing, 4: Success
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const handleOpen = (e: any) => {
-      setPlan(e.detail);
+    const handleOpen = (e: Event) => {
+      const customEvent = e as CustomEvent<Plan>;
+      setPlan(customEvent.detail);
       setIsOpen(true);
       setStep(1);
     };

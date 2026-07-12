@@ -193,7 +193,13 @@ export default function ContactPage() {
   );
 }
 
-const ContactDetail = ({ icon: Icon, label, value }: any) => (
+interface ContactDetailProps {
+  icon: React.ElementType;
+  label: string;
+  value: string;
+}
+
+const ContactDetail = ({ icon: Icon, label, value }: ContactDetailProps) => (
   <div className="flex gap-6 items-start">
      <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/5 flex items-center justify-center shrink-0">
         <Icon className="w-5 h-5 text-white/30" />

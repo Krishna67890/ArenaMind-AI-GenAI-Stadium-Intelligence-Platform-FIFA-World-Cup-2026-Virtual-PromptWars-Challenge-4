@@ -70,7 +70,14 @@ const useWebGLStatus = () => {
   return isSupported;
 };
 
-function CameraHandler({ view, cameraPosition, walkMode, tourInProgress }: any) {
+interface CameraHandlerProps {
+  view: "globe" | "stadium";
+  cameraPosition: [number, number, number] | null;
+  walkMode: boolean;
+  tourInProgress: boolean;
+}
+
+function CameraHandler({ view, cameraPosition, walkMode, tourInProgress }: CameraHandlerProps) {
   useFrame((state) => {
     if (cameraPosition && !walkMode) {
       state.camera.position.lerp(new THREE.Vector3(...cameraPosition), tourInProgress ? 0.03 : 0.08);
@@ -102,9 +109,9 @@ export default function ArenaVersePage() {
   const [showHUD, setShowHUD] = useState(true);
   const [isVoiceOpen, setIsVoiceOpen] = useState(false);
   const [cameraPosition, setCameraPosition] = useState<[number, number, number] | null>(null);
-  const [liveAlerts, setLiveAlerts] = useState<any[]>([]);
+  const [liveAlerts, setLiveAlerts] = useState<Array<{ id: string; message: string }>>([]);
   const [activeRoute, setActiveRoute] = useState<string[] | undefined>(undefined);
-  const [selectedCity, setSelectedCity] = useState<any>(null);
+  const [selectedCity, setSelectedCity] = useState<{ name: string; stadium: string; pos: [number, number, number] } | null>(null);
   const [tourInProgress, setTourInProgress] = useState(false);
   const [currentTourIndex, setCurrentTourIndex] = useState(0);
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -169,7 +176,7 @@ export default function ArenaVersePage() {
     }, 5500);
   };
 
-  const handleCitySelect = (city: any) => {
+  const handleCitySelect = (city: { name: string; stadium: string; pos: [number, number, number] }) => {
     setSelectedCity(city);
     setView("stadium");
     setCameraPosition([15, 10, 15]);
@@ -265,9 +272,9 @@ export default function ArenaVersePage() {
   }, [user]);
 
   useEffect(() => {
-    const handleCommand = (e: any) => handleVoiceCommand(e.detail);
-    window.addEventListener("arena-command", handleCommand);
-    return () => window.removeEventListener("arena-command", handleCommand);
+    const handleCommand = (e: CustomEvent<string>) => handleVoiceCommand(e.detail);
+    window.addEventListener("arena-command", handleCommand as EventListener);
+    return () => window.removeEventListener("arena-command", handleCommand as EventListener);
   }, []);
 
   const handleVoiceCommand = (command: string) => {
@@ -724,7 +731,14 @@ export default function ArenaVersePage() {
   );
 }
 
-function ControlButton({ icon: Icon, active, onClick, label }: any) {
+interface ControlButtonProps {
+  icon: React.ElementType;
+  active?: boolean;
+  onClick: () => void;
+  label: string;
+}
+
+function ControlButton({ icon: Icon, active, onClick, label }: ControlButtonProps) {
   return (
     <div className="flex items-center justify-end gap-3 group">
       <span className="text-[10px] font-bold uppercase tracking-widest text-white/0 group-hover:text-white/60 transition-all duration-300 transform translate-x-2 group-hover:translate-x-0">

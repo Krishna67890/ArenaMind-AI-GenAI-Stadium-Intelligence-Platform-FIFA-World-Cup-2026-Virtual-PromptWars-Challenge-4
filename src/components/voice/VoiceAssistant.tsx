@@ -6,6 +6,25 @@ import { Mic, MicOff, Volume2, VolumeX, Sparkles, X } from "lucide-react";
 import { generateOSResponse } from "@/services/gemini";
 import { useRouter } from "next/navigation";
 
+interface SpeechRecognitionEvent extends Event {
+  results: {
+    [index: number]: {
+      [index: number]: {
+        transcript: string;
+      };
+    };
+  };
+}
+
+interface ISpeechRecognition extends EventTarget {
+  continuous: boolean;
+  interimResults: boolean;
+  onresult: (event: SpeechRecognitionEvent) => void;
+  onend: () => void;
+  start: () => void;
+  stop: () => void;
+}
+
 export const VoiceAssistant = ({ onCommand }: { onCommand?: (command: string) => void }) => {
   const router = useRouter();
   const [isListening, setIsListening] = useState(false);
@@ -14,7 +33,7 @@ export const VoiceAssistant = ({ onCommand }: { onCommand?: (command: string) =>
   const [response, setResponse] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);
   const [hasInitialized, setHasInitialized] = useState(false);
-  const recognitionRef = useRef<any>(null);
+  const recognitionRef = useRef<ISpeechRecognition | null>(null);
 
   const introText = "Welcome to ArenaMind AI, the official next-generation command and control center for the FIFA World Cup 2026. I am your specialized AI agent, designed to orchestrate stadium operations across all sixteen host cities. My core functions include real-time spatial intelligence, neural crowd management, and zero-latency accessibility support. How can I assist you in navigating the future of tournament logistics today?";
 
@@ -36,23 +55,25 @@ export const VoiceAssistant = ({ onCommand }: { onCommand?: (command: string) =>
   };
 
   useEffect(() => {
-    if (typeof window !== "undefined" && ("WebKitSpeechRecognition" in window || "speechRecognition" in window)) {
+    if (typeof window !== "undefined") {
       const SpeechRecognition = (window as any).WebKitSpeechRecognition || (window as any).speechRecognition;
-      recognitionRef.current = new SpeechRecognition();
-      recognitionRef.current.continuous = false;
-      recognitionRef.current.interimResults = false;
+      if (SpeechRecognition) {
+        recognitionRef.current = new SpeechRecognition() as ISpeechRecognition;
+        recognitionRef.current.continuous = false;
+        recognitionRef.current.interimResults = false;
 
-      recognitionRef.current.onresult = async (event: any) => {
-        const text = event.results[0][0].transcript;
-        setTranscript(text);
-        handleAIQuery(text);
-      };
+        recognitionRef.current.onresult = async (event: SpeechRecognitionEvent) => {
+          const text = event.results[0][0].transcript;
+          setTranscript(text);
+          handleAIQuery(text);
+        };
 
-      recognitionRef.current.onend = () => {
-        if (isListening) {
-          recognitionRef.current?.start();
-        }
-      };
+        recognitionRef.current.onend = () => {
+          if (isListening) {
+            recognitionRef.current?.start();
+          }
+        };
+      }
     }
   }, []);
 

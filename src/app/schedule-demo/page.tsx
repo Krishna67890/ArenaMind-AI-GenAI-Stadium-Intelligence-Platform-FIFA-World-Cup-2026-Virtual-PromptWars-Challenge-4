@@ -65,7 +65,7 @@ export default function ScheduleDemoPage() {
           createdAt: new Date().toISOString(),
           status: "pending"
         });
-      } catch (fbError: any) {
+      } catch (fbError) {
         console.warn("Firebase permission denied, proceeding with local simulation:", fbError);
         // We still proceed to success screen for user experience in demo
       }
@@ -301,7 +301,17 @@ export default function ScheduleDemoPage() {
   );
 }
 
-const InputField = ({ icon: Icon, label, placeholder, type = "text", value, onChange, error }: any) => (
+interface InputFieldProps {
+  icon: React.ElementType;
+  label: string;
+  placeholder: string;
+  type?: string;
+  value: string;
+  onChange: (value: string) => void;
+  error?: string;
+}
+
+const InputField = ({ icon: Icon, label, placeholder, type = "text", value, onChange, error }: InputFieldProps) => (
   <div className="space-y-3">
     <label className="text-[10px] font-bold text-white/30 uppercase tracking-widest ml-4">{label}</label>
     <div className="relative">
