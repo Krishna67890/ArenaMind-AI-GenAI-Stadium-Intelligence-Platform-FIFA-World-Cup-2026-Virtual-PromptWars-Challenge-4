@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Navbar } from "@/components/ui/Navbar";
 import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
-import { useAuth } from "@/context/AuthContext";
+import { useAuth, UserRole } from "@/context/AuthContext";
 import { User, Mail, Phone, MapPin, Globe, Building2, FileText, Camera, Save, X, RotateCcw, Loader2 } from "lucide-react";
 import { useNotifications } from "@/context/NotificationContext";
 import { auth, db } from "@/services/firebase";
@@ -15,7 +15,17 @@ export default function ProfilePage() {
   const { userData, updateUserData } = useAuth();
   const { addNotification } = useNotifications();
   const [loading, setLoading] = useState(false);
-  const [formData, setFormData] = useState({
+
+  const [formData, setFormData] = useState<{
+    name: string;
+    phone: string;
+    address: string;
+    city: string;
+    country: string;
+    organization: string;
+    bio: string;
+    role: UserRole;
+  }>({
     name: "",
     phone: "",
     address: "",
@@ -23,7 +33,7 @@ export default function ProfilePage() {
     country: "",
     organization: "",
     bio: "",
-    role: "fan" as const
+    role: "fan"
   });
 
   useEffect(() => {
@@ -36,7 +46,7 @@ export default function ProfilePage() {
         country: userData.country || "",
         organization: userData.organization || "",
         bio: userData.bio || "",
-        role: (userData.role as any) || "fan"
+        role: userData.role || "fan"
       });
     }
   }, [userData]);
@@ -123,7 +133,7 @@ export default function ProfilePage() {
         organization: userData.organization || "",
         bio: userData.bio || "",
         role: userData.role || "fan"
-      });
+      } as typeof formData);
     }
   };
 

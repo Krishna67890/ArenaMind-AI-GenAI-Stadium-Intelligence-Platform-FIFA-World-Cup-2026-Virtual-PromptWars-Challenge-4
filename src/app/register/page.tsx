@@ -2,7 +2,8 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, Lock, User, ArrowRight, Globe, ShieldCheck, Eye, EyeOff, Building2 } from "lucide-react";
+import { useAuth, UserRole } from "@/context/AuthContext";
+import { Mail, Lock, User, ArrowRight, Globe, ShieldCheck, Eye, EyeOff, Building2, LucideIcon } from "lucide-react";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth, db } from "@/services/firebase";
 import { setDoc, doc } from "firebase/firestore";
@@ -10,7 +11,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 interface InputFieldProps {
-  icon: any;
+  icon: LucideIcon;
   label: string;
   placeholder: string;
   type?: string;
@@ -19,12 +20,11 @@ interface InputFieldProps {
 }
 
 const InputField = ({ icon: Icon, label, placeholder, type = "text", value, onChange }: InputFieldProps) => {
-  const IconComponent = Icon as any;
   return (
     <div className="space-y-2">
       <label className="text-[10px] font-bold text-white/30 uppercase tracking-[0.2em] ml-4">{label}</label>
       <div className="relative">
-        <IconComponent className="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-white/20" />
+        <Icon className="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-white/20" />
         <input
           type={type}
           placeholder={placeholder}
@@ -43,7 +43,7 @@ export default function RegisterPage() {
     email: "",
     password: "",
     country: "",
-    role: "fan" as const
+    role: "fan" as UserRole
   });
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
@@ -152,11 +152,11 @@ export default function RegisterPage() {
             <div className="space-y-2">
               <label className="text-[10px] font-bold text-white/30 uppercase tracking-[0.2em] ml-4">Strategic Role</label>
               <div className="grid grid-cols-3 gap-3">
-                 {["fan", "organizer", "volunteer"].map((role) => (
+                 {(["fan", "organizer", "volunteer"] as UserRole[]).map((role) => (
                    <button
                     key={role}
                     type="button"
-                    onClick={() => setFormData({...formData, role: role as any})}
+                    onClick={() => setFormData({...formData, role})}
                     className={`py-3 rounded-xl text-[10px] font-bold uppercase tracking-widest border transition-all ${
                       formData.role === role ? "bg-blue-600 border-blue-400 text-white" : "bg-white/5 border-white/10 text-white/40 hover:bg-white/10"
                     }`}

@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Maximize2, Minimize2, Info, Camera, MapPin, Users, Zap, Shield, Activity } from "lucide-react";
+import { Maximize2, Minimize2, Info, Camera, MapPin, Users, Zap, Shield, Activity, LucideIcon } from "lucide-react";
 
 interface Stadium {
   id: string;
@@ -151,17 +151,16 @@ export const StadiumViewer = () => {
 };
 
 interface StatItemProps {
-  icon: any;
+  icon: LucideIcon;
   label: string;
   value: string;
 }
 
 const StatItem = ({ icon: Icon, label, value }: StatItemProps) => {
-  const IconComponent = Icon as any;
   return (
     <div>
       <div className="flex items-center gap-2 mb-1">
-        <IconComponent className="w-3 h-3 text-blue-400" />
+        <Icon className="w-3 h-3 text-blue-400" />
         <span className="text-[8px] font-bold text-white/30 uppercase tracking-widest">{label}</span>
       </div>
       <div className="text-lg font-black tracking-tighter uppercase">{value}</div>

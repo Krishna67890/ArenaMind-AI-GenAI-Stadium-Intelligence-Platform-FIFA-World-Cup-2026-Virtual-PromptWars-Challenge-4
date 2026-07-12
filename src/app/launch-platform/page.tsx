@@ -4,7 +4,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Navbar } from "@/components/ui/Navbar";
 import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
-import { Rocket, Server, ShieldCheck, Cpu, Globe2, Zap, CheckCircle2, Cloud, Terminal } from "lucide-react";
+import { Rocket, Server, ShieldCheck, Cpu, Globe2, Zap, CheckCircle2, Cloud, Terminal, LucideIcon } from "lucide-react";
 
 export default function LaunchPlatformPage() {
   const [logs, setLogs] = React.useState<string[]>([
@@ -35,7 +35,7 @@ export default function LaunchPlatformPage() {
     return () => clearInterval(interval);
   }, []);
 
-  const stats = [
+  const stats: { icon: LucideIcon; label: string; value: string; color: string; trend: string }[] = [
     { icon: Server, label: "Cloud Status", value: "Operational", color: "green", trend: "+12.4ms" },
     { icon: Zap, label: "Gemini AI", value: "Neural Link: Active", color: "blue", trend: "98.2% Accuracy" },
     { icon: ShieldCheck, label: "Security", value: "Protocols: Encrypted", color: "purple", trend: "0 Breaches" },
@@ -141,7 +141,7 @@ export default function LaunchPlatformPage() {
           {/* Infrastructure Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-32">
             {stats.map((stat, i) => {
-              const Icon = stat.icon as any;
+              const Icon = stat.icon;
               return (
                 <motion.div
                   key={i}

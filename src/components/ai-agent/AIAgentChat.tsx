@@ -54,17 +54,19 @@ export const AIAgentChat = () => {
       const SpeechRecognition = (window as any).WebKitSpeechRecognition || (window as any).speechRecognition;
       if (SpeechRecognition) {
         recognitionRef.current = new SpeechRecognition() as ISpeechRecognition;
-        recognitionRef.current.continuous = false;
-        recognitionRef.current.interimResults = false;
+        if (recognitionRef.current) {
+          recognitionRef.current.continuous = false;
+          recognitionRef.current.interimResults = false;
 
-        recognitionRef.current.onresult = (event: SpeechRecognitionEvent) => {
-          const text = event.results[0][0].transcript;
-          setInput(text);
-          setIsListening(false);
-        };
+          recognitionRef.current.onresult = (event: SpeechRecognitionEvent) => {
+            const text = event.results[0][0].transcript;
+            setInput(text);
+            setIsListening(false);
+          };
 
-        recognitionRef.current.onerror = () => setIsListening(false);
-        recognitionRef.current.onend = () => setIsListening(false);
+          recognitionRef.current.onerror = () => setIsListening(false);
+          recognitionRef.current.onend = () => setIsListening(false);
+        }
       }
     }
   }, []);
@@ -128,7 +130,7 @@ export const AIAgentChat = () => {
         const voices = window.speechSynthesis.getVoices();
         // Prefer a natural-sounding voice if available
         const preferredVoice = voices.find(v => (v.name.includes("Google") || v.name.includes("Natural")) && v.lang.includes("en"));
-        if (preferredVoice) utterance.voice = preferredVoice;
+        if (preferredVoice) utterance.voice = preferredVoice as SpeechSynthesisVoice;
 
         utterance.rate = 0.95; // Slightly slower for "cinematic" authority
         utterance.pitch = 1.0;

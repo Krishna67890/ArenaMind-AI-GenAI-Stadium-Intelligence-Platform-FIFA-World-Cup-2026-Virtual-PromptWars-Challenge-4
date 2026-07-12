@@ -8,7 +8,8 @@ import {
   Accessibility, Eye, Ear,
   Map as MapIcon, Mic, Volume2,
   Navigation, CheckCircle2, ShieldCheck,
-  Smartphone
+  Smartphone,
+  LucideIcon
 } from "lucide-react";
 import { VoiceAssistant } from "@/components/voice/VoiceAssistant";
 
@@ -81,7 +82,7 @@ const AccessibilityPage = () => {
                  bg: "bg-cyan-500/10"
                }
              ].map((feature, i) => {
-               const Icon = feature.icon as any;
+               const Icon = feature.icon;
                return (
                  <motion.div
                    key={feature.title}

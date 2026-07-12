@@ -14,7 +14,8 @@ import {
   Linkedin,
   Github,
   ChevronRight,
-  ShieldCheck
+  ShieldCheck,
+  LucideIcon
 } from "lucide-react";
 
 export default function ContactPage() {
@@ -194,17 +195,16 @@ export default function ContactPage() {
 }
 
 interface ContactDetailProps {
-  icon: any;
+  icon: LucideIcon;
   label: string;
   value: string;
 }
 
 const ContactDetail = ({ icon: Icon, label, value }: ContactDetailProps) => {
-  const IconComponent = Icon as any;
   return (
     <div className="flex gap-6 items-start">
        <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/5 flex items-center justify-center shrink-0">
-          <IconComponent className="w-5 h-5 text-white/30" />
+          <Icon className="w-5 h-5 text-white/30" />
        </div>
        <div>
           <p className="text-[10px] font-black uppercase tracking-[0.2em] text-white/20 mb-1">{label}</p>

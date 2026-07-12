@@ -27,7 +27,8 @@ import {
   Moon,
   Sun,
   Wind,
-  CloudRain
+  CloudRain,
+  LucideIcon
 } from "lucide-react";
 import { WorldGlobe } from "@/components/arena-verse/WorldGlobe";
 import { AdvancedStadium } from "@/components/arena-verse/AdvancedStadium";
@@ -47,7 +48,7 @@ const useWebGLStatus = () => {
       try {
         const canvas = document.createElement("canvas");
         // Use a more explicit type cast to resolve the Vercel build error
-        const gl = (canvas.getContext("webgl") || canvas.getContext("experimental-webgl")) as any;
+        const gl = (canvas.getContext("webgl") || canvas.getContext("experimental-webgl")) as WebGLRenderingContext | null;
 
         if (!gl || typeof gl.getExtension !== 'function') return false;
 
@@ -150,9 +151,9 @@ export default function ArenaVersePage() {
     }
 
     const step = tourSequence[index];
-    setView(step.view as any);
-    setCameraPosition(step.pos as any);
-    if (step.mode) setMode(step.mode as any);
+    setView(step.view as "globe" | "stadium");
+    setCameraPosition(step.pos as [number, number, number]);
+    if (step.mode) setMode(step.mode as "day" | "night");
 
     window.dispatchEvent(new CustomEvent("show-notification", {
       detail: {
@@ -735,14 +736,13 @@ export default function ArenaVersePage() {
 }
 
 interface ControlButtonProps {
-  icon: React.ElementType | any;
+  icon: LucideIcon;
   active?: boolean;
   onClick: () => void;
   label: string;
 }
 
 function ControlButton({ icon: Icon, active, onClick, label }: ControlButtonProps) {
-  const IconComponent = Icon as any;
   return (
     <div className="flex items-center justify-end gap-3 group">
       <span className="text-[10px] font-bold uppercase tracking-widest text-white/0 group-hover:text-white/60 transition-all duration-300 transform translate-x-2 group-hover:translate-x-0">
@@ -756,7 +756,7 @@ function ControlButton({ icon: Icon, active, onClick, label }: ControlButtonProp
           : "bg-black/40 border-white/10 hover:border-white/30"
         }`}
       >
-        <IconComponent className={`w-5 h-5 ${active ? "text-white" : "text-white/60"}`} />
+        <Icon className={`w-5 h-5 ${active ? "text-white" : "text-white/60"}`} />
       </button>
     </div>
   );

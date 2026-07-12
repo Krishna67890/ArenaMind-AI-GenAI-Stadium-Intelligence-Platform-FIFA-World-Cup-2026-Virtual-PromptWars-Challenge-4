@@ -100,7 +100,7 @@ export const Navbar = () => {
                       <button
                         key={lang.code}
                         onClick={() => {
-                          setLanguage(lang.code as any);
+                          setLanguage(lang.code as "en" | "es" | "fr" | "ar" | "hi" | "ja" | "pt");
                           setIsLangOpen(false);
                         }}
                         className={`w-full flex items-center justify-between px-4 py-3 rounded-lg text-xs font-medium transition-colors ${

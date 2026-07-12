@@ -65,7 +65,7 @@ export const NotificationProvider = ({ children }: { children: React.ReactNode }
 
     const interval = setInterval(() => {
       const randomNotif = mockNotifs[Math.floor(Math.random() * mockNotifs.length)];
-      addNotification(randomNotif as any);
+      addNotification(randomNotif as Omit<Notification, "id" | "timestamp" | "read">);
     }, 15000); // 15 seconds for a more dynamic demo experience
 
     return () => clearInterval(interval);

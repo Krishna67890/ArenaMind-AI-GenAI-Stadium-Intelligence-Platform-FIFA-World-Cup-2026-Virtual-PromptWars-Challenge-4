@@ -7,14 +7,14 @@ import {
   Ticket, MapPin, Languages, Clock,
   Bus, Accessibility, Utensils, ArrowRight,
   Download, Sparkles, ChevronRight, X,
-  CheckCircle2, Info
+  CheckCircle2, Info, LucideIcon
 } from "lucide-react";
 import { askGemini } from "@/services/gemini";
 
 interface ItineraryItem {
   time: string;
   task: string;
-  icon: any;
+  icon: LucideIcon;
 }
 
 interface Itinerary {
@@ -290,7 +290,7 @@ export const Copilot = () => {
                       </h3>
                       <div className="space-y-4 relative before:absolute before:left-[19px] before:top-2 before:bottom-2 before:w-px before:bg-white/10">
                         {itinerary.schedule.map((item: ItineraryItem, i: number) => {
-                          const IconComponent = item.icon as any;
+                          const IconComponent = item.icon;
                           return (
                             <div key={i} className="flex gap-4 relative">
                               <div className="w-10 h-10 rounded-full bg-zinc-900 border border-white/10 flex items-center justify-center shrink-0 z-10">

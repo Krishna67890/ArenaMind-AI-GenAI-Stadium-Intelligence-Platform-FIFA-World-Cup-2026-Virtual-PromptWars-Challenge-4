@@ -56,26 +56,28 @@ export const VoiceAssistant = ({ onCommand }: { onCommand?: (command: string) =>
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const SpeechRecognition = (window as any).WebKitSpeechRecognition || (window as any).speechRecognition;
+      const SpeechRecognition = (window as any).WebKitSpeechRecognition || (window as any).SpeechRecognition;
       if (SpeechRecognition) {
         recognitionRef.current = new SpeechRecognition() as ISpeechRecognition;
-        recognitionRef.current.continuous = false;
-        recognitionRef.current.interimResults = false;
+        if (recognitionRef.current) {
+          recognitionRef.current.continuous = false;
+          recognitionRef.current.interimResults = false;
 
-        recognitionRef.current.onresult = async (event: SpeechRecognitionEvent) => {
-          const text = event.results[0][0].transcript;
-          setTranscript(text);
-          handleAIQuery(text);
-        };
+          recognitionRef.current.onresult = async (event: SpeechRecognitionEvent) => {
+            const text = event.results[0][0].transcript;
+            setTranscript(text);
+            handleAIQuery(text);
+          };
 
-        recognitionRef.current.onend = () => {
-          if (isListening) {
-            recognitionRef.current?.start();
-          }
-        };
+          recognitionRef.current.onend = () => {
+            if (isListening) {
+              recognitionRef.current?.start();
+            }
+          };
+        }
       }
     }
-  }, []);
+  }, [isListening]);
 
   const handleAIQuery = async (query: string) => {
     setIsProcessing(true);
@@ -148,7 +150,7 @@ export const VoiceAssistant = ({ onCommand }: { onCommand?: (command: string) =>
     const utterance = new SpeechSynthesisUtterance(text);
     const voices = window.speechSynthesis.getVoices();
     const preferredVoice = voices.find(v => (v.name.includes("Google") || v.name.includes("Natural")) && v.lang.includes("en")) || voices[0];
-    if (preferredVoice) utterance.voice = preferredVoice;
+    if (preferredVoice) utterance.voice = preferredVoice as SpeechSynthesisVoice;
 
     utterance.rate = 0.95;
     utterance.pitch = 1.0;

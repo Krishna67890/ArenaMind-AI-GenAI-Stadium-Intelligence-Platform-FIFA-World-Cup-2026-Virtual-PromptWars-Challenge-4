@@ -4,14 +4,14 @@ import React, { useRef, useMemo, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, PerspectiveCamera, Float, Text, MeshDistortMaterial, Html } from "@react-three/drei";
 import * as THREE from "three";
-import { AlertTriangle, Users, Thermometer, Wind } from "lucide-react";
+import { AlertTriangle, Users, Thermometer, Wind, LucideIcon } from "lucide-react";
 import { motion } from "framer-motion";
 
 interface InfoTagProps {
   position: [number, number, number];
   title: string;
   value: string;
-  icon: any;
+  icon: LucideIcon;
   color: string;
 }
 

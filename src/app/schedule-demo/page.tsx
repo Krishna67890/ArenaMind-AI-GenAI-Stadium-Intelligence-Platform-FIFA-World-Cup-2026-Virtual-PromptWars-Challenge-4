@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
 import { Navbar } from "@/components/ui/Navbar";
-import { Calendar, Clock, Video, Globe, Send, CheckCircle, ChevronRight, Building2, User2, Mail, AlertCircle } from "lucide-react";
+import { Calendar, Clock, Video, Globe, Send, CheckCircle, ChevronRight, Building2, User2, Mail, AlertCircle, LucideIcon } from "lucide-react";
 import { addDoc, collection } from "firebase/firestore";
 import { db } from "@/services/firebase";
 
@@ -302,7 +302,7 @@ export default function ScheduleDemoPage() {
 }
 
 interface InputFieldProps {
-  icon: any;
+  icon: LucideIcon;
   label: string;
   placeholder: string;
   type?: string;
@@ -312,12 +312,11 @@ interface InputFieldProps {
 }
 
 const InputField = ({ icon: Icon, label, placeholder, type = "text", value, onChange, error }: InputFieldProps) => {
-  const IconComponent = Icon as any;
   return (
     <div className="space-y-3">
       <label className="text-[10px] font-bold text-white/30 uppercase tracking-widest ml-4">{label}</label>
       <div className="relative">
-        <IconComponent className={`absolute left-6 top-1/2 -translate-y-1/2 w-4 h-4 ${error ? 'text-red-500/50' : 'text-white/20'}`} />
+        <Icon className={`absolute left-6 top-1/2 -translate-y-1/2 w-4 h-4 ${error ? 'text-red-500/50' : 'text-white/20'}`} />
         <input
           type={type}
           placeholder={placeholder}

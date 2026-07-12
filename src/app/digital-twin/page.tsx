@@ -11,10 +11,18 @@ import { collection, onSnapshot, query, orderBy, limit } from "firebase/firestor
 import { useAuth } from "@/context/AuthContext";
 import Link from "next/link";
 
+interface SecurityAlert {
+  id: string;
+  type?: string;
+  message?: string;
+  priority?: "low" | "medium" | "high";
+  timestamp?: { seconds: number };
+}
+
 export default function DigitalTwinPage() {
   const [activeTab, setActiveTab] = useState("stadiums");
   const { user } = useAuth();
-  const [securityAlerts, setSecurityAlerts] = useState<any[]>([]);
+  const [securityAlerts, setSecurityAlerts] = useState<SecurityAlert[]>([]);
   const [threatLevel, setThreatLevel] = useState("Minimal");
 
   const tabs = [
@@ -53,11 +61,11 @@ export default function DigitalTwinPage() {
         const alerts = snapshot.docs.map(doc => ({
           id: doc.id,
           ...doc.data()
-        }));
+        })) as SecurityAlert[];
         setSecurityAlerts(alerts);
 
         // Update threat level based on latest alert if high priority
-        if (alerts.length > 0 && (alerts[0] as any).priority === "high") {
+        if (alerts.length > 0 && alerts[0].priority === "high") {
           setThreatLevel("Elevated");
         } else {
           setThreatLevel("Minimal");
@@ -65,7 +73,7 @@ export default function DigitalTwinPage() {
       }, (error) => {
         // Fallback to mock security alerts if Firebase permissions fail
         console.warn("Using local security alerts fallback due to permissions.");
-        const mockAlerts = [
+        const mockAlerts: SecurityAlert[] = [
           {
             id: "mock-sec-1",
             type: "Neural Sync",
@@ -360,7 +368,7 @@ export default function DigitalTwinPage() {
                                       <div key={alert.id} className="p-2 bg-white/5 rounded-lg border border-white/5 flex flex-col gap-1">
                                         <div className="flex justify-between items-center">
                                           <span className={`text-[8px] font-bold uppercase ${alert.priority === 'high' ? 'text-red-500' : 'text-blue-500'}`}>{alert.type || 'Event'}</span>
-                                          <span className="text-[8px] text-white/20">{new Date(alert.timestamp?.seconds * 1000).toLocaleTimeString()}</span>
+                                          <span className="text-[8px] text-white/20">{alert.timestamp ? new Date(alert.timestamp.seconds * 1000).toLocaleTimeString() : "N/A"}</span>
                                         </div>
                                         <p className="text-[10px] text-white/70 line-clamp-1">{alert.message}</p>
                                       </div>
