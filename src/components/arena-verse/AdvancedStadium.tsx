@@ -114,14 +114,16 @@ const RainEffect = () => {
     }
   });
 
+  const positionArray = useMemo(() => {
+    return new Float32Array(points.flatMap(p => [p.x, p.y, p.z]));
+  }, [points]);
+
   return (
     <points ref={meshRef}>
       <bufferGeometry>
         <bufferAttribute
           attach="attributes-position"
-          count={points.length}
-          array={new Float32Array(points.flatMap(p => [p.x, p.y, p.z]))}
-          itemSize={3}
+          args={[positionArray, 3]}
         />
       </bufferGeometry>
       <pointsMaterial color="#60a5fa" size={0.05} transparent opacity={0.4} />
