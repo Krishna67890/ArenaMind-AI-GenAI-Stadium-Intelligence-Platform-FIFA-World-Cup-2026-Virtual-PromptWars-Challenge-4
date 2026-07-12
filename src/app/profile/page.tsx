@@ -23,7 +23,7 @@ export default function ProfilePage() {
     country: "",
     organization: "",
     bio: "",
-    role: "fan"
+    role: "fan" as const
   });
 
   useEffect(() => {
@@ -36,7 +36,7 @@ export default function ProfilePage() {
         country: userData.country || "",
         organization: userData.organization || "",
         bio: userData.bio || "",
-        role: userData.role || "fan"
+        role: (userData.role as any) || "fan"
       });
     }
   }, [userData]);

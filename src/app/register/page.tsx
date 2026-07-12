@@ -43,7 +43,7 @@ export default function RegisterPage() {
     email: "",
     password: "",
     country: "",
-    role: "fan"
+    role: "fan" as const
   });
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
@@ -156,7 +156,7 @@ export default function RegisterPage() {
                    <button
                     key={role}
                     type="button"
-                    onClick={() => setFormData({...formData, role})}
+                    onClick={() => setFormData({...formData, role: role as any})}
                     className={`py-3 rounded-xl text-[10px] font-bold uppercase tracking-widest border transition-all ${
                       formData.role === role ? "bg-blue-600 border-blue-400 text-white" : "bg-white/5 border-white/10 text-white/40 hover:bg-white/10"
                     }`}
