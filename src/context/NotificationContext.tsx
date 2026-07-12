@@ -6,7 +6,7 @@ export interface Notification {
   id: string;
   title: string;
   message: string;
-  type: "match" | "weather" | "security" | "traffic" | "info";
+  type: "match" | "weather" | "security" | "traffic" | "info" | "success";
   timestamp: string;
   read: boolean;
 }

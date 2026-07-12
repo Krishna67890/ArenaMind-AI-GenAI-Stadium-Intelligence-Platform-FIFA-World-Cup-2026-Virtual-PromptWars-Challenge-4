@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Bell, X, Shield, Cloud, Trophy, Info, MapPin } from "lucide-react";
+import { Bell, X, Shield, Cloud, Trophy, Info, MapPin, CheckCircle } from "lucide-react";
 import { Notification } from "@/context/NotificationContext";
 
 export const NotificationToast = () => {
@@ -33,6 +33,7 @@ export const NotificationToast = () => {
       case "weather": return <Cloud className="w-5 h-5 text-blue-400" />;
       case "match": return <Trophy className="w-5 h-5 text-yellow-500" />;
       case "traffic": return <MapPin className="w-5 h-5 text-orange-500" />;
+      case "success": return <CheckCircle className="w-5 h-5 text-green-500" />;
       default: return <Info className="w-5 h-5 text-blue-500" />;
     }
   };
