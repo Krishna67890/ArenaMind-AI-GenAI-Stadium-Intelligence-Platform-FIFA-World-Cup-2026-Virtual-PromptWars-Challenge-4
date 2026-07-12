@@ -80,21 +80,24 @@ const AccessibilityPage = () => {
                  color: "text-cyan-500",
                  bg: "bg-cyan-500/10"
                }
-             ].map((feature, i) => (
-               <motion.div
-                 key={feature.title}
-                 initial={{ opacity: 0, y: 20 }}
-                 whileInView={{ opacity: 1, y: 0 }}
-                 transition={{ delay: i * 0.1 }}
-                 className="glass-card group hover:border-blue-500/30 transition-all"
-               >
-                 <div className={`w-12 h-12 rounded-2xl ${feature.bg} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
-                    <feature.icon className={`w-6 h-6 ${feature.color}`} />
-                 </div>
-                 <h3 className="text-xl font-bold mb-4">{feature.title}</h3>
-                 <p className="text-sm text-white/40 leading-relaxed">{feature.desc}</p>
-               </motion.div>
-             ))}
+             ].map((feature, i) => {
+               const Icon = feature.icon as any;
+               return (
+                 <motion.div
+                   key={feature.title}
+                   initial={{ opacity: 0, y: 20 }}
+                   whileInView={{ opacity: 1, y: 0 }}
+                   transition={{ delay: i * 0.1 }}
+                   className="glass-card group hover:border-blue-500/30 transition-all"
+                 >
+                   <div className={`w-12 h-12 rounded-2xl ${feature.bg} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
+                      <Icon className={`w-6 h-6 ${feature.color}`} />
+                   </div>
+                   <h3 className="text-xl font-bold mb-4">{feature.title}</h3>
+                   <p className="text-sm text-white/40 leading-relaxed">{feature.desc}</p>
+                 </motion.div>
+               );
+             })}
           </div>
 
           {/* Interactive Accessibility Map Preview */}

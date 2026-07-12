@@ -11,7 +11,7 @@ interface InfoTagProps {
   position: [number, number, number];
   title: string;
   value: string;
-  icon: React.ElementType;
+  icon: any;
   color: string;
 }
 

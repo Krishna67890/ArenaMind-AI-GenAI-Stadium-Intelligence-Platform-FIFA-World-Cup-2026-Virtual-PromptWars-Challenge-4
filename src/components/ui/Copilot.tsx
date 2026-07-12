@@ -14,7 +14,7 @@ import { askGemini } from "@/services/gemini";
 interface ItineraryItem {
   time: string;
   task: string;
-  icon: React.ElementType;
+  icon: any;
 }
 
 interface Itinerary {
@@ -289,17 +289,20 @@ export const Copilot = () => {
                         {t("matchdaySchedule")}
                       </h3>
                       <div className="space-y-4 relative before:absolute before:left-[19px] before:top-2 before:bottom-2 before:w-px before:bg-white/10">
-                        {itinerary.schedule.map((item: ItineraryItem, i: number) => (
-                          <div key={i} className="flex gap-4 relative">
-                            <div className="w-10 h-10 rounded-full bg-zinc-900 border border-white/10 flex items-center justify-center shrink-0 z-10">
-                              <item.icon className="w-4 h-4 text-blue-400" />
+                        {itinerary.schedule.map((item: ItineraryItem, i: number) => {
+                          const IconComponent = item.icon as any;
+                          return (
+                            <div key={i} className="flex gap-4 relative">
+                              <div className="w-10 h-10 rounded-full bg-zinc-900 border border-white/10 flex items-center justify-center shrink-0 z-10">
+                                <IconComponent className="w-4 h-4 text-blue-400" />
+                              </div>
+                              <div className="py-1">
+                                <span className="text-[10px] font-bold text-white/40 uppercase">{item.time}</span>
+                                <p className="text-sm font-medium text-white/80">{item.task}</p>
+                              </div>
                             </div>
-                            <div className="py-1">
-                              <span className="text-[10px] font-bold text-white/40 uppercase">{item.time}</span>
-                              <p className="text-sm font-medium text-white/80">{item.task}</p>
-                            </div>
-                          </div>
-                        ))}
+                          );
+                        })}
                       </div>
                     </div>
 

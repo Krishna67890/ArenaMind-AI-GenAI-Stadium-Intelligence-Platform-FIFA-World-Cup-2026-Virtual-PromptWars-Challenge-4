@@ -151,17 +151,20 @@ export const StadiumViewer = () => {
 };
 
 interface StatItemProps {
-  icon: React.ElementType;
+  icon: any;
   label: string;
   value: string;
 }
 
-const StatItem = ({ icon: Icon, label, value }: StatItemProps) => (
-  <div>
-    <div className="flex items-center gap-2 mb-1">
-      <Icon className="w-3 h-3 text-blue-400" />
-      <span className="text-[8px] font-bold text-white/30 uppercase tracking-widest">{label}</span>
+const StatItem = ({ icon: Icon, label, value }: StatItemProps) => {
+  const IconComponent = Icon as any;
+  return (
+    <div>
+      <div className="flex items-center gap-2 mb-1">
+        <IconComponent className="w-3 h-3 text-blue-400" />
+        <span className="text-[8px] font-bold text-white/30 uppercase tracking-widest">{label}</span>
+      </div>
+      <div className="text-lg font-black tracking-tighter uppercase">{value}</div>
     </div>
-    <div className="text-lg font-black tracking-tighter uppercase">{value}</div>
-  </div>
-);
+  );
+};

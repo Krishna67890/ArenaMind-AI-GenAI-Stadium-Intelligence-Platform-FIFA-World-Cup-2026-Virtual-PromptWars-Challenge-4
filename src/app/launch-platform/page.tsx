@@ -140,26 +140,29 @@ export default function LaunchPlatformPage() {
 
           {/* Infrastructure Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-32">
-            {stats.map((stat, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.1 }}
-                className="glass-morphism p-8 rounded-[2rem] border-white/5 hover:border-blue-500/20 transition-all group"
-              >
-                <div className={`w-12 h-12 rounded-2xl mb-6 flex items-center justify-center bg-${stat.color}-500/10 group-hover:scale-110 transition-transform`}>
-                  <stat.icon className={`w-6 h-6 text-${stat.color}-500`} />
-                </div>
-                <p className="text-[10px] font-bold text-white/30 uppercase tracking-widest mb-1">{stat.label}</p>
-                <p className="text-lg font-bold text-white/90">{stat.value}</p>
-                <div className="mt-4 flex items-center gap-2">
-                  <span className={`text-[10px] font-bold text-${stat.color}-400 bg-${stat.color}-500/10 px-2 py-0.5 rounded-full`}>
-                    {stat.trend}
-                  </span>
-                </div>
-              </motion.div>
-            ))}
+            {stats.map((stat, i) => {
+              const Icon = stat.icon as any;
+              return (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.1 }}
+                  className="glass-morphism p-8 rounded-[2rem] border-white/5 hover:border-blue-500/20 transition-all group"
+                >
+                  <div className={`w-12 h-12 rounded-2xl mb-6 flex items-center justify-center bg-${stat.color}-500/10 group-hover:scale-110 transition-transform`}>
+                    <Icon className={`w-6 h-6 text-${stat.color}-500`} />
+                  </div>
+                  <p className="text-[10px] font-bold text-white/30 uppercase tracking-widest mb-1">{stat.label}</p>
+                  <p className="text-lg font-bold text-white/90">{stat.value}</p>
+                  <div className="mt-4 flex items-center gap-2">
+                    <span className={`text-[10px] font-bold text-${stat.color}-400 bg-${stat.color}-500/10 px-2 py-0.5 rounded-full`}>
+                      {stat.trend}
+                    </span>
+                  </div>
+                </motion.div>
+              );
+            })}
           </div>
 
           {/* Deployment Checklist */}

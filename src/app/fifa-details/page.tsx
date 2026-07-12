@@ -307,17 +307,20 @@ export default function FifaDetailsPage() {
 }
 
 interface FeatureCardProps {
-  icon: React.ElementType;
+  icon: any;
   title: string;
   desc: string;
 }
 
-const FeatureCard = ({ icon: Icon, title, desc }: FeatureCardProps) => (
-  <div className="glass-morphism p-8 rounded-[2.5rem] border-white/10 hover:border-blue-500/30 transition-all">
-    <div className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center mb-6">
-      <Icon className="w-6 h-6 text-blue-500" />
+const FeatureCard = ({ icon: Icon, title, desc }: FeatureCardProps) => {
+  const IconComponent = Icon as any;
+  return (
+    <div className="glass-morphism p-8 rounded-[2.5rem] border-white/10 hover:border-blue-500/30 transition-all">
+      <div className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center mb-6">
+        <IconComponent className="w-6 h-6 text-blue-500" />
+      </div>
+      <h3 className="text-xl font-bold mb-3">{title}</h3>
+      <p className="text-sm text-white/40 leading-relaxed">{desc}</p>
     </div>
-    <h3 className="text-xl font-bold mb-3">{title}</h3>
-    <p className="text-sm text-white/40 leading-relaxed">{desc}</p>
-  </div>
-);
+  );
+};

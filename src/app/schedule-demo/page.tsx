@@ -302,7 +302,7 @@ export default function ScheduleDemoPage() {
 }
 
 interface InputFieldProps {
-  icon: React.ElementType;
+  icon: any;
   label: string;
   placeholder: string;
   type?: string;
@@ -311,19 +311,22 @@ interface InputFieldProps {
   error?: string;
 }
 
-const InputField = ({ icon: Icon, label, placeholder, type = "text", value, onChange, error }: InputFieldProps) => (
-  <div className="space-y-3">
-    <label className="text-[10px] font-bold text-white/30 uppercase tracking-widest ml-4">{label}</label>
-    <div className="relative">
-      <Icon className={`absolute left-6 top-1/2 -translate-y-1/2 w-4 h-4 ${error ? 'text-red-500/50' : 'text-white/20'}`} />
-      <input
-        type={type}
-        placeholder={placeholder}
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        className={`w-full bg-white/5 border ${error ? 'border-red-500/50' : 'border-white/10'} rounded-2xl py-4 pl-14 pr-6 text-white placeholder:text-white/10 focus:border-blue-500 transition-all outline-none`}
-      />
-      {error && <p className="text-[10px] text-red-500 mt-1 ml-4 flex items-center gap-1"><AlertCircle className="w-3 h-3"/> {error}</p>}
+const InputField = ({ icon: Icon, label, placeholder, type = "text", value, onChange, error }: InputFieldProps) => {
+  const IconComponent = Icon as any;
+  return (
+    <div className="space-y-3">
+      <label className="text-[10px] font-bold text-white/30 uppercase tracking-widest ml-4">{label}</label>
+      <div className="relative">
+        <IconComponent className={`absolute left-6 top-1/2 -translate-y-1/2 w-4 h-4 ${error ? 'text-red-500/50' : 'text-white/20'}`} />
+        <input
+          type={type}
+          placeholder={placeholder}
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          className={`w-full bg-white/5 border ${error ? 'border-red-500/50' : 'border-white/10'} rounded-2xl py-4 pl-14 pr-6 text-white placeholder:text-white/10 focus:border-blue-500 transition-all outline-none`}
+        />
+        {error && <p className="text-[10px] text-red-500 mt-1 ml-4 flex items-center gap-1"><AlertCircle className="w-3 h-3"/> {error}</p>}
+      </div>
     </div>
-  </div>
-);
+  );
+};

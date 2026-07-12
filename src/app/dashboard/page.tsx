@@ -274,25 +274,27 @@ export default function DashboardPage() {
 }
 
 interface StatCardProps {
-  icon: React.ElementType;
+  icon: any;
   label: string;
   value: string;
   change: string;
   color: string;
 }
 
-const StatCard = ({ icon: Icon, label, value, change, color }: StatCardProps) => (
-  <motion.div
-    whileHover={{ y: -5 }}
-    className="glass-morphism p-8 rounded-[2rem] border-white/10"
-  >
-    <div className="flex justify-between items-start mb-6">
-      <div className="p-3 rounded-2xl bg-white/5">
-        <Icon className={`w-6 h-6 ${color}`} />
+const StatCard = ({ icon: Icon, label, value, change, color }: StatCardProps) => {
+  const IconComponent = Icon as any;
+  return (
+    <motion.div
+      whileHover={{ y: -5 }}
+      className="glass-morphism p-8 rounded-[2rem] border-white/10"
+    >
+      <div className="flex justify-between items-start mb-6">
+        <div className="p-3 rounded-2xl bg-white/5">
+          <IconComponent className={`w-6 h-6 ${color}`} />
+        </div>
+        <span className="text-[10px] font-black text-green-500 uppercase tracking-widest">{change}</span>
       </div>
-      <span className="text-[10px] font-black text-green-500 uppercase tracking-widest">{change}</span>
-    </div>
-    <div className="text-4xl font-black italic tracking-tighter uppercase mb-2">{value}</div>
+      <div className="text-4xl font-black italic tracking-tighter uppercase mb-2">{value}</div>
     <div className="text-[10px] font-black text-white/20 uppercase tracking-[0.3em]">{label}</div>
   </motion.div>
 );

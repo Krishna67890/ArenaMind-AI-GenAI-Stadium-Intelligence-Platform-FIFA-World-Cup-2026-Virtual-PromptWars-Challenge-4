@@ -742,6 +742,7 @@ interface ControlButtonProps {
 }
 
 function ControlButton({ icon: Icon, active, onClick, label }: ControlButtonProps) {
+  const IconComponent = Icon as any;
   return (
     <div className="flex items-center justify-end gap-3 group">
       <span className="text-[10px] font-bold uppercase tracking-widest text-white/0 group-hover:text-white/60 transition-all duration-300 transform translate-x-2 group-hover:translate-x-0">
@@ -755,7 +756,7 @@ function ControlButton({ icon: Icon, active, onClick, label }: ControlButtonProp
           : "bg-black/40 border-white/10 hover:border-white/30"
         }`}
       >
-        <Icon className={`w-5 h-5 ${active ? "text-white" : "text-white/60"}`} />
+        <IconComponent className={`w-5 h-5 ${active ? "text-white" : "text-white/60"}`} />
       </button>
     </div>
   );

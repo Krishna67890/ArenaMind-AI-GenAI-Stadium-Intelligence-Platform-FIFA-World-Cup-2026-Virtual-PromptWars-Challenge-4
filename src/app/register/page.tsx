@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 interface InputFieldProps {
-  icon: React.ElementType;
+  icon: any;
   label: string;
   placeholder: string;
   type?: string;
@@ -18,16 +18,24 @@ interface InputFieldProps {
   onChange: (value: string) => void;
 }
 
-const InputField = ({ icon: Icon, label, placeholder, type = "text", value, onChange }: InputFieldProps) => (
-  <div className="space-y-2">
-    <label className="text-[10px] font-bold text-white/30 uppercase tracking-[0.2em] ml-4">{label}</label>
-    <div className="relative">
-      <Icon className="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-white/20" />
-      <input
-        type={type}
-        placeholder={placeholder}
-        value={value}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange(e.target.value)}
+const InputField = ({ icon: Icon, label, placeholder, type = "text", value, onChange }: InputFieldProps) => {
+  const IconComponent = Icon as any;
+  return (
+    <div className="space-y-2">
+      <label className="text-[10px] font-bold text-white/30 uppercase tracking-[0.2em] ml-4">{label}</label>
+      <div className="relative">
+        <IconComponent className="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-white/20" />
+        <input
+          type={type}
+          placeholder={placeholder}
+          value={value}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange(e.target.value)}
+          className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-12 text-white focus:border-blue-500 outline-none transition-all placeholder:text-white/10"
+        />
+      </div>
+    </div>
+  );
+};
         className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 pl-14 pr-6 text-white focus:border-blue-500/50 transition-all outline-none"
         required
       />
