@@ -32,6 +32,7 @@ import {
 } from "lucide-react";
 import { WorldGlobe } from "@/components/arena-verse/WorldGlobe";
 import { AdvancedStadium } from "@/components/arena-verse/AdvancedStadium";
+import { Stadium3D } from "@/components/digital-twin/Stadium3D";
 import { useLanguage } from "@/context/LanguageContext";
 import { collection, onSnapshot, query, limit } from "firebase/firestore";
 import { db } from "@/services/firebase";
@@ -493,15 +494,8 @@ export default function ArenaVersePage() {
                   <group>
                     <AdvancedStadium mode={mode} celebration={celebration} weather={weather} />
                     <Html position={[0, 10, -15]} center transform distanceFactor={10}>
-                      <div className="sketchfab-embed-wrapper w-[90vw] max-w-[800px] h-[30vh] lg:h-[450px] bg-black/20 backdrop-blur-md rounded-2xl lg:rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
-                        <iframe
-                          title="MetLife Stadium"
-                          className="w-full h-full"
-                          frameBorder="0"
-                          allowFullScreen
-                          allow="autoplay; fullscreen; xr-spatial-tracking"
-                          src="https://sketchfab.com/models/996924376c9945038c35e3b624508493/embed"
-                        ></iframe>
+                      <div className="w-[90vw] max-w-[800px] h-[30vh] lg:h-[450px] bg-black/20 backdrop-blur-md rounded-2xl lg:rounded-3xl overflow-hidden border border-white/10 shadow-2xl relative">
+                        <Stadium3D />
                       </div>
                     </Html>
                   </group>

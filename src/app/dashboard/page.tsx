@@ -7,6 +7,7 @@ import { Footer } from "@/components/ui/Footer";
 import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
 import { useLanguage } from "@/context/LanguageContext";
 import { useAuth } from "@/context/AuthContext";
+import { Stadium3D } from "@/components/digital-twin/Stadium3D";
 import {
   BarChart3, Users, ShieldAlert,
   MapPin, Clock, TrendingUp,
@@ -131,15 +132,10 @@ export default function DashboardPage() {
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                   {/* Interactive Stadium Preview */}
                   <div className="lg:col-span-2 glass-morphism rounded-[2rem] lg:rounded-[2.5rem] border-white/10 overflow-hidden h-[300px] lg:h-[500px] relative group">
-                    <div className="absolute inset-0 bg-blue-600/5 group-hover:bg-blue-600/0 transition-colors pointer-events-none z-10" />
-                    <iframe
-                      src="https://sketchfab.com/models/83ca580566054b1b9d780289f4372d68/embed?autostart=1&internal=1&tracking=0&ui_ar=0&ui_infos=0&ui_snapshots=1&ui_stop=0&ui_theatre=1&ui_watermark=0"
-                      className="w-full h-full border-0"
-                      allow="autoplay; fullscreen; xr-spatial-tracking"
-                    />
+                    <Stadium3D />
                     <div className="absolute bottom-4 left-4 lg:bottom-8 lg:left-8 z-20">
                       <div className="glass-morphism p-4 lg:p-6 rounded-2xl lg:rounded-3xl border-white/10 backdrop-blur-md">
-                        <h3 className="text-lg lg:text-2xl font-black italic uppercase tracking-tighter">Azteca Twin</h3>
+                        <h3 className="text-lg lg:text-2xl font-black italic uppercase tracking-tighter">MetLife Twin</h3>
                         <p className="text-[8px] lg:text-xs text-white/40 font-bold uppercase tracking-widest mt-1">Live Spatial Mapping Active</p>
                       </div>
                     </div>
@@ -307,8 +303,8 @@ interface StadiumTwinCardProps {
 }
 
 const StadiumTwinCard = ({ title, location, embed }: StadiumTwinCardProps) => (
-  <div className="glass-morphism rounded-[2rem] lg:rounded-[3rem] border-white/10 overflow-hidden h-[400px] lg:h-[600px] flex flex-col">
-    <div className="p-6 lg:p-8 border-b border-white/5 flex justify-between items-center">
+  <div className="glass-morphism rounded-[2rem] lg:rounded-[3rem] border-white/10 overflow-hidden h-[400px] lg:h-[600px] flex flex-col relative">
+    <div className="p-6 lg:p-8 border-b border-white/5 flex justify-between items-center z-10">
       <div>
         <h3 className="text-xl lg:text-2xl font-black italic uppercase tracking-tighter">{title}</h3>
         <p className="text-[10px] lg:text-xs text-blue-400 font-bold uppercase tracking-widest mt-1">{location}</p>
@@ -318,8 +314,8 @@ const StadiumTwinCard = ({ title, location, embed }: StadiumTwinCardProps) => (
         <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-lg lg:rounded-xl bg-blue-500/10 flex items-center justify-center"><Globe className="w-4 h-4 lg:w-5 lg:h-5 text-blue-400" /></div>
       </div>
     </div>
-    <div className="flex-1 bg-black">
-      <iframe src={`${embed}?autostart=1&ui_infos=0&ui_watermark=0`} className="w-full h-full border-0" allowFullScreen />
+    <div className="flex-1 bg-black relative">
+       <Stadium3D />
     </div>
   </div>
 );

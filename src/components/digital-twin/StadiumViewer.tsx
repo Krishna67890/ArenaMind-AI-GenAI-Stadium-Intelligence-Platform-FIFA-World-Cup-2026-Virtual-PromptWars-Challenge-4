@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Maximize2, Minimize2, Info, Camera, MapPin, Users, Zap, Shield, Activity, LucideIcon } from "lucide-react";
+import { Stadium3D } from "./Stadium3D";
 
 interface Stadium {
   id: string;
@@ -52,14 +53,8 @@ export const StadiumViewer = () => {
   return (
     <div className={`relative w-full transition-all duration-500 ${isFullscreen ? "fixed inset-0 z-[100] bg-black" : "h-[700px] rounded-[2.5rem] overflow-hidden border border-white/10"}`}>
       {/* 3D Embed */}
-      <div className="absolute inset-0 z-0">
-        <iframe
-          title={activeStadium.title}
-          className="w-full h-full border-0"
-          allowFullScreen
-          allow="autoplay; fullscreen; xr-spatial-tracking"
-          src={activeStadium.embed}
-        />
+      <div className="absolute inset-0 z-0 bg-black">
+        <Stadium3D />
       </div>
 
       {/* Overlay UI */}
