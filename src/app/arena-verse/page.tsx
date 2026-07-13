@@ -113,7 +113,7 @@ export default function ArenaVersePage() {
   const [cameraPosition, setCameraPosition] = useState<[number, number, number] | null>(null);
   const [liveAlerts, setLiveAlerts] = useState<Array<{ id: string; message: string }>>([]);
   const [activeRoute, setActiveRoute] = useState<string[] | undefined>(undefined);
-  const [selectedCity, setSelectedCity] = useState<{ name: string; stadium: string; pos: [number, number, number] } | null>(null);
+  const [selectedCity, setSelectedCity] = useState<{ name: string; stadium: string; pos: [number, number, number]; embedId?: string } | null>(null);
   const [tourInProgress, setTourInProgress] = useState(false);
   const [currentTourIndex, setCurrentTourIndex] = useState(0);
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -178,7 +178,7 @@ export default function ArenaVersePage() {
     }, 5500);
   };
 
-  const handleCitySelect = (city: { name: string; stadium: string; pos: [number, number, number] }) => {
+  const handleCitySelect = (city: { name: string; stadium: string; pos: [number, number, number]; embedId?: string }) => {
     setSelectedCity(city);
     setView("stadium");
     setCameraPosition([15, 10, 15]);
@@ -495,7 +495,10 @@ export default function ArenaVersePage() {
                     <AdvancedStadium mode={mode} celebration={celebration} weather={weather} />
                     <Html position={[0, 10, -15]} center transform distanceFactor={10}>
                       <div className="w-[90vw] max-w-[800px] h-[30vh] lg:h-[450px] bg-black/20 backdrop-blur-md rounded-2xl lg:rounded-3xl overflow-hidden border border-white/10 shadow-2xl relative">
-                        <Stadium3D title={selectedCity ? selectedCity.stadium : "Stadio Renato Dall'Ara"} />
+                        <Stadium3D
+                          title={selectedCity ? selectedCity.stadium : "Stadio Renato Dall'Ara"}
+                          embedId={selectedCity?.embedId}
+                        />
                       </div>
                     </Html>
                   </group>

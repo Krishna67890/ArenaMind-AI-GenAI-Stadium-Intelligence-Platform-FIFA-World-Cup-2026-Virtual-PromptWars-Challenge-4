@@ -13,11 +13,14 @@ interface HostCity {
   traffic: string;
   altitude: number;
   vector: THREE.Vector3;
+  embedId?: string;
 }
 
 const hostCities: Omit<HostCity, "vector">[] = [
-  { name: "Bologna", pos: [44.4949, 11.3426], color: "#3b82f6", stadium: "Stadio Renato Dall'Ara", traffic: "Optimal", altitude: 0.2 },
-  { name: "Saransk", pos: [54.1838, 45.1749], color: "#ef4444", stadium: "Stadium Mordovia", traffic: "Moderate", altitude: 0.15 },
+  { name: "Bologna", pos: [44.4949, 11.3426], color: "#3b82f6", stadium: "Stadio Renato Dall'Ara", traffic: "Optimal", altitude: 0.2, embedId: "292c41506f32403a943836c78d357d1b" },
+  { name: "Saransk", pos: [54.1838, 45.1749], color: "#ef4444", stadium: "Stadium Mordovia", traffic: "Moderate", altitude: 0.15, embedId: "54a73d5582c947d1b4942fc38ed1d7c9" },
+  { name: "London", pos: [51.5074, -0.1278], color: "#10b981", stadium: "Euro Arena", traffic: "High", altitude: 0.2, embedId: "282713cea55a4289a946ada0dd3d0cd9" },
+  { name: "Doha", pos: [25.2854, 51.5310], color: "#fbbf24", stadium: "Khalifa Intl", traffic: "Low", altitude: 0.25, embedId: "1944f9b033f24ea68b90e82e173e0c66" },
   { name: "Los Angeles", pos: [34.0522, -118.2437], color: "#8b5cf6", stadium: "SoFi", traffic: "High", altitude: 0.25 },
   { name: "Toronto", pos: [43.6532, -79.3832], color: "#10b981", stadium: "BMO Field", traffic: "Low", altitude: 0.2 },
   { name: "Vancouver", pos: [49.2827, -123.1207], color: "#f59e0b", stadium: "BC Place", traffic: "Moderate", altitude: 0.1 },

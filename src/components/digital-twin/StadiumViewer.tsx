@@ -9,6 +9,7 @@ interface Stadium {
   id: string;
   title: string;
   embed: string;
+  embedId: string;
   capacity: string;
   location: string;
   year: string;
@@ -23,6 +24,7 @@ const stadiums: Stadium[] = [
     id: "renato-dallara",
     title: "Stadio Renato Dall'Ara",
     embed: "https://sketchfab.com/models/292c41506f32403a943836c78d357d1b/embed",
+    embedId: "292c41506f32403a943836c78d357d1b",
     capacity: "38,279",
     location: "Bologna, Italy",
     year: "1927",
@@ -35,12 +37,39 @@ const stadiums: Stadium[] = [
     id: "mordovia",
     title: "Stadium Mordovia",
     embed: "https://sketchfab.com/models/54a73d5582c947d1b4942fc38ed1d7c9/embed",
+    embedId: "54a73d5582c947d1b4942fc38ed1d7c9",
     capacity: "44,442",
     location: "Saransk, Russia",
     year: "2018",
     match: "International Friendly",
     weather: "18°C Cloudy",
     density: "82%",
+    security: "Level 3 - High",
+  },
+  {
+    id: "euro-arena",
+    title: "Euro Arena Soccer Stadium",
+    embed: "https://sketchfab.com/models/282713cea55a4289a946ada0dd3d0cd9/embed",
+    embedId: "282713cea55a4289a946ada0dd3d0cd9",
+    capacity: "68,000",
+    location: "London, UK",
+    year: "2020",
+    match: "Euro Cup Final",
+    weather: "15°C Foggy",
+    density: "95%",
+    security: "Level 4 - Critical",
+  },
+  {
+    id: "khalifa",
+    title: "Khalifa International Stadium",
+    embed: "https://sketchfab.com/models/1944f9b033f24ea68b90e82e173e0c66/embed",
+    embedId: "1944f9b033f24ea68b90e82e173e0c66",
+    capacity: "45,857",
+    location: "Doha, Qatar",
+    year: "1976",
+    match: "World Cup Group Stage",
+    weather: "28°C Clear",
+    density: "88%",
     security: "Level 3 - High",
   }
 ];
@@ -54,7 +83,7 @@ export const StadiumViewer = () => {
     <div className={`relative w-full transition-all duration-500 ${isFullscreen ? "fixed inset-0 z-[100] bg-black" : "h-[700px] rounded-[2.5rem] overflow-hidden border border-white/10"}`}>
       {/* 3D Embed */}
       <div className="absolute inset-0 z-0 bg-black">
-        <Stadium3D title={activeStadium.title} />
+        <Stadium3D title={activeStadium.title} embedId={activeStadium.embedId} />
       </div>
 
       {/* Overlay UI */}

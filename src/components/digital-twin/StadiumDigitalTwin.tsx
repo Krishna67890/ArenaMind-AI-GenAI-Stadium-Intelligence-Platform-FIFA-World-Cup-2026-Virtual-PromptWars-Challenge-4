@@ -27,6 +27,7 @@ const stadiums = [
     name: "Stadio Renato Dall'Ara",
     city: "Bologna",
     location: "Bologna, Italy",
+    embedId: "292c41506f32403a943836c78d357d1b",
     description: "Official simulation for the historic Italian venue. Monitor real-time spatial intelligence and environmental sustainability.",
     mapUrl: "https://www.google.com/maps/dir/?api=1&destination=Stadio+Renato+Dall+Ara+Bologna"
   },
@@ -35,8 +36,27 @@ const stadiums = [
     name: "Stadium Mordovia",
     city: "Saransk",
     location: "Saransk, Russia",
+    embedId: "54a73d5582c947d1b4942fc38ed1d7c9",
     description: "Digital twin of the Saransk landmark. Synchronizing physical infrastructure with virtual simulation and crowd flow analysis.",
     mapUrl: "https://www.google.com/maps/dir/?api=1&destination=Mordovia+Arena+Saransk"
+  },
+  {
+    id: "euro-arena",
+    name: "Euro Arena",
+    city: "London",
+    location: "London, UK",
+    embedId: "282713cea55a4289a946ada0dd3d0cd9",
+    description: "Multi-purpose stadium simulation with high-capacity crowd modeling and dynamic lighting analysis.",
+    mapUrl: "https://www.google.com/maps/dir/?api=1&destination=Wembley+Stadium+London"
+  },
+  {
+    id: "khalifa",
+    name: "Khalifa Intl Stadium",
+    city: "Doha",
+    location: "Doha, Qatar",
+    embedId: "1944f9b033f24ea68b90e82e173e0c66",
+    description: "World-class venue digital twin. Features advanced cooling system simulation and historical match data integration.",
+    mapUrl: "https://www.google.com/maps/dir/?api=1&destination=Khalifa+International+Stadium+Doha"
   }
 ];
 
@@ -106,7 +126,7 @@ export const StadiumDigitalTwin = () => {
           {/* Simulation Visualizer */}
           <div className="lg:col-span-3 aspect-video bg-black/40 rounded-3xl border border-white/10 relative overflow-hidden group">
             {viewMode === "3d-model" ? (
-              <Stadium3D title={selectedStadium.name} />
+              <Stadium3D title={selectedStadium.name} embedId={selectedStadium.embedId} />
             ) : (
               /* Mock Stadium Representation */
               <div className="absolute inset-0 flex items-center justify-center p-12">
