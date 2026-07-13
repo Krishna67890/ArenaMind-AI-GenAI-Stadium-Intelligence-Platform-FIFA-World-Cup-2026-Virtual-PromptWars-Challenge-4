@@ -495,12 +495,12 @@ export default function ArenaVersePage() {
                     <Html position={[0, 10, -15]} center transform distanceFactor={10}>
                       <div className="sketchfab-embed-wrapper w-[90vw] max-w-[800px] h-[30vh] lg:h-[450px] bg-black/20 backdrop-blur-md rounded-2xl lg:rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
                         <iframe
-                          title="Arrowhead NFL"
+                          title="MetLife Stadium"
                           className="w-full h-full"
                           frameBorder="0"
                           allowFullScreen
                           allow="autoplay; fullscreen; xr-spatial-tracking"
-                          src="https://sketchfab.com/models/8a4343ba53c74078808cadc937cdb20e/embed"
+                          src="https://sketchfab.com/models/996924376c9945038c35e3b624508493/embed"
                         ></iframe>
                       </div>
                     </Html>

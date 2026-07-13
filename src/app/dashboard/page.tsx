@@ -260,9 +260,9 @@ export default function DashboardPage() {
                   embed="https://sketchfab.com/models/83ca580566054b1b9d780289f4372d68/embed"
                 />
                 <StadiumTwinCard
-                  title="Arrowhead Stadium"
-                  location="Kansas City"
-                  embed="https://sketchfab.com/models/8a4343ba53c74078808cadc937cdb20e/embed"
+                  title="MetLife Stadium"
+                  location="New Jersey"
+                  embed="https://sketchfab.com/models/996924376c9945038c35e3b624508493/embed"
                 />
               </motion.div>
             )}
