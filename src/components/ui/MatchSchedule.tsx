@@ -19,9 +19,9 @@ export const MatchSchedule = () => {
     },
     {
       id: 2,
-      teamA: "Mexico",
-      teamB: "Germany",
-      venue: "Estadio Azteca, Mexico City",
+      teamA: "Italy",
+      teamB: "France",
+      venue: "Stadio Renato Dall'Ara, Bologna",
       date: "June 15, 2026",
       status: "High Demand",
       type: "Group Stage"
@@ -46,9 +46,9 @@ export const MatchSchedule = () => {
     },
     {
       id: 5,
-      teamA: "Spain",
-      teamB: "Morocco",
-      venue: "MetLife Stadium, NJ",
+      teamA: "Russia",
+      teamB: "Serbia",
+      venue: "Stadium Mordovia, Saransk",
       date: "June 22, 2026",
       status: "High Demand",
       type: "Group Stage"

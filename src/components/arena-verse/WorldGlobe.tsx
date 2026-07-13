@@ -16,14 +16,11 @@ interface HostCity {
 }
 
 const hostCities: Omit<HostCity, "vector">[] = [
-  { name: "New York", pos: [40.7128, -74.0060], color: "#3b82f6", stadium: "MetLife", traffic: "High", altitude: 0.2 },
-  { name: "Los Angeles", pos: [34.0522, -118.2437], color: "#ef4444", stadium: "SoFi", traffic: "Moderate", altitude: 0.15 },
-  { name: "Mexico City", pos: [19.4326, -99.1332], color: "#10b981", stadium: "Azteca", traffic: "Low", altitude: 0.3 },
-  { name: "Toronto", pos: [43.6532, -79.3832], color: "#f59e0b", stadium: "BMO Field", traffic: "Optimal", altitude: 0.1 },
-  { name: "Vancouver", pos: [49.2827, -123.1207], color: "#8b5cf6", stadium: "BC Place", traffic: "High", altitude: 0.25 },
-  { name: "Kansas City", pos: [39.0997, -94.5786], color: "#ec4899", stadium: "Arrowhead", traffic: "Moderate", altitude: 0.12 },
-  { name: "Miami", pos: [25.7617, -80.1918], color: "#06b6d4", stadium: "Hard Rock", traffic: "High", altitude: 0.05 },
-  { name: "Dallas", pos: [32.7767, -96.7970], color: "#6366f1", stadium: "AT&T", traffic: "Critical", altitude: 0.18 },
+  { name: "Bologna", pos: [44.4949, 11.3426], color: "#3b82f6", stadium: "Stadio Renato Dall'Ara", traffic: "Optimal", altitude: 0.2 },
+  { name: "Saransk", pos: [54.1838, 45.1749], color: "#ef4444", stadium: "Stadium Mordovia", traffic: "Moderate", altitude: 0.15 },
+  { name: "Los Angeles", pos: [34.0522, -118.2437], color: "#8b5cf6", stadium: "SoFi", traffic: "High", altitude: 0.25 },
+  { name: "Toronto", pos: [43.6532, -79.3832], color: "#10b981", stadium: "BMO Field", traffic: "Low", altitude: 0.2 },
+  { name: "Vancouver", pos: [49.2827, -123.1207], color: "#f59e0b", stadium: "BC Place", traffic: "Moderate", altitude: 0.1 },
 ];
 
 const latLongToVector3 = (lat: number, lon: number, radius: number) => {

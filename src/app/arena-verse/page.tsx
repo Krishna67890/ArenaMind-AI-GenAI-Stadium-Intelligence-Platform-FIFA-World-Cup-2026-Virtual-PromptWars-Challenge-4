@@ -119,7 +119,7 @@ export default function ArenaVersePage() {
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   const tourSequence = [
-    { pos: [15, 5, 15], view: "globe", label: "North American Hubs", mode: "night" },
+    { pos: [15, 5, 15], view: "globe", label: "Global Network Nodes", mode: "night" },
     { pos: [0, 18, 5], view: "globe", label: "Satellite Connectivity Grid", mode: "night" },
     { pos: [20, 12, 20], view: "stadium", label: "Digital Twin Synchronization", mode: "day" },
     { pos: [0, 5, 11], view: "stadium", label: "VIP Executive Analytics", mode: "night" },
@@ -225,10 +225,10 @@ export default function ArenaVersePage() {
 
   const simulateRouteDetection = () => {
     const routes = [
-      ["New York", "Kansas City", "Los Angeles"],
-      ["Mexico City", "Dallas", "New York"],
+      ["Bologna", "Saransk", "Los Angeles"],
+      ["Saransk", "Dallas", "Bologna"],
       ["Vancouver", "Toronto", "Miami"],
-      ["Los Angeles", "Dallas", "Mexico City"]
+      ["Los Angeles", "Dallas", "Saransk"]
     ];
     const randomRoute = routes[Math.floor(Math.random() * routes.length)];
     setActiveRoute(randomRoute);
@@ -495,7 +495,7 @@ export default function ArenaVersePage() {
                     <AdvancedStadium mode={mode} celebration={celebration} weather={weather} />
                     <Html position={[0, 10, -15]} center transform distanceFactor={10}>
                       <div className="w-[90vw] max-w-[800px] h-[30vh] lg:h-[450px] bg-black/20 backdrop-blur-md rounded-2xl lg:rounded-3xl overflow-hidden border border-white/10 shadow-2xl relative">
-                        <Stadium3D />
+                        <Stadium3D title={selectedCity ? selectedCity.stadium : "Stadio Renato Dall'Ara"} />
                       </div>
                     </Html>
                   </group>
@@ -689,17 +689,17 @@ export default function ArenaVersePage() {
                 <div className="text-center md:text-right">
                   <div className="text-[10px] font-bold text-white/40 uppercase tracking-[0.3em] mb-1">Current Venue</div>
                   <div className="text-2xl md:text-4xl font-black tracking-tighter italic">
-                    {selectedCity ? selectedCity.stadium.toUpperCase() : "METLIFE STADIUM"}
+                    {selectedCity ? selectedCity.stadium.toUpperCase() : "STADIO RENATO DALL'ARA"}
                   </div>
                   <div className="text-blue-400 font-bold tracking-widest text-[10px] md:text-sm uppercase">
-                    {selectedCity ? `${selectedCity.name}, ${selectedCity.pos[0] > 30 ? 'USA' : 'MEXICO'}` : "East Rutherford, NJ"}
+                    {selectedCity ? `${selectedCity.name}` : "Bologna, Italy"}
                   </div>
                 </div>
 
                 <div className="flex gap-3">
                   <div className="glass-card px-4 py-2 rounded-xl bg-black/40">
                     <div className="text-[8px] font-bold text-white/40 uppercase mb-1">Capacity</div>
-                    <div className="text-xs md:text-sm font-bold">{selectedCity ? "75,000+" : "82,500"}</div>
+                    <div className="text-xs md:text-sm font-bold">{selectedCity ? "75,000+" : "38,279"}</div>
                   </div>
                   <div className="glass-card px-4 py-2 rounded-xl bg-black/40">
                     <div className="text-[8px] font-bold text-white/40 uppercase mb-1">Status</div>

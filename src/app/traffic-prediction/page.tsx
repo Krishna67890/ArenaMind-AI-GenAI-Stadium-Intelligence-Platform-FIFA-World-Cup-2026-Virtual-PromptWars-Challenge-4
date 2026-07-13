@@ -43,12 +43,11 @@ interface HostCity {
 
 // Mock Traffic Data for FIFA 2026 Host Cities
 const HOST_CITIES: HostCity[] = [
-  { name: "Mexico City", lat: 19.4326, lng: -99.1332, stadium: "Azteca", congestion: 88, status: "Critical" },
-  { name: "New York/New Jersey", lat: 40.7128, lng: -74.006, stadium: "MetLife", congestion: 65, status: "High" },
+  { name: "Bologna", lat: 44.4949, lng: 11.3426, stadium: "Stadio Renato Dall'Ara", congestion: 45, status: "Stable" },
+  { name: "Saransk", lat: 54.1838, lng: 45.1749, stadium: "Stadium Mordovia", congestion: 32, status: "Optimal" },
   { name: "Los Angeles", lat: 34.0522, lng: -118.2437, stadium: "SoFi", congestion: 72, status: "High" },
-  { name: "Kansas City", lat: 39.0997, lng: -94.5786, stadium: "Arrowhead", congestion: 42, status: "Stable" },
-  { name: "Dallas", lat: 32.7767, lng: -96.797, stadium: "AT&T", congestion: 58, status: "Moderate" },
-  { name: "Vancouver", lat: 49.2827, lng: -123.1207, stadium: "BC Place", congestion: 35, status: "Stable" },
+  { name: "Toronto", lat: 43.6532, lng: -79.3832, stadium: "BMO Field", congestion: 58, status: "Moderate" },
+  { name: "Vancouver", lat: 49.2827, lng: -123.1207, stadium: "BC Place", congestion: 41, status: "Stable" },
 ];
 
 interface GlobalTrafficGlobeProps {

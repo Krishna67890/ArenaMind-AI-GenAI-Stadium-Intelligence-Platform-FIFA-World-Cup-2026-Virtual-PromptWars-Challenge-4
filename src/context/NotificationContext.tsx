@@ -29,16 +29,16 @@ export const NotificationProvider = ({ children }: { children: React.ReactNode }
     const initial = [
       {
         id: "1",
-        title: "Upcoming Match: USA vs Mexico",
-        message: "Kickoff at Estadio Azteca in 2 hours. Expect high traffic around the stadium.",
+        title: "Upcoming Match: Italy vs France",
+        message: "Kickoff at Stadio Renato Dall'Ara in 2 hours. Expect high traffic around the stadium.",
         type: "match",
         timestamp: new Date().toISOString(),
         read: false
       },
       {
         id: "2",
-        title: "Weather Alert: Mexico City",
-        message: "Heavy rain predicted for this evening. Stadium roof deployment scheduled.",
+        title: "Weather Alert: Bologna",
+        message: "Clear skies predicted for this evening. Perfect conditions for the match.",
         type: "weather",
         timestamp: new Date().toISOString(),
         read: false

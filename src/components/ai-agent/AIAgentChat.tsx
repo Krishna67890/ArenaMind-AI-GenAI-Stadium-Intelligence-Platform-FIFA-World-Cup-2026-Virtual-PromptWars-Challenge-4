@@ -93,7 +93,7 @@ export const AIAgentChat = () => {
 
   const suggestions = [
     "How to play football?",
-    "Show me MetLife Stadium twin",
+    "Show me Renato Dall'Ara twin",
     "What are the FIFA 2026 host cities?",
     "Check crowd density at Gate B",
     "Generate a matchday itinerary",

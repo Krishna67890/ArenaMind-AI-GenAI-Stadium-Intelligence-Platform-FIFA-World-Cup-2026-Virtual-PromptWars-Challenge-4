@@ -35,7 +35,7 @@ const InfoTag = ({ position, title, value, icon: Icon, color }: InfoTagProps) =>
   );
 };
 
-const StadiumModel = () => {
+const StadiumModel = ({ title }: { title: string }) => {
   const groupRef = useRef<THREE.Group>(null);
   const meshRef = useRef<THREE.InstancedMesh>(null);
   const tempObject = useMemo(() => new THREE.Object3D(), []);
@@ -122,8 +122,8 @@ const StadiumModel = () => {
           maxWidth={2}
           textAlign="center"
         >
-          METLIFE STADIUM
-          FIFA WORLD CUP 2026
+          {title.toUpperCase()}
+          {"\n"}FIFA WORLD CUP 2026
         </Text>
       </Float>
 
@@ -136,7 +136,7 @@ const StadiumModel = () => {
   );
 };
 
-export const Stadium3D = () => {
+export const Stadium3D = ({ title = "STADIO RENATO DALL'ARA" }: { title?: string }) => {
   const [webglError, setWebglError] = useState(false);
 
   // Check WebGL on mount
@@ -216,7 +216,7 @@ export const Stadium3D = () => {
         <pointLight position={[10, 10, 10]} intensity={1} castShadow />
         <spotLight position={[-10, 20, 10]} angle={0.2} penumbra={1} intensity={2} castShadow />
 
-        <StadiumModel />
+        <StadiumModel title={title} />
 
         <fog attach="fog" args={["#000", 12, 30]} />
       </Canvas>

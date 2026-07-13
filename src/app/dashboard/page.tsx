@@ -132,10 +132,10 @@ export default function DashboardPage() {
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                   {/* Interactive Stadium Preview */}
                   <div className="lg:col-span-2 glass-morphism rounded-[2rem] lg:rounded-[2.5rem] border-white/10 overflow-hidden h-[300px] lg:h-[500px] relative group">
-                    <Stadium3D />
+                    <Stadium3D title="Renato Dall'Ara" />
                     <div className="absolute bottom-4 left-4 lg:bottom-8 lg:left-8 z-20">
                       <div className="glass-morphism p-4 lg:p-6 rounded-2xl lg:rounded-3xl border-white/10 backdrop-blur-md">
-                        <h3 className="text-lg lg:text-2xl font-black italic uppercase tracking-tighter">MetLife Twin</h3>
+                        <h3 className="text-lg lg:text-2xl font-black italic uppercase tracking-tighter">Renato Dall'Ara Twin</h3>
                         <p className="text-[8px] lg:text-xs text-white/40 font-bold uppercase tracking-widest mt-1">Live Spatial Mapping Active</p>
                       </div>
                     </div>
@@ -251,14 +251,14 @@ export default function DashboardPage() {
                 className="grid grid-cols-1 lg:grid-cols-2 gap-8"
               >
                 <StadiumTwinCard
-                  title="Estadio Azteca"
-                  location="Mexico City"
-                  embed="https://sketchfab.com/models/83ca580566054b1b9d780289f4372d68/embed"
+                  title="Stadio Renato Dall'Ara"
+                  location="Bologna, Italy"
+                  embed="https://sketchfab.com/models/292c41506f32403a943836c78d357d1b/embed"
                 />
                 <StadiumTwinCard
-                  title="MetLife Stadium"
-                  location="New Jersey"
-                  embed="https://sketchfab.com/models/996924376c9945038c35e3b624508493/embed"
+                  title="Stadium Mordovia"
+                  location="Saransk, Russia"
+                  embed="https://sketchfab.com/models/54a73d5582c947d1b4942fc38ed1d7c9/embed"
                 />
               </motion.div>
             )}
@@ -315,7 +315,7 @@ const StadiumTwinCard = ({ title, location, embed }: StadiumTwinCardProps) => (
       </div>
     </div>
     <div className="flex-1 bg-black relative">
-       <Stadium3D />
+       <Stadium3D title={title} />
     </div>
   </div>
 );

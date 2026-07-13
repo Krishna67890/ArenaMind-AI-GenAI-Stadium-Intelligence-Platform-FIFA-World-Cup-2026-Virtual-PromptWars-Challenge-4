@@ -34,10 +34,10 @@ const FIFA_DATA = {
       id: 1,
       stage: "Opening Match",
       date: "June 11, 2026",
-      venue: "Estadio Azteca",
-      city: "Mexico City",
-      teams: ["Mexico", "TBD"],
-      prediction: { winner: "Mexico", probability: "68%", factor: "Home Advantage" }
+      venue: "Stadio Renato Dall'Ara",
+      city: "Bologna, Italy",
+      teams: ["Italy", "TBD"],
+      prediction: { winner: "Italy", probability: "68%", factor: "Home Advantage" }
     },
     {
       id: 2,
@@ -52,17 +52,17 @@ const FIFA_DATA = {
       id: 3,
       stage: "Group Stage",
       date: "June 12, 2026",
-      venue: "MetLife Stadium",
-      city: "New York/New Jersey",
-      teams: ["Canada", "TBD"],
-      prediction: { winner: "Canada", probability: "55%", factor: "Dynamic Offense" }
+      venue: "Stadium Mordovia",
+      city: "Saransk, Russia",
+      teams: ["Russia", "TBD"],
+      prediction: { winner: "Russia", probability: "55%", factor: "Dynamic Offense" }
     },
     {
       id: 4,
       stage: "Final Match",
       date: "July 19, 2026",
-      venue: "MetLife Stadium",
-      city: "New York/New Jersey",
+      venue: "Stadium Mordovia",
+      city: "Saransk, Russia",
       teams: ["TBD", "TBD"],
       prediction: { winner: "Brazil", probability: "12%", factor: "Historical Form" }
     },
@@ -176,9 +176,9 @@ export default function FifaDetailsPage() {
                     <h3 className="text-lg font-bold mb-6">Tournament Timeline</h3>
                     <div className="space-y-6">
                        {[
-                         { date: "June 11", event: "Opening Ceremony", status: "Estadio Azteca" },
+                         { date: "June 11", event: "Opening Ceremony", status: "Stadio Renato Dall'Ara" },
                          { date: "June 25", event: "Group Stage Ends", status: "All Venues" },
-                         { date: "July 19", event: "World Cup Final", status: "MetLife Stadium" },
+                         { date: "July 19", event: "World Cup Final", status: "Stadium Mordovia" },
                        ].map((item, i) => (
                          <div key={i} className="flex gap-4">
                             <div className="flex flex-col items-center">

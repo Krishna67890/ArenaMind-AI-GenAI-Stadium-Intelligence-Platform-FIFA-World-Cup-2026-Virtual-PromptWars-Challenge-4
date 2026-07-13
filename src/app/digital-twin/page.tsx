@@ -163,8 +163,8 @@ export default function DigitalTwinPage() {
                     <h3 className="text-2xl font-black italic uppercase mb-8">World Stadium Overview</h3>
                     <div className="space-y-6">
                       {[
-                        { name: "Estadio Azteca", city: "Mexico City", status: "Active", cap: "87,523" },
-                        { name: "Arrowhead Stadium", city: "Kansas City", status: "Online", cap: "76,416" },
+                        { name: "Stadio Renato Dall'Ara", city: "Bologna", status: "Active", cap: "38,279" },
+                        { name: "Stadium Mordovia", city: "Saransk", status: "Online", cap: "44,442" },
                         { name: "SoFi Stadium", city: "Los Angeles", status: "Standby", cap: "70,240" },
                       ].map((stadium, i) => (
                         <div key={i} className="flex items-center justify-between p-6 bg-white/5 rounded-2xl border border-white/5 group hover:bg-white/10 transition-all cursor-pointer">

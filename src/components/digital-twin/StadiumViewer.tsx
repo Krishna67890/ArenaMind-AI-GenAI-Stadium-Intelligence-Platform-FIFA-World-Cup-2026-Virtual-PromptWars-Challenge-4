@@ -20,28 +20,28 @@ interface Stadium {
 
 const stadiums: Stadium[] = [
   {
-    id: "azteca",
-    title: "Azteca Stadium",
-    embed: "https://sketchfab.com/models/83ca580566054b1b9d780289f4372d68/embed?autostart=1&internal=1&tracking=0&ui_ar=0&ui_infos=0&ui_snapshots=1&ui_stop=0&ui_theatre=1&ui_watermark=0",
-    capacity: "87,523",
-    location: "Mexico City, Mexico",
-    year: "1966",
-    match: "Opening Match // June 11",
-    weather: "24°C Clear",
-    density: "88%",
-    security: "Level 4 - High",
+    id: "renato-dallara",
+    title: "Stadio Renato Dall'Ara",
+    embed: "https://sketchfab.com/models/292c41506f32403a943836c78d357d1b/embed",
+    capacity: "38,279",
+    location: "Bologna, Italy",
+    year: "1927",
+    match: "European Qualifier",
+    weather: "20°C Clear",
+    density: "75%",
+    security: "Level 2 - Optimal",
   },
   {
-    id: "metlife",
-    title: "MetLife Stadium",
-    embed: "https://sketchfab.com/models/996924376c9945038c35e3b624508493/embed?autostart=1&internal=1&tracking=0&ui_ar=0&ui_infos=0&ui_snapshots=1&ui_stop=0&ui_theatre=1&ui_watermark=0",
-    capacity: "82,500",
-    location: "East Rutherford, NJ",
-    year: "2010",
-    match: "Final Match // July 19",
-    weather: "26°C Clear",
-    density: "92%",
-    security: "Level 3 - Optimal",
+    id: "mordovia",
+    title: "Stadium Mordovia",
+    embed: "https://sketchfab.com/models/54a73d5582c947d1b4942fc38ed1d7c9/embed",
+    capacity: "44,442",
+    location: "Saransk, Russia",
+    year: "2018",
+    match: "International Friendly",
+    weather: "18°C Cloudy",
+    density: "82%",
+    security: "Level 3 - High",
   }
 ];
 
@@ -54,7 +54,7 @@ export const StadiumViewer = () => {
     <div className={`relative w-full transition-all duration-500 ${isFullscreen ? "fixed inset-0 z-[100] bg-black" : "h-[700px] rounded-[2.5rem] overflow-hidden border border-white/10"}`}>
       {/* 3D Embed */}
       <div className="absolute inset-0 z-0 bg-black">
-        <Stadium3D />
+        <Stadium3D title={activeStadium.title} />
       </div>
 
       {/* Overlay UI */}

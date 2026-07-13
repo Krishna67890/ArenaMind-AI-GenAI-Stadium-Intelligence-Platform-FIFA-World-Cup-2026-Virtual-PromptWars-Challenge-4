@@ -18,7 +18,7 @@ interface MenuItem {
 
 const MENU_ITEMS: MenuItem[] = [
   { id: 1, name: "Neural Burger", category: "Non-Veg", price: 18, cals: 650, icon: "🍔", tags: ["Popular", "High Protein"] },
-  { id: 2, name: "Azteca Nachos", category: "Veg", price: 14, cals: 420, icon: "🌮", tags: ["Veg", "Gluten-Free"] },
+  { id: 2, name: "Bologna Bruschetta", category: "Veg", price: 14, cals: 420, icon: "🥖", tags: ["Veg", "Gluten-Free"] },
   { id: 3, name: "Cyber Dogs", category: "Non-Veg", price: 12, cals: 380, icon: "🌭", tags: ["Quick"] },
   { id: 4, name: "Stadium Fries", category: "Veg", price: 8, cals: 310, icon: "🍟", tags: ["Classic"] },
   { id: 5, name: "Nitro Cold Brew", category: "Drinks", price: 6, cals: 5, icon: "☕", tags: ["Energy"] },

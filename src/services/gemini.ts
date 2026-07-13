@@ -26,22 +26,22 @@ function mockGeminiResponse(prompt: string) {
   }
 
   if (p.includes("match") || p.includes("game") || p.includes("live")) {
-    return "LIVE UPDATE: USA vs Brazil at MetLife Stadium is currently 2-1 (84th minute). Next match: Mexico vs Germany at Estadio Azteca, tomorrow 18:00 UTC. Tournament status: Group Stage Day 4. All systems operational.";
+    return "LIVE UPDATE: Italy vs France at Stadio Renato Dall'Ara is currently 1-0 (32nd minute). Next match: Russia vs Serbia at Stadium Mordovia, tomorrow 19:00 UTC. Tournament status: Group Stage Day 2. All systems operational.";
   }
 
   // FIFA 2026 Details
   if (p.includes("fifa 2026") || p.includes("world cup 26") || p.includes("tournament")) {
-    return "FIFA World Cup 2026 will be the largest ever, featuring 48 teams across 16 host cities in the USA, Canada, and Mexico. A total of 104 matches will be played between June 11 and July 19, 2026. The final will be held at MetLife Stadium.";
+    return "FIFA World Cup 2026 will be the largest ever, featuring 48 teams across global host cities including Bologna and Saransk. A total of 104 matches will be played between June 11 and July 19, 2026. The final will be held at Stadio Renato Dall'Ara.";
   }
 
   // Stadium Info
   if (p.includes("stadium") || p.includes("arena")) {
-    if (p.includes("metlife") || p.includes("new york") || p.includes("new jersey")) return "MetLife Stadium (NY/NJ): The crown jewel of the tournament hosting the Final. Capacity: 82,500. Features advanced 5G integration and neural crowd management.";
-    if (p.includes("azteca") || p.includes("mexico city")) return "Estadio Azteca (Mexico City): The historic venue for the opening match. Capacity: 87,523. First stadium to host three World Cups.";
-    if (p.includes("sofi") || p.includes("los angeles")) return "SoFi Stadium (LA): Hosting the USA's opening match. The world's most expensive stadium with a 360-degree dual-sided 4K Oculus video board.";
+    if (p.includes("dall'ara") || p.includes("bologna") || p.includes("renato")) return "Stadio Renato Dall'Ara (Bologna): The crown jewel of the tournament hosting the Final. Capacity: 38,279. Features historic architecture integrated with advanced 5G and neural crowd management.";
+    if (p.includes("mordovia") || p.includes("saransk")) return "Stadium Mordovia (Saransk): A vibrant venue for the opening match. Capacity: 44,442. Showcases modern design inspired by local folk art.";
+    if (p.includes("sofi") || p.includes("los angeles")) return "SoFi Stadium (LA): Hosting the opening match. The world's most expensive stadium with a 360-degree dual-sided 4K Oculus video board.";
     if (p.includes("arrowhead") || p.includes("kansas city")) return "Arrowhead Stadium (KC): Known for the loudest crowd in the world. Capacity: 76,416. Will host quarter-final matches.";
     if (p.includes("att") || p.includes("dallas")) return "AT&T Stadium (Dallas): Featuring the massive center-hung video board and retractable roof. Capacity: 80,000+.";
-    return "I have data on all 16 host cities: New York, Los Angeles, Mexico City, Toronto, Vancouver, Kansas City, Miami, Dallas, and more. Which one would you like to explore in ArenaVerse?";
+    return "I have data on host cities including Bologna, Saransk, Los Angeles, Toronto, Vancouver, Kansas City, Miami, Dallas, and more. Which one would you like to explore in ArenaVerse?";
   }
 
   // 3D Navigation & Page Routes
@@ -74,7 +74,7 @@ function mockGeminiResponse(prompt: string) {
     if (p.includes("pitch") || p.includes("field") || p.includes("grass")) {
       return "COMMAND_VIEW_PITCH|Moving camera to pitch level for a player's perspective.";
     }
-    return "COMMAND_VIEW_STADIUM|Redirecting neural link to MetLife Stadium 3D twin. Welcome to the ArenaVerse.";
+    return "COMMAND_VIEW_STADIUM|Redirecting neural link to Stadio Renato Dall'Ara 3D twin. Welcome to the ArenaVerse.";
   }
 
   if (p.includes("night") || p.includes("dark")) {

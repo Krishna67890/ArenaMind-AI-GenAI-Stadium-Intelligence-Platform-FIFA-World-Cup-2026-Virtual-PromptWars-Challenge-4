@@ -41,10 +41,10 @@ export const StadiumDigitalTwin = () => {
               viewport={{ once: true }}
               className="text-4xl font-bold mb-4"
             >
-              MetLife Stadium <span className="text-gradient">Digital Twin</span>
+              Stadio Renato Dall'Ara <span className="text-gradient">Digital Twin</span>
             </motion.h2>
             <p className="text-white/40 max-w-xl">
-              Official simulation for the 2026 FIFA World Cup Final venue. Monitor real-time spatial intelligence, gate flow, and environmental sustainability.
+              Official simulation for the world-class sporting venue. Monitor real-time spatial intelligence, gate flow, and environmental sustainability with our neural engine.
             </p>
           </div>
 
@@ -71,7 +71,7 @@ export const StadiumDigitalTwin = () => {
           {/* Simulation Visualizer */}
           <div className="lg:col-span-3 aspect-video bg-black/40 rounded-3xl border border-white/10 relative overflow-hidden group">
             {viewMode === "3d-model" ? (
-              <Stadium3D />
+              <Stadium3D title="Stadio Renato Dall'Ara" />
             ) : (
               /* Mock Stadium Representation */
               <div className="absolute inset-0 flex items-center justify-center p-12">
@@ -150,7 +150,7 @@ export const StadiumDigitalTwin = () => {
 
               <div className="flex gap-2 pointer-events-auto">
                 <button
-                  onClick={() => window.open('https://www.google.com/maps/dir/?api=1&destination=MetLife+Stadium', '_blank')}
+                  onClick={() => window.open('https://www.google.com/maps/dir/?api=1&destination=Stadio+Renato+Dall+Ara+Bologna', '_blank')}
                   className="px-4 py-2 bg-blue-600 text-white rounded-full flex items-center gap-2 hover:bg-blue-500 transition-all text-xs font-bold shadow-lg"
                 >
                   <Navigation className="w-4 h-4" />
