@@ -122,23 +122,6 @@ export default function LoginPage() {
             </button>
           </form>
 
-          <div className="my-10 flex items-center gap-4">
-             <div className="h-px flex-1 bg-white/5" />
-             <span className="text-[8px] font-bold text-white/20 uppercase tracking-[0.3em]">Third-Party Uplink</span>
-             <div className="h-px flex-1 bg-white/5" />
-          </div>
-
-          <div className="grid grid-cols-2 gap-4">
-             <button onClick={handleGoogleSignIn} className="flex items-center justify-center gap-2 py-4 bg-white/5 border border-white/10 rounded-2xl hover:bg-white/10 transition-colors">
-                <Chrome className="w-4 h-4" />
-                <span className="text-xs font-bold uppercase tracking-widest">Google</span>
-             </button>
-             <button className="flex items-center justify-center gap-2 py-4 bg-white/5 border border-white/10 rounded-2xl hover:bg-white/10 transition-colors">
-                <Github className="w-4 h-4" />
-                <span className="text-xs font-bold uppercase tracking-widest">Github</span>
-             </button>
-          </div>
-
           <p className="mt-10 text-center text-[10px] font-bold uppercase tracking-widest text-white/30">
             No access granted? <Link href="/register" className="text-blue-500 hover:underline">Request Initialization</Link>
           </p>

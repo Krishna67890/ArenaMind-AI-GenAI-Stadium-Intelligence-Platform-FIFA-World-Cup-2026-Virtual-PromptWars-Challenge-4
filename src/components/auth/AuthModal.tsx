@@ -147,26 +147,6 @@ export const AuthModal = ({ isOpen, onClose }: AuthModalProps) => {
               </button>
             </form>
 
-            <div className="my-6 flex items-center gap-4 relative z-10">
-              <div className="h-px flex-1 bg-white/10" />
-              <span className="text-[10px] uppercase tracking-widest text-white/20 font-bold">Protocol Diversification</span>
-              <div className="h-px flex-1 bg-white/10" />
-            </div>
-
-            <div className="grid grid-cols-2 gap-4 relative z-10">
-              <button
-                onClick={handleGoogleSignIn}
-                className="flex items-center justify-center gap-2 py-3 bg-white/5 border border-white/10 rounded-2xl hover:bg-white/10 transition-colors"
-              >
-                <Chrome className="w-4 h-4" />
-                <span className="text-sm">Google</span>
-              </button>
-              <button className="flex items-center justify-center gap-2 py-3 bg-white/5 border border-white/10 rounded-2xl hover:bg-white/10 transition-colors">
-                <Github className="w-4 h-4" />
-                <span className="text-sm">Github</span>
-              </button>
-            </div>
-
             <p className="mt-8 text-center text-sm text-white/40 relative z-10">
               {isLogin ? "New to the network?" : "Already have an uplink?"}{" "}
               <button

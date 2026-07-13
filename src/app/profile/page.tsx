@@ -144,8 +144,8 @@ export default function ProfilePage() {
 
         <main className="pt-32 pb-20 px-6 max-w-[1000px] mx-auto">
           <header className="mb-12">
-            <h1 className="text-4xl font-black italic uppercase tracking-tighter mb-2">User <span className="text-gradient">Profile</span></h1>
-            <p className="text-white/40 text-sm uppercase tracking-widest">Manage your neural identity and credentials.</p>
+            <h1 className="text-3xl lg:text-4xl font-black italic uppercase tracking-tighter mb-2">User <span className="text-gradient">Profile</span></h1>
+            <p className="text-white/40 text-[10px] lg:text-sm uppercase tracking-widest">Manage your neural identity and credentials.</p>
           </header>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -204,8 +204,8 @@ export default function ProfilePage() {
 
             {/* Main Form */}
             <div className="lg:col-span-2 space-y-8">
-              <div className="glass-morphism p-10 rounded-[3rem] border-white/10">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="glass-morphism p-6 lg:p-10 rounded-[2rem] lg:rounded-[3rem] border-white/10">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
                   <div className="space-y-2">
                     <label className="text-[10px] font-black uppercase tracking-[0.2em] text-white/30 ml-4">Full Name</label>
                     <div className="relative">
@@ -292,18 +292,18 @@ export default function ProfilePage() {
                   </div>
                 </div>
 
-                <div className="mt-12 flex flex-wrap gap-4">
+                <div className="mt-8 lg:mt-12 flex flex-col sm:flex-row gap-4">
                   <button
                     onClick={handleSave}
                     disabled={loading}
-                    className="px-8 py-4 bg-blue-600 hover:bg-blue-500 rounded-2xl flex items-center gap-3 font-black uppercase tracking-widest text-xs shadow-lg shadow-blue-600/20 transition-all disabled:opacity-50"
+                    className="w-full sm:w-auto px-8 py-4 bg-blue-600 hover:bg-blue-500 rounded-2xl flex items-center justify-center gap-3 font-black uppercase tracking-widest text-xs shadow-lg shadow-blue-600/20 transition-all disabled:opacity-50"
                   >
                     <Save className="w-4 h-4" />
                     {loading ? "Synchronizing..." : "Save Profile"}
                   </button>
                   <button
                     onClick={handleReset}
-                    className="px-8 py-4 bg-white/5 hover:bg-white/10 rounded-2xl flex items-center gap-3 font-black uppercase tracking-widest text-xs transition-all border border-white/10"
+                    className="w-full sm:w-auto px-8 py-4 bg-white/5 hover:bg-white/10 rounded-2xl flex items-center justify-center gap-3 font-black uppercase tracking-widest text-xs transition-all border border-white/10"
                   >
                     <RotateCcw className="w-4 h-4" />
                     Reset Changes

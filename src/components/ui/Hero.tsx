@@ -101,7 +101,7 @@ export const Hero = () => {
             </Magnetic>
             <Magnetic>
               <button
-                onClick={() => window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ', '_blank')}
+                onClick={() => window.open('https://youtu.be/HRLPRi5-Se4?si=pUUADbEAuBb2EwM8', '_blank')}
                 className="px-6 py-3 bg-white/5 hover:bg-white/10 text-white rounded-full font-medium transition-all flex items-center gap-2 border border-white/10"
               >
                 <Play className="w-4 h-4" /> {t("watchOverview")}

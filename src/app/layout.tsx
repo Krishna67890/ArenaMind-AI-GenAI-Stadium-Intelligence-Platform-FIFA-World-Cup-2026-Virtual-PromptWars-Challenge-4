@@ -25,6 +25,11 @@ export const metadata: Metadata = {
   authors: [{ name: "Krishna Patil Rajput" }],
   creator: "Krishna Patil Rajput",
   publisher: "ArenaMind AI",
+  icons: {
+    icon: "/website.png",
+    shortcut: "/website.png",
+    apple: "/website.png",
+  },
   formatDetection: {
     email: false,
     address: false,

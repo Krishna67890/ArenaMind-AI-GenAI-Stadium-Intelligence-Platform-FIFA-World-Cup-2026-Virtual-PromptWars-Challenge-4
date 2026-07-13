@@ -82,29 +82,29 @@ export default function DashboardPage() {
               <motion.h1
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
-                className="text-4xl font-black italic tracking-tighter uppercase"
+                className="text-3xl lg:text-4xl font-black italic tracking-tighter uppercase"
               >
                 Command <span className="text-blue-600">Center</span>
               </motion.h1>
-              <p className="text-white/40 text-sm font-medium uppercase tracking-[0.2em]">Operational Intelligence // FIFA 2026</p>
+              <p className="text-white/40 text-[10px] lg:text-sm font-medium uppercase tracking-[0.2em]">Operational Intelligence // FIFA 2026</p>
             </div>
 
-            <div className="flex items-center gap-4 bg-white/5 p-2 rounded-2xl border border-white/10">
+            <div className="flex items-center gap-2 lg:gap-4 bg-white/5 p-1.5 lg:p-2 rounded-2xl border border-white/10 overflow-x-auto no-scrollbar max-w-full">
               <button
                 onClick={() => setActiveTab("overview")}
-                className={`px-6 py-2 rounded-xl text-xs font-bold uppercase tracking-widest transition-all ${activeTab === "overview" ? "bg-blue-600 shadow-lg shadow-blue-600/20" : "hover:bg-white/5"}`}
+                className={`px-4 lg:px-6 py-2 rounded-xl text-[10px] lg:text-xs font-bold uppercase tracking-widest transition-all whitespace-nowrap ${activeTab === "overview" ? "bg-blue-600 shadow-lg shadow-blue-600/20" : "hover:bg-white/5"}`}
               >
                 Overview
               </button>
               <button
                 onClick={() => setActiveTab("incidents")}
-                className={`px-6 py-2 rounded-xl text-xs font-bold uppercase tracking-widest transition-all ${activeTab === "incidents" ? "bg-blue-600 shadow-lg shadow-blue-600/20" : "hover:bg-white/5"}`}
+                className={`px-4 lg:px-6 py-2 rounded-xl text-[10px] lg:text-xs font-bold uppercase tracking-widest transition-all whitespace-nowrap ${activeTab === "incidents" ? "bg-blue-600 shadow-lg shadow-blue-600/20" : "hover:bg-white/5"}`}
               >
                 Incidents ({filteredIncidents.length})
               </button>
               <button
                 onClick={() => setActiveTab("stadiums")}
-                className={`px-6 py-2 rounded-xl text-xs font-bold uppercase tracking-widest transition-all ${activeTab === "stadiums" ? "bg-blue-600 shadow-lg shadow-blue-600/20" : "hover:bg-white/5"}`}
+                className={`px-4 lg:px-6 py-2 rounded-xl text-[10px] lg:text-xs font-bold uppercase tracking-widest transition-all whitespace-nowrap ${activeTab === "stadiums" ? "bg-blue-600 shadow-lg shadow-blue-600/20" : "hover:bg-white/5"}`}
               >
                 3D Twins
               </button>
@@ -130,25 +130,25 @@ export default function DashboardPage() {
 
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                   {/* Interactive Stadium Preview */}
-                  <div className="lg:col-span-2 glass-morphism rounded-[2.5rem] border-white/10 overflow-hidden h-[500px] relative group">
+                  <div className="lg:col-span-2 glass-morphism rounded-[2rem] lg:rounded-[2.5rem] border-white/10 overflow-hidden h-[300px] lg:h-[500px] relative group">
                     <div className="absolute inset-0 bg-blue-600/5 group-hover:bg-blue-600/0 transition-colors pointer-events-none z-10" />
                     <iframe
                       src="https://sketchfab.com/models/83ca580566054b1b9d780289f4372d68/embed?autostart=1&internal=1&tracking=0&ui_ar=0&ui_infos=0&ui_snapshots=1&ui_stop=0&ui_theatre=1&ui_watermark=0"
                       className="w-full h-full border-0"
                       allow="autoplay; fullscreen; xr-spatial-tracking"
                     />
-                    <div className="absolute bottom-8 left-8 z-20">
-                      <div className="glass-morphism p-6 rounded-3xl border-white/10 backdrop-blur-md">
-                        <h3 className="text-2xl font-black italic uppercase tracking-tighter">Azteca Twin</h3>
-                        <p className="text-xs text-white/40 font-bold uppercase tracking-widest mt-1">Live Spatial Mapping Active</p>
+                    <div className="absolute bottom-4 left-4 lg:bottom-8 lg:left-8 z-20">
+                      <div className="glass-morphism p-4 lg:p-6 rounded-2xl lg:rounded-3xl border-white/10 backdrop-blur-md">
+                        <h3 className="text-lg lg:text-2xl font-black italic uppercase tracking-tighter">Azteca Twin</h3>
+                        <p className="text-[8px] lg:text-xs text-white/40 font-bold uppercase tracking-widest mt-1">Live Spatial Mapping Active</p>
                       </div>
                     </div>
                   </div>
 
                   {/* Quick Incident Feed */}
-                  <div className="glass-morphism rounded-[2.5rem] border-white/10 p-8 flex flex-col h-[500px]">
-                    <div className="flex justify-between items-center mb-8">
-                      <h3 className="text-xl font-bold italic uppercase tracking-tighter">Live Intel</h3>
+                  <div className="glass-morphism rounded-[2rem] lg:rounded-[2.5rem] border-white/10 p-6 lg:p-8 flex flex-col h-[400px] lg:h-[500px]">
+                    <div className="flex justify-between items-center mb-6 lg:mb-8">
+                      <h3 className="text-lg lg:text-xl font-bold italic uppercase tracking-tighter">Live Intel</h3>
                       <button onClick={() => setActiveTab("incidents")} className="text-[10px] font-black uppercase text-blue-500 tracking-widest hover:underline">View All</button>
                     </div>
                     <div className="space-y-4 overflow-y-auto flex-1 pr-2 custom-scrollbar">
@@ -166,15 +166,15 @@ export default function DashboardPage() {
                 </div>
 
                 {/* Performance Analytics */}
-                <div className="glass-morphism rounded-[2.5rem] border-white/10 p-10">
-                  <div className="flex justify-between items-center mb-10">
-                    <h3 className="text-2xl font-black italic uppercase tracking-tighter">Crowd Dynamics</h3>
-                    <div className="flex gap-6">
+                <div className="glass-morphism rounded-[2rem] lg:rounded-[2.5rem] border-white/10 p-6 lg:p-10">
+                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 lg:mb-10 gap-4">
+                    <h3 className="text-xl lg:text-2xl font-black italic uppercase tracking-tighter">Crowd Dynamics</h3>
+                    <div className="flex gap-4 lg:gap-6">
                       <div className="flex items-center gap-2"><div className="w-2 h-2 rounded-full bg-blue-500" /><span className="text-[10px] font-bold text-white/40 uppercase tracking-widest">Inflow</span></div>
                       <div className="flex items-center gap-2"><div className="w-2 h-2 rounded-full bg-red-500" /><span className="text-[10px] font-bold text-white/40 uppercase tracking-widest">Alerts</span></div>
                     </div>
                   </div>
-                  <div className="h-[300px]">
+                  <div className="h-[200px] lg:h-[300px]">
                     <ResponsiveContainer width="100%" height="100%">
                       <AreaChart data={data}>
                         <defs>
@@ -286,15 +286,15 @@ const StatCard = ({ icon: Icon, label, value, change, color }: StatCardProps) =>
   return (
     <motion.div
       whileHover={{ y: -5 }}
-      className="glass-morphism p-8 rounded-[2rem] border-white/10"
+      className="glass-morphism p-6 lg:p-8 rounded-[1.5rem] lg:rounded-[2rem] border-white/10"
     >
-      <div className="flex justify-between items-start mb-6">
-        <div className="p-3 rounded-2xl bg-white/5">
-          <Icon className={`w-6 h-6 ${color}`} />
+      <div className="flex justify-between items-start mb-4 lg:mb-6">
+        <div className="p-2 lg:p-3 rounded-xl lg:rounded-2xl bg-white/5">
+          <Icon className={`w-5 h-5 lg:w-6 lg:h-6 ${color}`} />
         </div>
         <span className="text-[10px] font-black text-green-500 uppercase tracking-widest">{change}</span>
       </div>
-      <div className="text-4xl font-black italic tracking-tighter uppercase mb-2">{value}</div>
+      <div className="text-3xl lg:text-4xl font-black italic tracking-tighter uppercase mb-1 lg:mb-2">{value}</div>
       <div className="text-[10px] font-black text-white/20 uppercase tracking-[0.3em]">{label}</div>
     </motion.div>
   );
@@ -307,15 +307,15 @@ interface StadiumTwinCardProps {
 }
 
 const StadiumTwinCard = ({ title, location, embed }: StadiumTwinCardProps) => (
-  <div className="glass-morphism rounded-[3rem] border-white/10 overflow-hidden h-[600px] flex flex-col">
-    <div className="p-8 border-b border-white/5 flex justify-between items-center">
+  <div className="glass-morphism rounded-[2rem] lg:rounded-[3rem] border-white/10 overflow-hidden h-[400px] lg:h-[600px] flex flex-col">
+    <div className="p-6 lg:p-8 border-b border-white/5 flex justify-between items-center">
       <div>
-        <h3 className="text-2xl font-black italic uppercase tracking-tighter">{title}</h3>
-        <p className="text-xs text-blue-400 font-bold uppercase tracking-widest mt-1">{location}</p>
+        <h3 className="text-xl lg:text-2xl font-black italic uppercase tracking-tighter">{title}</h3>
+        <p className="text-[10px] lg:text-xs text-blue-400 font-bold uppercase tracking-widest mt-1">{location}</p>
       </div>
-      <div className="flex gap-3">
-        <div className="w-10 h-10 rounded-xl bg-green-500/10 flex items-center justify-center"><Activity className="w-5 h-5 text-green-500" /></div>
-        <div className="w-10 h-10 rounded-xl bg-blue-500/10 flex items-center justify-center"><Globe className="w-5 h-5 text-blue-400" /></div>
+      <div className="flex gap-2 lg:gap-3">
+        <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-lg lg:rounded-xl bg-green-500/10 flex items-center justify-center"><Activity className="w-4 h-4 lg:w-5 lg:h-5 text-green-500" /></div>
+        <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-lg lg:rounded-xl bg-blue-500/10 flex items-center justify-center"><Globe className="w-4 h-4 lg:w-5 lg:h-5 text-blue-400" /></div>
       </div>
     </div>
     <div className="flex-1 bg-black">
