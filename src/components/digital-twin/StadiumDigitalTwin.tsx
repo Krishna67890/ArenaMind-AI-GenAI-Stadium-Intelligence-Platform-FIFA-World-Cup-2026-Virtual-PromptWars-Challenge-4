@@ -21,9 +21,29 @@ const stadiumZones = [
 
 import { Stadium3D } from "./Stadium3D";
 
+const stadiums = [
+  {
+    id: "renato-dallara",
+    name: "Stadio Renato Dall'Ara",
+    city: "Bologna",
+    location: "Bologna, Italy",
+    description: "Official simulation for the historic Italian venue. Monitor real-time spatial intelligence and environmental sustainability.",
+    mapUrl: "https://www.google.com/maps/dir/?api=1&destination=Stadio+Renato+Dall+Ara+Bologna"
+  },
+  {
+    id: "mordovia",
+    name: "Stadium Mordovia",
+    city: "Saransk",
+    location: "Saransk, Russia",
+    description: "Digital twin of the Saransk landmark. Synchronizing physical infrastructure with virtual simulation and crowd flow analysis.",
+    mapUrl: "https://www.google.com/maps/dir/?api=1&destination=Mordovia+Arena+Saransk"
+  }
+];
+
 export const StadiumDigitalTwin = () => {
+  const [selectedStadium, setSelectedStadium] = useState(stadiums[0]);
   const [activeZone, setActiveZone] = useState(stadiumZones[0]);
-  const [viewMode, setViewMode] = useState("3d-model"); // Changed default to 3d-model
+  const [viewMode, setViewMode] = useState("3d-model");
   const [isMounted, setIsMounted] = useState(false);
 
   React.useEffect(() => {
@@ -35,16 +55,31 @@ export const StadiumDigitalTwin = () => {
       <div className="container mx-auto px-6">
         <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-8">
           <div>
+            <div className="flex gap-2 mb-4">
+              {stadiums.map((s) => (
+                <button
+                  key={s.id}
+                  onClick={() => setSelectedStadium(s)}
+                  className={`px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest transition-all ${
+                    selectedStadium.id === s.id
+                      ? "bg-blue-600 text-white shadow-lg shadow-blue-600/20"
+                      : "bg-white/5 text-white/40 hover:bg-white/10"
+                  }`}
+                >
+                  {s.city}
+                </button>
+              ))}
+            </div>
             <motion.h2
+              key={selectedStadium.id}
               initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
+              animate={{ opacity: 1, x: 0 }}
               className="text-4xl font-bold mb-4"
             >
-              Stadio Renato Dall'Ara <span className="text-gradient">Digital Twin</span>
+              {selectedStadium.name} <span className="text-gradient">Digital Twin</span>
             </motion.h2>
             <p className="text-white/40 max-w-xl">
-              Official simulation for the world-class sporting venue. Monitor real-time spatial intelligence, gate flow, and environmental sustainability with our neural engine.
+              {selectedStadium.description}
             </p>
           </div>
 
@@ -71,7 +106,7 @@ export const StadiumDigitalTwin = () => {
           {/* Simulation Visualizer */}
           <div className="lg:col-span-3 aspect-video bg-black/40 rounded-3xl border border-white/10 relative overflow-hidden group">
             {viewMode === "3d-model" ? (
-              <Stadium3D title="Stadio Renato Dall'Ara" />
+              <Stadium3D title={selectedStadium.name} />
             ) : (
               /* Mock Stadium Representation */
               <div className="absolute inset-0 flex items-center justify-center p-12">
@@ -150,7 +185,7 @@ export const StadiumDigitalTwin = () => {
 
               <div className="flex gap-2 pointer-events-auto">
                 <button
-                  onClick={() => window.open('https://www.google.com/maps/dir/?api=1&destination=Stadio+Renato+Dall+Ara+Bologna', '_blank')}
+                  onClick={() => window.open(selectedStadium.mapUrl, '_blank')}
                   className="px-4 py-2 bg-blue-600 text-white rounded-full flex items-center gap-2 hover:bg-blue-500 transition-all text-xs font-bold shadow-lg"
                 >
                   <Navigation className="w-4 h-4" />
