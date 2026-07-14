@@ -10,7 +10,7 @@ import {
   GoogleAuthProvider,
   updateProfile
 } from "firebase/auth";
-import { auth } from "@/services/firebase";
+import { getFirebaseAuth } from "@/services/firebase";
 
 interface AuthModalProps {
   isOpen: boolean;
@@ -31,10 +31,13 @@ export const AuthModal = ({ isOpen, onClose }: AuthModalProps) => {
     setLoading(true);
 
     try {
+      const auth = getFirebaseAuth();
+      if (!auth) throw new Error("Authentication service is unavailable.");
+
       if (isLogin) {
-        await signInWithEmailAndPassword(auth, email, password);
+        await signInWithEmailAndPassword(auth!, email, password);
       } else {
-        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        const userCredential = await createUserWithEmailAndPassword(auth!, email, password);
         await updateProfile(userCredential.user, { displayName: name });
       }
       onClose();
@@ -48,7 +51,9 @@ export const AuthModal = ({ isOpen, onClose }: AuthModalProps) => {
   const handleGoogleSignIn = async () => {
     const provider = new GoogleAuthProvider();
     try {
-      await signInWithPopup(auth, provider);
+      const auth = getFirebaseAuth();
+      if (!auth) throw new Error("Authentication service is unavailable.");
+      await signInWithPopup(auth!, provider);
       onClose();
     } catch (err) {
       setError(err instanceof Error ? err.message : String(err));

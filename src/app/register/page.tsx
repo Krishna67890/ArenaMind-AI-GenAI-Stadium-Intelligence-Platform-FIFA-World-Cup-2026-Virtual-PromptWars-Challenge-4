@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { useAuth, UserRole } from "@/context/AuthContext";
 import { Mail, Lock, User, ArrowRight, Globe, ShieldCheck, Eye, EyeOff, Building2, LucideIcon } from "lucide-react";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { auth, db } from "@/services/firebase";
+import { getFirebaseAuth, getFirebaseDb } from "@/services/firebase";
 import { setDoc, doc } from "firebase/firestore";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -55,11 +55,17 @@ export default function RegisterPage() {
     setError("");
     setLoading(true);
     try {
-      const userCredential = await createUserWithEmailAndPassword(auth, formData.email, formData.password);
+      const auth = getFirebaseAuth();
+      const db = getFirebaseDb();
+      if (!auth || !db) {
+        throw new Error("Authentication or Database service is currently unavailable.");
+      }
+
+      const userCredential = await createUserWithEmailAndPassword(auth!, formData.email, formData.password);
       await updateProfile(userCredential.user, { displayName: formData.name });
 
       // Save extra user info to Firestore
-      await setDoc(doc(db, "users", userCredential.user.uid), {
+      await setDoc(doc(db!, "users", userCredential.user.uid), {
         name: formData.name,
         email: formData.email,
         country: formData.country,

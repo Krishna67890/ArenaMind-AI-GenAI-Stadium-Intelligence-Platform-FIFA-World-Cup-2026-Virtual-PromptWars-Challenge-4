@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Star, Send, CheckCircle2 } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
-import { db } from "@/services/firebase";
+import { getFirebaseDb } from "@/services/firebase";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { sanitizeInput } from "@/services/utils";
 
@@ -22,9 +22,10 @@ export const RatingSystem = () => {
 
     setIsSubmitting(true);
     try {
+      const db = getFirebaseDb();
       if (!db) throw new Error("Database connection lost");
 
-      await addDoc(collection(db, "ratings"), {
+      await addDoc(collection(db!, "ratings"), {
         rating,
         comment: sanitizeInput(comment),
         timestamp: serverTimestamp(),

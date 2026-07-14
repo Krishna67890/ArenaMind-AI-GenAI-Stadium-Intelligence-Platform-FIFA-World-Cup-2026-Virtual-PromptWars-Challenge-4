@@ -7,8 +7,7 @@ import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
 import { useAuth, UserRole } from "@/context/AuthContext";
 import { User, Mail, Phone, MapPin, Globe, Building2, FileText, Camera, Save, X, RotateCcw, Loader2 } from "lucide-react";
 import { useNotifications } from "@/context/NotificationContext";
-import { auth, db } from "@/services/firebase";
-import { doc, updateDoc } from "firebase/firestore";
+import { getFirebaseAuth } from "@/services/firebase";
 import { updateProfile } from "firebase/auth";
 
 export default function ProfilePage() {
@@ -59,8 +58,9 @@ export default function ProfilePage() {
       await updateUserData(formData);
 
       // 2. Update Auth Profile (Display Name)
-      if (auth.currentUser && formData.name !== auth.currentUser.displayName) {
-        await updateProfile(auth.currentUser, {
+      const auth = getFirebaseAuth();
+      if (auth?.currentUser && formData.name !== auth.currentUser.displayName) {
+        await updateProfile(auth.currentUser!, {
           displayName: formData.name
         });
       }

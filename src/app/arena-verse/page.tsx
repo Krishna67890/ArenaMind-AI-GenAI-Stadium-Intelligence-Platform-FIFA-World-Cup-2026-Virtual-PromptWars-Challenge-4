@@ -35,7 +35,7 @@ import { AdvancedStadium } from "@/components/arena-verse/AdvancedStadium";
 import { Stadium3D } from "@/components/digital-twin/Stadium3D";
 import { useLanguage } from "@/context/LanguageContext";
 import { collection, onSnapshot, query, limit } from "firebase/firestore";
-import { db } from "@/services/firebase";
+import { getFirebaseDb } from "@/services/firebase";
 import { ProtectedRoute as AuthGuard } from "@/components/auth/ProtectedRoute";
 import { useAuth } from "@/context/AuthContext";
 import * as THREE from "three";
@@ -243,6 +243,7 @@ export default function ArenaVersePage() {
   };
 
   useEffect(() => {
+    const db = getFirebaseDb();
     if (!db || !user) {
       setLiveAlerts([]);
       return;
@@ -251,7 +252,7 @@ export default function ArenaVersePage() {
     let unsubscribe: () => void = () => {};
 
     try {
-      const q = query(collection(db, "stadium_alerts"), limit(3));
+      const q = query(collection(db!, "stadium_alerts"), limit(3));
       unsubscribe = onSnapshot(q,
         (snapshot) => {
           const alerts = snapshot.docs.map(doc => ({

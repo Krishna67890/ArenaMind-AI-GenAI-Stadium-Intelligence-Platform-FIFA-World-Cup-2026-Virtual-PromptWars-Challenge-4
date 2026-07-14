@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Mail, Lock, ArrowRight, Chrome, Github, ShieldCheck, Eye, EyeOff } from "lucide-react";
 import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import { auth } from "@/services/firebase";
+import { getFirebaseAuth } from "@/services/firebase";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
@@ -21,7 +21,9 @@ export default function LoginPage() {
     setError("");
     setLoading(true);
     try {
-      await signInWithEmailAndPassword(auth, email, password);
+      const auth = getFirebaseAuth();
+      if (!auth) throw new Error("Authentication service is unavailable.");
+      await signInWithEmailAndPassword(auth!, email, password);
       router.push("/dashboard");
     } catch (err) {
       setError(err instanceof Error ? err.message : String(err));
@@ -33,7 +35,9 @@ export default function LoginPage() {
   const handleGoogleSignIn = async () => {
     const provider = new GoogleAuthProvider();
     try {
-      await signInWithPopup(auth, provider);
+      const auth = getFirebaseAuth();
+      if (!auth) throw new Error("Authentication service is unavailable.");
+      await signInWithPopup(auth!, provider);
       router.push("/dashboard");
     } catch (err) {
       setError(err instanceof Error ? err.message : String(err));

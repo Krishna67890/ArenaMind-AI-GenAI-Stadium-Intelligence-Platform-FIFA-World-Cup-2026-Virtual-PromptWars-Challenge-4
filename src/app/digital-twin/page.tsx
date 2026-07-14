@@ -6,7 +6,7 @@ import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
 import { Navbar } from "@/components/ui/Navbar";
 import { StadiumViewer } from "@/components/digital-twin/StadiumViewer";
 import { LayoutGrid, Database, Radio, TrainFront, ShieldAlert, BrainCircuit, Thermometer, Wind, Droplets, Gauge, AlertTriangle, Users, Map as MapIcon } from "lucide-react";
-import { db } from "@/services/firebase";
+import { getFirebaseDb } from "@/services/firebase";
 import { collection, onSnapshot, query, orderBy, limit } from "firebase/firestore";
 import { useAuth } from "@/context/AuthContext";
 import Link from "next/link";
@@ -43,6 +43,7 @@ export default function DigitalTwinPage() {
   ];
 
   useEffect(() => {
+    const db = getFirebaseDb();
     if (!db || !user) {
       setSecurityAlerts([]);
       return;
@@ -52,7 +53,7 @@ export default function DigitalTwinPage() {
 
     try {
       const q = query(
-        collection(db, "security_alerts"),
+        collection(db!, "security_alerts"),
         orderBy("timestamp", "desc"),
         limit(5)
       );

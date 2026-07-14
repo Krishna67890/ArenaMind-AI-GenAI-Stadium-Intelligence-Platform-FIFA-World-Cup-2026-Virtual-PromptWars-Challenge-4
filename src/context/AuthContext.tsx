@@ -56,17 +56,17 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }
 
     // Set persistence to local (keeps user logged in across refreshes)
-    setPersistence(auth, browserLocalPersistence).catch(err => {
+    setPersistence(auth!, browserLocalPersistence).catch(err => {
       console.warn("Firebase persistence error:", err);
     });
 
-    const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
+    const unsubscribe = onAuthStateChanged(auth!, async (firebaseUser) => {
       if (firebaseUser) {
         setUser(firebaseUser);
 
         // Fetch extended user data from Firestore
         try {
-          const userDocRef = doc(db, "users", firebaseUser.uid);
+          const userDocRef = doc(db!, "users", firebaseUser.uid);
           let userDoc = await getDoc(userDocRef);
 
           if (!userDoc.exists()) {
@@ -130,7 +130,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const auth = getFirebaseAuth();
     try {
       if (auth) {
-        await firebaseSignOut(auth);
+        await firebaseSignOut(auth!);
       }
     } catch (error) {
       console.error("Logout error:", error);
@@ -148,7 +148,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
     try {
       const uid = auth.currentUser.uid;
-      const docRef = doc(db, "users", uid);
+      const docRef = doc(db!, "users", uid);
 
       // Update Firestore
       await setDoc(docRef, newData, { merge: true });

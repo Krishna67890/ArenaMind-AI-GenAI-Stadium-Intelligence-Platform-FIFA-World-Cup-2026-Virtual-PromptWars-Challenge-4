@@ -6,7 +6,7 @@ import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
 import { Navbar } from "@/components/ui/Navbar";
 import { Calendar, Clock, Video, Globe, Send, CheckCircle, ChevronRight, Building2, User2, Mail, AlertCircle, LucideIcon } from "lucide-react";
 import { addDoc, collection } from "firebase/firestore";
-import { db } from "@/services/firebase";
+import { getFirebaseDb } from "@/services/firebase";
 
 // Basic validation types
 type FormErrors = {
@@ -59,7 +59,10 @@ export default function ScheduleDemoPage() {
       setGeneratedTicket(ticketId);
 
       try {
-        await addDoc(collection(db, "demo_requests"), {
+        const db = getFirebaseDb();
+        if (!db) throw new Error("Database service unavailable");
+
+        await addDoc(collection(db!, "demo_requests"), {
           ...formData,
           bookingId: ticketId,
           createdAt: new Date().toISOString(),
