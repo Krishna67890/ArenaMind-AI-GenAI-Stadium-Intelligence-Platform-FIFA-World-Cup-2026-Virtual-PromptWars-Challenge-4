@@ -1,5 +1,10 @@
 export const sanitizeInput = (input: string): string => {
-  return input.replace(/[<>]/g, "").trim();
+  if (!input) return "";
+  return input
+    .replace(/[<>]/g, "") // Remove basic tags
+    .replace(/javascript:/gi, "") // Block javascript protocols
+    .replace(/on\w+=/gi, "") // Remove inline event handlers
+    .trim();
 };
 
 export const formatTime = (time: string): string => {

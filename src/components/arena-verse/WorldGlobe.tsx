@@ -108,7 +108,7 @@ export const WorldGlobe = ({ activeRoute, onCitySelect }: { activeRoute?: string
       </Sphere>
 
       {/* Earth Surface - High Fidelity Dark Mode / Holographic Grid */}
-      <Sphere args={[radius, 128, 128]}>
+      <Sphere args={[radius, 64, 64]}>
         <meshStandardMaterial
           color="#0a0a0a"
           emissive="#1e3a8a"
@@ -120,7 +120,7 @@ export const WorldGlobe = ({ activeRoute, onCitySelect }: { activeRoute?: string
       </Sphere>
 
       {/* Grid Overlay for visibility */}
-      <Sphere args={[radius * 1.01, 64, 64]}>
+      <Sphere args={[radius * 1.01, 32, 32]}>
         <meshBasicMaterial
           color="#60a5fa"
           wireframe

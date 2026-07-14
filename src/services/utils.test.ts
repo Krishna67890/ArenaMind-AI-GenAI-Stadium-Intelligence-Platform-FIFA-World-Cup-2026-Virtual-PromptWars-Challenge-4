@@ -30,6 +30,16 @@ describe('Utility Functions', () => {
       const input = '<<<<script>alert(1)</script>>>>';
       expect(sanitizeInput(input)).toBe('scriptalert(1)/script');
     });
+
+    it('should remove javascript protocols', () => {
+      const input = 'javascript:alert("XSS")';
+      expect(sanitizeInput(input)).toBe('alert("XSS")');
+    });
+
+    it('should remove inline event handlers', () => {
+      const input = 'img src=x onerror=alert(1)';
+      expect(sanitizeInput(input)).toBe('img src=x alert(1)');
+    });
   });
 
   describe('formatTime', () => {

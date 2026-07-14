@@ -103,13 +103,13 @@ const StadiumModel = ({ title }: { title: string }) => {
 
       {/* Scanning Rings */}
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.1, 0]}>
-        <ringGeometry args={[3.8, 3.85, 64]} />
+        <ringGeometry args={[3.8, 3.85, 32]} />
         <meshBasicMaterial color="#3b82f6" transparent opacity={0.3} />
       </mesh>
 
       <Float speed={3} rotationIntensity={0.2} floatIntensity={0.5}>
         <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.5, 0]}>
-          <ringGeometry args={[4.2, 4.22, 64]} />
+          <ringGeometry args={[4.2, 4.22, 32]} />
           <meshBasicMaterial color="#3b82f6" transparent opacity={0.1} />
         </mesh>
       </Float>
@@ -129,7 +129,7 @@ const StadiumModel = ({ title }: { title: string }) => {
 
       {/* Ground Glow */}
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.1, 0]}>
-        <circleGeometry args={[6, 64]} />
+        <circleGeometry args={[6, 32]} />
         <meshBasicMaterial color="#1d4ed8" transparent opacity={0.05} />
       </mesh>
     </group>
