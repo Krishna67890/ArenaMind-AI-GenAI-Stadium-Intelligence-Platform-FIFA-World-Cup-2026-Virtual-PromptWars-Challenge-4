@@ -61,6 +61,24 @@ export const MatchSchedule = () => {
       date: "June 25, 2026",
       status: "Selling Fast",
       type: "Group Stage"
+    },
+    {
+      id: 7,
+      teamA: "Germany",
+      teamB: "Spain",
+      venue: "Euro Arena, London",
+      date: "June 28, 2026",
+      status: "Tickets Available",
+      type: "Group Stage"
+    },
+    {
+      id: 8,
+      teamA: "Qatar",
+      teamB: "Netherlands",
+      venue: "Khalifa International Stadium, Doha",
+      date: "June 30, 2026",
+      status: "High Demand",
+      type: "Group Stage"
     }
   ];
 

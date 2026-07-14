@@ -6,6 +6,7 @@ import { Star, Send, CheckCircle2 } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import { db } from "@/services/firebase";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { sanitizeInput } from "@/services/utils";
 
 export const RatingSystem = () => {
   const { t } = useLanguage();
@@ -25,7 +26,7 @@ export const RatingSystem = () => {
 
       await addDoc(collection(db, "ratings"), {
         rating,
-        comment: comment.trim(),
+        comment: sanitizeInput(comment),
         timestamp: serverTimestamp(),
         isoTimestamp: new Date().toISOString(),
         page: typeof window !== "undefined" ? window.location.pathname : "unknown"

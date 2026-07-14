@@ -207,7 +207,7 @@ export const Stadium3D = ({ title = "STADIO RENATO DALL'ARA", embedId }: { title
             title={title}
             src={`https://sketchfab.com/models/${embedId}/embed?autostart=1&internal=1&tracking=0&ui_ar=0&ui_infos=0&ui_snapshots=1&ui_stop=0&ui_theatre=1&ui_watermark=0`}
             className="w-full h-full border-0"
-            allow="autoplay; fullscreen; xr-spatial-tracking"
+            allow="autoplay; fullscreen; xr-spatial-tracking; accelerometer; gyroscope"
             allowFullScreen
           />
         </div>

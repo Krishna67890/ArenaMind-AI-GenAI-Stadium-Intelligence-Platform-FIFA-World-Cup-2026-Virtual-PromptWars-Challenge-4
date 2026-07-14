@@ -3,13 +3,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "@/context/LanguageContext";
-import {
-  Ticket, MapPin, Languages, Clock,
-  Bus, Accessibility, Utensils, ArrowRight,
-  Download, Sparkles, ChevronRight, X,
-  CheckCircle2, Info, LucideIcon
-} from "lucide-react";
-import { askGemini } from "@/services/gemini";
+import { sanitizeInput } from "@/services/utils";
 
 interface ItineraryItem {
   time: string;
@@ -136,7 +130,7 @@ export const Copilot = () => {
                           type="text"
                           placeholder="e.g. FIFA-2026-NY-992"
                           value={formData.ticket}
-                          onChange={(e) => setFormData({...formData, ticket: e.target.value})}
+                          onChange={(e) => setFormData({...formData, ticket: sanitizeInput(e.target.value)})}
                           className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 pl-12 pr-4 text-white focus:outline-none focus:border-blue-500/50"
                         />
                       </div>
@@ -149,7 +143,7 @@ export const Copilot = () => {
                           type="text"
                           placeholder="e.g. A-102"
                           value={formData.seat}
-                          onChange={(e) => setFormData({...formData, seat: e.target.value})}
+                          onChange={(e) => setFormData({...formData, seat: sanitizeInput(e.target.value)})}
                           className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 pl-12 pr-4 text-white focus:outline-none focus:border-blue-500/50"
                         />
                       </div>
