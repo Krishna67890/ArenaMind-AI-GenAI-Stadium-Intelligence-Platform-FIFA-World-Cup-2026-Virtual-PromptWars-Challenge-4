@@ -136,9 +136,7 @@ export const WorldGlobe = ({ activeRoute, onCitySelect }: { activeRoute?: string
             position={city.vector}
             onPointerOver={() => setHoveredCity(city.name)}
             onPointerOut={() => setHoveredCity(null)}
-            onClick={() => onCitySelect && onCitySelect(city)}
-            role="button"
-            aria-label={`Select ${city.name} stadium`}
+            onClick={() => { if (onCitySelect) onCitySelect(city); }}
           >
             <sphereGeometry args={[0.08, 16, 16]} />
             <meshBasicMaterial color={hoveredCity === city.name ? "#ffffff" : city.color} />
