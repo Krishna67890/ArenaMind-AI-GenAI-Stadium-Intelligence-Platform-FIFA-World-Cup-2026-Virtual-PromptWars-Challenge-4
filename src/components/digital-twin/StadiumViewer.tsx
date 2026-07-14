@@ -102,10 +102,11 @@ export const StadiumViewer = () => {
             </div>
           </div>
 
-          <div className="flex gap-3">
+            <div className="flex gap-3">
             <button
               onClick={() => setIsFullscreen(!isFullscreen)}
               className="glass-morphism p-4 rounded-2xl border-white/10 text-white/60 hover:text-white transition-colors"
+              aria-label={isFullscreen ? "Exit Fullscreen" : "Enter Fullscreen"}
             >
               {isFullscreen ? <Minimize2 className="w-5 h-5" /> : <Maximize2 className="w-5 h-5" />}
             </button>
@@ -153,12 +154,16 @@ export const StadiumViewer = () => {
           </div>
 
           <div className="flex flex-col gap-3">
-             <button className="glass-morphism p-4 rounded-2xl border-white/10 text-white/60 hover:text-white transition-colors">
+             <button
+               className="glass-morphism p-4 rounded-2xl border-white/10 text-white/60 hover:text-white transition-colors"
+               aria-label="Capture Screenshot"
+             >
                 <Camera className="w-5 h-5" />
              </button>
              <button
                 onClick={() => setShowInfo(!showInfo)}
                 className={`glass-morphism p-4 rounded-2xl border-white/10 transition-colors ${showInfo ? "text-blue-400" : "text-white/60"}`}
+                aria-label={showInfo ? "Hide Stadium Info" : "Show Stadium Info"}
               >
                 <Info className="w-5 h-5" />
              </button>

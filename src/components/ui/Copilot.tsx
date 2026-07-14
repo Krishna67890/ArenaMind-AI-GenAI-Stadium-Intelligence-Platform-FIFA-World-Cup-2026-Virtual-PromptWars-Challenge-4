@@ -3,6 +3,13 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "@/context/LanguageContext";
+import {
+  Ticket, MapPin, Languages, Clock,
+  Bus, Accessibility, Utensils, ArrowRight,
+  Download, Sparkles, ChevronRight, X,
+  CheckCircle2, Info, LucideIcon
+} from "lucide-react";
+import { askGemini } from "@/services/gemini";
 import { sanitizeInput } from "@/services/utils";
 
 interface ItineraryItem {

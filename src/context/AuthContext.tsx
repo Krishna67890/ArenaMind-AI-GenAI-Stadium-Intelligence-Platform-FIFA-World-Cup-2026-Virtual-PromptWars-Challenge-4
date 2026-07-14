@@ -59,23 +59,29 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           let userDoc = await getDoc(userDocRef);
 
           if (!userDoc.exists()) {
-            // Create default profile if not exists
-            const defaultData = {
-              uid: firebaseUser.uid,
-              name: firebaseUser.displayName || "New User",
-              email: firebaseUser.email,
-              photo: firebaseUser.photoURL,
-              role: "fan",
-              joinedDate: new Date().toISOString(),
-              phone: "",
-              address: "",
-              city: "",
-              country: "",
-              organization: "",
-              bio: ""
-            };
-            await setDoc(userDocRef, defaultData);
-            userDoc = await getDoc(userDocRef);
+            // Check if the user is actually signed in before trying to write (prevent race condition/permission issues)
+            if (firebaseUser.uid) {
+               const defaultData = {
+                 uid: firebaseUser.uid,
+                 name: firebaseUser.displayName || "New User",
+                 email: firebaseUser.email,
+                 photo: firebaseUser.photoURL,
+                 role: "fan",
+                 joinedDate: new Date().toISOString(),
+                 phone: "",
+                 address: "",
+                 city: "",
+                 country: "",
+                 organization: "",
+                 bio: ""
+               };
+               try {
+                 await setDoc(userDocRef, defaultData);
+                 userDoc = await getDoc(userDocRef);
+               } catch (writeError) {
+                 console.warn("Could not create user document (permission denied or offline):", writeError);
+               }
+            }
           }
 
           if (userDoc.exists()) {

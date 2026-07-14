@@ -159,6 +159,7 @@ export const Stadium3D = ({ title = "STADIO RENATO DALL'ARA", embedId }: { title
         <button
           onClick={() => window.location.reload()}
           className="mt-6 px-6 py-2 bg-white/10 hover:bg-white/20 rounded-full text-xs font-bold uppercase transition-all"
+          aria-label="Reload page to try WebGL again"
         >
           Try Again
         </button>
@@ -190,13 +191,22 @@ export const Stadium3D = ({ title = "STADIO RENATO DALL'ARA", embedId }: { title
       </div>
 
       <div className="absolute top-6 right-6 z-10 flex flex-col gap-2">
-         <button className="glass-card p-2 rounded-lg hover:bg-white/10 transition-all border-white/10">
+         <button
+           className="glass-card p-2 rounded-lg hover:bg-white/10 transition-all border-white/10"
+           aria-label="Toggle Crowd Heatmap"
+         >
             <Users className="w-4 h-4 text-blue-500" />
          </button>
-         <button className="glass-card p-2 rounded-lg hover:bg-white/10 transition-all border-white/10">
+         <button
+           className="glass-card p-2 rounded-lg hover:bg-white/10 transition-all border-white/10"
+           aria-label="Toggle Temperature Sensors"
+         >
             <Thermometer className="w-4 h-4 text-orange-500" />
          </button>
-         <button className="glass-card p-2 rounded-lg hover:bg-white/10 transition-all border-white/10">
+         <button
+           className="glass-card p-2 rounded-lg hover:bg-white/10 transition-all border-white/10"
+           aria-label="Toggle Wind Speed Analysis"
+         >
             <Wind className="w-4 h-4 text-cyan-500" />
          </button>
       </div>

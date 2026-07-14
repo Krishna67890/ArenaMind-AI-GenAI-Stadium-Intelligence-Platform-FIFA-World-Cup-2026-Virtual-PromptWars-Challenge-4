@@ -544,6 +544,7 @@ export default function ArenaVersePage() {
                 <button
                   onClick={startAITour}
                   className="glass-card px-4 lg:px-6 py-2 lg:py-3 rounded-full flex items-center gap-3 hover:bg-white/10 transition-all border-white/10 group bg-purple-600/20 flex-shrink-0"
+                  aria-label="Start AI Guided Tour"
                 >
                   <Activity className="w-4 h-4 lg:w-5 lg:h-5 text-purple-400 animate-pulse" />
                   <span className="text-[10px] lg:text-sm font-bold uppercase tracking-widest whitespace-nowrap">AI Tour Guide</span>
@@ -551,6 +552,7 @@ export default function ArenaVersePage() {
                 <button
                   onClick={simulateRouteDetection}
                   className="glass-card px-4 lg:px-6 py-2 lg:py-3 rounded-full flex items-center gap-3 hover:bg-white/10 transition-all border-white/10 group bg-red-600/20 flex-shrink-0"
+                  aria-label="Simulate Neural Route Detection"
                 >
                   <Zap className="w-4 h-4 lg:w-5 lg:h-5 text-red-400 animate-pulse" />
                   <span className="text-[10px] lg:text-sm font-bold uppercase tracking-widest whitespace-nowrap">Detect Route</span>
@@ -558,6 +560,7 @@ export default function ArenaVersePage() {
                 <button
                   onClick={startDemo}
                   className="glass-card px-4 lg:px-6 py-2 lg:py-3 rounded-full flex items-center gap-3 hover:bg-white/10 transition-all border-white/10 group bg-blue-600/20 flex-shrink-0"
+                  aria-label="Start Automated Judge Demo"
                 >
                   <Zap className="w-4 h-4 lg:w-5 lg:h-5 text-yellow-400 animate-pulse" />
                   <span className="text-[10px] lg:text-sm font-bold uppercase tracking-widest whitespace-nowrap">Judge Demo</span>
@@ -565,6 +568,7 @@ export default function ArenaVersePage() {
                 <button
                   onClick={() => setView(view === "globe" ? "stadium" : "globe")}
                   className="glass-card px-4 lg:px-6 py-2 lg:py-3 rounded-full flex items-center gap-3 hover:bg-white/10 transition-all border-white/10 group flex-shrink-0"
+                  aria-label={view === "globe" ? "Switch to Stadium Simulation" : "Switch to Global Explorer"}
                 >
                   {view === "globe" ? <MapIcon className="w-4 h-4 lg:w-5 lg:h-5 text-blue-400" /> : <Globe className="w-4 h-4 lg:w-5 lg:h-5 text-blue-400" />}
                   <span className="text-[10px] lg:text-sm font-bold uppercase tracking-widest whitespace-nowrap">
@@ -723,6 +727,7 @@ export default function ArenaVersePage() {
           <button
             onClick={() => setShowHUD(true)}
             className="absolute top-6 right-6 z-50 glass-card p-3 rounded-full hover:bg-white/10 transition-all border-white/10"
+            aria-label="Show HUD"
           >
             <Maximize2 className="w-5 h-5 text-white" />
           </button>
