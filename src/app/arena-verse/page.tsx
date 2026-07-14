@@ -747,11 +747,12 @@ interface ControlButtonProps {
 function ControlButton({ icon: Icon, active, onClick, label }: ControlButtonProps) {
   return (
     <div className="flex items-center justify-end gap-3 group">
-      <span className="text-[10px] font-bold uppercase tracking-widest text-white/0 group-hover:text-white/60 transition-all duration-300 transform translate-x-2 group-hover:translate-x-0">
+      <span className="text-[10px] font-bold uppercase tracking-widest text-white/0 group-hover:text-white/60 transition-all duration-300 transform translate-x-2 group-hover:translate-x-0" aria-hidden="true">
         {label}
       </span>
       <button
         onClick={onClick}
+        aria-label={label}
         className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-all border ${
           active
           ? "bg-blue-600 border-blue-400 shadow-[0_0_15px_rgba(37,99,235,0.4)]"

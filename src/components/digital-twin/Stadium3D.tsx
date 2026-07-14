@@ -21,6 +21,8 @@ const InfoTag = ({ position, title, value, icon: Icon, color }: InfoTagProps) =>
       <motion.div
         initial={{ opacity: 0, scale: 0.5 }}
         animate={{ opacity: 1, scale: 1 }}
+        role="status"
+        aria-label={`${title}: ${value}`}
         className="glass-card p-2 rounded-lg flex items-center gap-2 border-white/20 min-w-[100px] whitespace-nowrap bg-black/60 backdrop-blur-md"
       >
         <div className={`p-1 rounded bg-${color}-500/20`}>
@@ -168,7 +170,11 @@ export const Stadium3D = ({ title = "STADIO RENATO DALL'ARA", embedId }: { title
   }
 
   return (
-    <div className="w-full h-full min-h-[500px] bg-zinc-950/50 rounded-3xl overflow-hidden border border-white/10 relative cursor-grab active:cursor-grabbing">
+    <div
+      className="w-full h-full min-h-[500px] bg-zinc-950/50 rounded-3xl overflow-hidden border border-white/10 relative cursor-grab active:cursor-grabbing"
+      role="region"
+      aria-label="3D Stadium Digital Twin Viewer"
+    >
       <div className="absolute top-6 left-6 z-10 space-y-2">
         <motion.div
           initial={{ x: -20, opacity: 0 }}

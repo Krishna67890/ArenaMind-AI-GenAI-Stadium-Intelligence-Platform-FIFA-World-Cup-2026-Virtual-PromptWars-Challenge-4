@@ -1,7 +1,7 @@
-import { initializeApp, getApps } from "firebase/app";
-import { getAuth } from "firebase/auth";
-import { getFirestore, initializeFirestore, persistentLocalCache, persistentMultipleTabManager } from "firebase/firestore";
-import { getStorage } from "firebase/storage";
+import { initializeApp, getApps, FirebaseApp } from "firebase/app";
+import { getAuth, Auth } from "firebase/auth";
+import { getFirestore, initializeFirestore, persistentLocalCache, persistentMultipleTabManager, Firestore } from "firebase/firestore";
+import { getStorage, FirebaseStorage } from "firebase/storage";
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -13,17 +13,54 @@ const firebaseConfig = {
   measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
 };
 
-// Initialize Firebase
-const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
-const auth = getAuth(app);
+let app: FirebaseApp | undefined;
+let auth: Auth | undefined;
+let db: Firestore | undefined;
+let storage: FirebaseStorage | undefined;
 
-// Initialize Firestore with persistent cache for better offline support
-const db = initializeFirestore(app, {
-  localCache: persistentLocalCache({
-    tabManager: persistentMultipleTabManager()
-  })
-});
+const isConfigValid =
+  firebaseConfig.apiKey &&
+  firebaseConfig.apiKey !== "undefined" &&
+  firebaseConfig.apiKey.startsWith("AIza");
 
-const storage = getStorage(app);
+export const getFirebaseApp = () => {
+  if (typeof window === "undefined" || !isConfigValid) return undefined;
+  if (!app) {
+    const existingApps = getApps();
+    app = existingApps.length === 0 ? initializeApp(firebaseConfig) : existingApps[0];
+  }
+  return app;
+};
 
+export const getFirebaseAuth = () => {
+  if (typeof window === "undefined" || !isConfigValid) return undefined;
+  const app = getFirebaseApp();
+  if (!app) return undefined;
+  if (!auth) auth = getAuth(app);
+  return auth;
+};
+
+export const getFirebaseDb = () => {
+  if (typeof window === "undefined" || !isConfigValid) return undefined;
+  const app = getFirebaseApp();
+  if (!app) return undefined;
+  if (!db) {
+    db = initializeFirestore(app, {
+      localCache: persistentLocalCache({
+        tabManager: persistentMultipleTabManager()
+      })
+    });
+  }
+  return db;
+};
+
+export const getFirebaseStorage = () => {
+  if (typeof window === "undefined" || !isConfigValid) return undefined;
+  const app = getFirebaseApp();
+  if (!app) return undefined;
+  if (!storage) storage = getStorage(app);
+  return storage;
+};
+
+// For backward compatibility while we migrate
 export { auth, db, storage };

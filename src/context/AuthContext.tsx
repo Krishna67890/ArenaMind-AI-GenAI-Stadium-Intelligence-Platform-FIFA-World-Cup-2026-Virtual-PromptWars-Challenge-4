@@ -8,7 +8,7 @@ import {
   setPersistence,
   browserLocalPersistence
 } from "firebase/auth";
-import { auth, db } from "@/services/firebase";
+import { getFirebaseAuth, getFirebaseDb } from "@/services/firebase";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 
 export type UserRole = "organizer" | "staff" | "fan" | "guest" | "volunteer";
@@ -46,8 +46,19 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    const auth = getFirebaseAuth();
+    const db = getFirebaseDb();
+
+    // If Firebase failed to initialize (e.g., during build or missing API keys), skip setup
+    if (!auth || !db) {
+      setLoading(false);
+      return;
+    }
+
     // Set persistence to local (keeps user logged in across refreshes)
-    setPersistence(auth, browserLocalPersistence).catch(console.error);
+    setPersistence(auth, browserLocalPersistence).catch(err => {
+      console.warn("Firebase persistence error:", err);
+    });
 
     const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
       if (firebaseUser) {
@@ -116,16 +127,22 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   }, []);
 
   const logout = async () => {
+    const auth = getFirebaseAuth();
     try {
-      await firebaseSignOut(auth);
+      if (auth) {
+        await firebaseSignOut(auth);
+      }
     } catch (error) {
       console.error("Logout error:", error);
     }
   };
 
   const updateUserData = async (newData: Partial<UserData>) => {
-    if (!auth.currentUser) {
-      console.error("Update failed: No authenticated user.");
+    const auth = getFirebaseAuth();
+    const db = getFirebaseDb();
+
+    if (!auth || !auth.currentUser || !db) {
+      console.error("Update failed: Firebase not initialized or no authenticated user.");
       return;
     }
 
