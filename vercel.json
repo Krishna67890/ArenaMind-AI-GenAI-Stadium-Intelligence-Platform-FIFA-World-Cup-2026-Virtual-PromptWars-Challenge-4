@@ -5,7 +5,7 @@
       "headers": [
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://sketchfab.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; frame-src 'self' https://sketchfab.com; connect-src 'self' https://*.firebaseio.com https://*.googleapis.com https://*.firebasestorage.googleapis.com;"
+          "value": "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://sketchfab.com https://*.sketchfab.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https: blob:; frame-src 'self' https://sketchfab.com https://*.sketchfab.com; connect-src 'self' https://*.firebaseio.com https://*.googleapis.com https://*.firebasestorage.googleapis.com https://raw.githack.com https://cdn.jsdelivr.net https://*.google-analytics.com https://fonts.gstatic.com https://raw.githubusercontent.com;"
         },
         {
           "key": "X-Frame-Options",

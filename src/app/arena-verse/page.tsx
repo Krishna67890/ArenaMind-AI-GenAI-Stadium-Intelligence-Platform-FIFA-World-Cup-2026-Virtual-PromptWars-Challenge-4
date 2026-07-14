@@ -505,7 +505,7 @@ export default function ArenaVersePage() {
                   </group>
                 )}
 
-                <Environment preset={mode === "night" ? "night" : "park"} />
+                <Environment preset={mode === "night" ? "city" : "park"} />
                 <ContactShadows opacity={0.4} scale={20} blur={2.4} far={4.5} />
                 <BakeShadows />
                 <Preload all />

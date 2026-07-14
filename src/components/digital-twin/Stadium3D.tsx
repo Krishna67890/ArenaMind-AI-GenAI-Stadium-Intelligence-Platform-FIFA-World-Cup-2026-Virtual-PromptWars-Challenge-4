@@ -21,8 +21,6 @@ const InfoTag = ({ position, title, value, icon: Icon, color }: InfoTagProps) =>
       <motion.div
         initial={{ opacity: 0, scale: 0.5 }}
         animate={{ opacity: 1, scale: 1 }}
-        role="status"
-        aria-label={`${title}: ${value}`}
         className="glass-card p-2 rounded-lg flex items-center gap-2 border-white/20 min-w-[100px] whitespace-nowrap bg-black/60 backdrop-blur-md"
       >
         <div className={`p-1 rounded bg-${color}-500/20`}>
