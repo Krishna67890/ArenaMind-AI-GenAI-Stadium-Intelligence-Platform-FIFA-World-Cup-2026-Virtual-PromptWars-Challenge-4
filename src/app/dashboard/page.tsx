@@ -125,7 +125,7 @@ export default function DashboardPage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                   <StatCard icon={Users} label="Total Attendance" value="54,201" change="+12%" color="text-blue-500" />
                   <StatCard icon={ShieldAlert} label="Active Incidents" value={GENERATED_INCIDENTS.filter(i => i.status === "Critical").length.toString()} change="-2" color="text-red-500" />
-                  <StatCard icon={Zap} label="Energy Usage" value="84%" change="Optimal" color="text-yellow-500" />
+                  <StatCard icon={Zap} label="Energy Usage" value="97%" change="Optimal" color="text-yellow-500" />
                   <StatCard icon={Activity} label="Sensor Network" value="14.2k" change="Active" color="text-green-500" />
                 </div>
 

@@ -155,7 +155,7 @@ export default function TrafficPredictionPage() {
         <div className="relative h-[calc(100vh-80px)] overflow-hidden">
           {/* 3D Visualizer */}
           <div className="absolute inset-0 z-0">
-            <Canvas shadows dpr={[1, 2]}>
+            <Canvas shadows dpr={[1, 2]} gl={{ powerPreference: "high-performance" }}>
               <Suspense fallback={null}>
                 <PerspectiveCamera makeDefault position={[0, 0, 15]} fov={45} />
                 <OrbitControls
@@ -281,14 +281,17 @@ export default function TrafficPredictionPage() {
                               <TrendingUp className="w-4 h-4 text-green-400" />
                               <span className="text-[10px] font-bold uppercase text-white/40">Efficiency</span>
                             </div>
-                            <div className="text-lg font-bold">{selectedCity ? "Optimal" : "92%"}</div>
+                            <div className="text-lg font-bold">{selectedCity ? "Optimal" : "96%"}</div>
                           </div>
                         </div>
                       </motion.div>
                     )}
                   </AnimatePresence>
 
-                  <button className="w-full mt-6 py-4 bg-blue-600 hover:bg-blue-500 rounded-2xl font-bold uppercase tracking-widest text-xs transition-all flex items-center justify-center gap-2 group">
+                  <button
+                    onClick={() => window.open('/logistics-report', '_blank')}
+                    className="w-full mt-6 py-4 bg-blue-600 hover:bg-blue-500 rounded-2xl font-bold uppercase tracking-widest text-xs transition-all flex items-center justify-center gap-2 group"
+                  >
                     View Full Logistics Report
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </button>

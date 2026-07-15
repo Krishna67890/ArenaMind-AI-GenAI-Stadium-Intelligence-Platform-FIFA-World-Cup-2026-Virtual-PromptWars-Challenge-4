@@ -48,20 +48,20 @@ export const OrganizersView = () => {
             <div className="absolute inset-0 bg-blue-600/5 opacity-0 group-hover:opacity-100 transition-opacity" />
             <div className="relative z-10">
               <div className="text-[10px] font-black uppercase tracking-[0.3em] text-blue-500 mb-2">Overall Efficiency</div>
-              <div className="text-8xl font-bold text-gradient mb-4">94</div>
+              <div className="text-8xl font-bold text-gradient mb-4">98</div>
               <div className="flex items-center gap-2 text-green-500 text-sm font-bold">
                 <TrendingUp className="w-4 h-4" />
-                <span>+2.4% from last hour</span>
+                <span>+4.2% from last hour</span>
               </div>
             </div>
 
             <div className="grid grid-cols-2 gap-4 w-full mt-12">
                <div className="p-4 rounded-2xl bg-white/5 border border-white/5">
-                  <div className="text-xl font-bold">98%</div>
+                  <div className="text-xl font-bold">99%</div>
                   <div className="text-[10px] text-white/40 uppercase font-bold">{t("security")}</div>
                </div>
                <div className="p-4 rounded-2xl bg-white/5 border border-white/5">
-                  <div className="text-xl font-bold">89%</div>
+                  <div className="text-xl font-bold">95%</div>
                   <div className="text-[10px] text-white/40 uppercase font-bold">{t("sustainability")}</div>
                </div>
             </div>

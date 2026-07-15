@@ -23,24 +23,24 @@ export const SustainabilitySection = () => {
     },
     {
       title: "Renewable Energy",
-      value: "84%",
-      change: "+5.2%",
+      value: "96%",
+      change: "+7.2%",
       icon: Sun,
       color: "text-yellow-500",
       bg: "bg-yellow-500/10"
     },
     {
       title: "Water Recycled",
-      value: "12,400 L",
-      change: "+18%",
+      value: "15,800 L",
+      change: "+22%",
       icon: Droplets,
       color: "text-blue-500",
       bg: "bg-blue-500/10"
     },
     {
       title: "Waste Diverted",
-      value: "92%",
-      change: "+3.1%",
+      value: "98%",
+      change: "+4.5%",
       icon: Trash2,
       color: "text-purple-500",
       bg: "bg-purple-500/10"

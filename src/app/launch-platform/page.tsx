@@ -116,12 +116,12 @@ export default function LaunchPlatformPage() {
                        <div className="flex-1 h-2 bg-white/5 rounded-full overflow-hidden">
                           <motion.div
                             initial={{ width: 0 }}
-                            animate={{ width: "94%" }}
+                            animate={{ width: "98%" }}
                             transition={{ duration: 10, repeat: Infinity }}
                             className="h-full bg-blue-500 shadow-[0_0_15px_#3b82f6]"
                           />
                        </div>
-                       <span className="text-blue-400 text-xs">94% SYSTEM STABILITY</span>
+                       <span className="text-blue-400 text-xs">98% SYSTEM STABILITY</span>
                     </div>
                   </div>
 

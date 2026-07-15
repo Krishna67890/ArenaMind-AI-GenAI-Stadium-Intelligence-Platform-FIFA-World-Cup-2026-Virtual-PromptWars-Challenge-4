@@ -226,7 +226,7 @@ export const Stadium3D = ({ title = "STADIO RENATO DALL'ARA", embedId }: { title
           />
         </div>
       ) : (
-        <Canvas shadows gl={{ antialias: true, alpha: true }}>
+        <Canvas shadows gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}>
           <PerspectiveCamera makeDefault position={[10, 10, 10]} fov={45} />
           <OrbitControls
             enableZoom={true}

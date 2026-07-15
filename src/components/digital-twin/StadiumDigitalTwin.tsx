@@ -272,7 +272,7 @@ export const StadiumDigitalTwin = () => {
                       <Trash2 className="w-3 h-3 text-purple-500" />
                       <span>Waste Bin</span>
                     </div>
-                    <span className="text-red-500 font-medium">85% Full</span>
+                    <span className="text-green-500 font-medium">96% Efficient</span>
                   </div>
                 </div>
 

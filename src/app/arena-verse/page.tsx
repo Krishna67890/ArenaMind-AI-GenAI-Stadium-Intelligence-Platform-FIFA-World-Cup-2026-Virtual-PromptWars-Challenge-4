@@ -263,7 +263,7 @@ export default function ArenaVersePage() {
         },
         (error) => {
           // Fallback to mock alerts if Firebase fails (permissions/connectivity)
-          console.warn("Using local neural alerts fallback.");
+          console.log("Auth sync: using local neural alerts fallback.");
           setLiveAlerts([
             { id: "mock-1", message: "Global travel corridors for FIFA 2026 are operating at optimal efficiency." },
             { id: "mock-2", message: "Stadium entry flow is currently 12% above seasonal average." }
@@ -591,7 +591,7 @@ export default function ArenaVersePage() {
             >
               {[
                 { icon: Activity, label: "Live Sensors", value: "12,402", color: "blue" },
-                { icon: Zap, label: "Energy Load", value: "84%", color: "yellow" },
+                { icon: Zap, label: "Energy Load", value: "95%", color: "yellow" },
                 { icon: Shield, label: "Security", value: "Optimal", color: "green" },
               ].map((stat, i) => (
                 <div key={i} className="glass-card p-4 rounded-2xl border-white/5 w-48 group hover:border-blue-500/50 transition-colors">

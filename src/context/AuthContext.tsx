@@ -67,44 +67,64 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         // Fetch extended user data from Firestore
         try {
           const userDocRef = doc(db!, "users", firebaseUser.uid);
-          let userDoc = await getDoc(userDocRef);
 
-          if (!userDoc.exists()) {
-            // Check if the user is actually signed in before trying to write (prevent race condition/permission issues)
-            if (firebaseUser.uid) {
-               const defaultData = {
-                 uid: firebaseUser.uid,
-                 name: firebaseUser.displayName || "New User",
-                 email: firebaseUser.email,
-                 photo: firebaseUser.photoURL,
-                 role: "fan",
-                 joinedDate: new Date().toISOString(),
-                 phone: "",
-                 address: "",
-                 city: "",
-                 country: "",
-                 organization: "",
-                 bio: ""
-               };
-               try {
-                 await setDoc(userDocRef, defaultData);
-                 userDoc = await getDoc(userDocRef);
-               } catch (writeError) {
-                 console.warn("Could not create user document (permission denied or offline):", writeError);
-               }
+          // Add a small delay or retry to handle Firestore auth state sync issues
+          let userDoc;
+          try {
+            userDoc = await getDoc(userDocRef);
+          } catch (e: any) {
+            if (e.code === 'permission-denied') {
+              // Wait 500ms and retry once
+              await new Promise(resolve => setTimeout(resolve, 500));
+              userDoc = await getDoc(userDocRef);
+            } else {
+              throw e;
             }
           }
 
-          if (userDoc.exists()) {
+          if (userDoc && userDoc.exists()) {
             const data = userDoc.data() as UserData;
             setUserData(data);
             setRole(data.role || "fan");
+          } else if (firebaseUser.uid) {
+            // Document doesn't exist, create it
+            const defaultData: UserData = {
+              uid: firebaseUser.uid,
+              name: firebaseUser.displayName || "New User",
+              email: firebaseUser.email,
+              photo: firebaseUser.photoURL,
+              role: "fan",
+              joinedDate: new Date().toISOString(),
+              phone: "",
+              address: "",
+              city: "",
+              country: "",
+              organization: "",
+              bio: ""
+            };
+            try {
+              await setDoc(userDocRef, defaultData);
+              const freshDoc = await getDoc(userDocRef);
+              if (freshDoc.exists()) {
+                setUserData(freshDoc.data() as UserData);
+                setRole("fan");
+              }
+            } catch (writeError) {
+              console.warn("Could not create user document (permission denied or offline):", writeError);
+              // Fallback to local state if write fails
+              setUserData(defaultData);
+              setRole("fan");
+            }
           }
-        } catch (error) {
-          console.error("Error fetching user data:", error);
+        } catch (error: any) {
           // If it's a permission error, it might be a race condition.
           // We'll set a default userData so the UI doesn't break.
-          if (error && typeof error === 'object' && 'code' in error && error.code === 'permission-denied') {
+          const isPermissionError = error?.code === 'permission-denied' ||
+                                    error?.message?.includes('permissions') ||
+                                    error?.message?.includes('Missing or insufficient permissions');
+
+          if (isPermissionError) {
+             console.log("Auth sync: using local state while Firestore propagates.");
              setUserData({
                 uid: firebaseUser.uid,
                 name: firebaseUser.displayName || "User",
@@ -112,6 +132,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
                 role: "fan",
                 joinedDate: new Date().toISOString()
              });
+          } else {
+            console.error("Error fetching user data:", error);
           }
           setRole("fan");
         }

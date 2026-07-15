@@ -140,7 +140,7 @@ export const StadiumViewer = () => {
                 >
                   <div className="grid grid-cols-2 gap-4">
                     <StatItem icon={Users} label="Capacity" value={activeStadium.capacity} />
-                    <StatItem icon={Zap} label="Energy" value="84%" />
+                    <StatItem icon={Zap} label="Energy" value="98%" />
                     <StatItem icon={Activity} label="Density" value={activeStadium.density} />
                     <StatItem icon={Shield} label="Security" value={activeStadium.security} />
                   </div>

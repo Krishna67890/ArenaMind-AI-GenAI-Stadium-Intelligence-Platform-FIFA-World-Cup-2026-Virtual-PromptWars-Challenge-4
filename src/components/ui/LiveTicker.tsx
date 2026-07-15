@@ -23,7 +23,7 @@ export const LiveTicker = () => {
             </div>
             <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-white/60 hover:text-white transition-colors cursor-default">
               <Users className="w-4 h-4 text-blue-500" />
-              <span className="hover:animate-glitch">Current Venue Occupancy: 84% · High Density in North Sector</span>
+              <span className="hover:animate-glitch">Current Venue Occupancy: 96% · High Density in North Sector</span>
             </div>
             <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-white/60 hover:text-white transition-colors cursor-default">
               <Clock className="w-4 h-4 text-green-500" />
