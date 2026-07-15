@@ -4,8 +4,9 @@ import React, { useRef, useMemo, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, PerspectiveCamera, Float, Text, MeshDistortMaterial, Html } from "@react-three/drei";
 import * as THREE from "three";
-import { AlertTriangle, Users, Thermometer, Wind, LucideIcon } from "lucide-react";
+import { AlertTriangle, Users, Thermometer, Wind, LucideIcon, RefreshCw } from "lucide-react";
 import { motion } from "framer-motion";
+import { WebGLErrorBoundary } from "../ui/WebGLErrorBoundary";
 
 interface InfoTagProps {
   position: [number, number, number];
@@ -226,25 +227,27 @@ export const Stadium3D = ({ title = "STADIO RENATO DALL'ARA", embedId }: { title
           />
         </div>
       ) : (
-        <Canvas shadows gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}>
-          <PerspectiveCamera makeDefault position={[10, 10, 10]} fov={45} />
-          <OrbitControls
-            enableZoom={true}
-            enablePan={false}
-            maxPolarAngle={Math.PI / 2.2}
-            minDistance={6}
-            maxDistance={18}
-            autoRotate={false}
-          />
+        <WebGLErrorBoundary>
+          <Canvas shadows gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}>
+            <PerspectiveCamera makeDefault position={[10, 10, 10]} fov={45} />
+            <OrbitControls
+              enableZoom={true}
+              enablePan={false}
+              maxPolarAngle={Math.PI / 2.2}
+              minDistance={6}
+              maxDistance={18}
+              autoRotate={false}
+            />
 
-          <ambientLight intensity={0.4} />
-          <pointLight position={[10, 10, 10]} intensity={1} castShadow />
-          <spotLight position={[-10, 20, 10]} angle={0.2} penumbra={1} intensity={2} castShadow />
+            <ambientLight intensity={0.4} />
+            <pointLight position={[10, 10, 10]} intensity={1} castShadow />
+            <spotLight position={[-10, 20, 10]} angle={0.2} penumbra={1} intensity={2} castShadow />
 
-          <StadiumModel title={title} />
+            <StadiumModel title={title} />
 
-          <fog attach="fog" args={["#000", 12, 30]} />
-        </Canvas>
+            <fog attach="fog" args={["#000", 12, 30]} />
+          </Canvas>
+        </WebGLErrorBoundary>
       )}
 
       <div className="absolute bottom-6 left-6 right-6 z-10 flex justify-between items-end">

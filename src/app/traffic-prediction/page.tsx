@@ -31,6 +31,7 @@ import {
 import * as THREE from "three";
 import { Navbar } from "@/components/ui/Navbar";
 import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
+import { WebGLErrorBoundary } from "@/components/ui/WebGLErrorBoundary";
 
 interface HostCity {
   name: string;
@@ -155,8 +156,9 @@ export default function TrafficPredictionPage() {
         <div className="relative h-[calc(100vh-80px)] overflow-hidden">
           {/* 3D Visualizer */}
           <div className="absolute inset-0 z-0">
-            <Canvas shadows dpr={[1, 2]} gl={{ powerPreference: "high-performance" }}>
-              <Suspense fallback={null}>
+            <WebGLErrorBoundary>
+              <Canvas shadows dpr={[1, 2]} gl={{ powerPreference: "high-performance" }}>
+                <Suspense fallback={null}>
                 <PerspectiveCamera makeDefault position={[0, 0, 15]} fov={45} />
                 <OrbitControls
                   enablePan={false}
@@ -179,6 +181,7 @@ export default function TrafficPredictionPage() {
                 <ContactShadows opacity={0.4} scale={20} blur={2.4} far={4.5} />
               </Suspense>
             </Canvas>
+          </WebGLErrorBoundary>
           </div>
 
           {/* HUD Overlay */}

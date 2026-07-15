@@ -3,6 +3,7 @@
 import React, { useState, useEffect, Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Sphere, MeshDistortMaterial } from "@react-three/drei";
+import { WebGLErrorBoundary } from "./WebGLErrorBoundary";
 
 const AnimatedSphere = () => {
   return (
@@ -47,13 +48,15 @@ export default function HeroVisual() {
   return (
     <div className="absolute inset-0">
       <Suspense fallback={null}>
-        <Canvas camera={{ position: [0, 0, 5], fov: 75 }} gl={{ powerPreference: "high-performance" }}>
-          <ambientLight intensity={1.5} />
-          <pointLight position={[10, 10, 10]} />
-          <directionalLight position={[2, 1, 1]} intensity={2} />
-          <AnimatedSphere />
-          <OrbitControls enableZoom={false} />
-        </Canvas>
+        <WebGLErrorBoundary>
+          <Canvas camera={{ position: [0, 0, 5], fov: 75 }} gl={{ powerPreference: "high-performance" }}>
+            <ambientLight intensity={1.5} />
+            <pointLight position={[10, 10, 10]} />
+            <directionalLight position={[2, 1, 1]} intensity={2} />
+            <AnimatedSphere />
+            <OrbitControls enableZoom={false} />
+          </Canvas>
+        </WebGLErrorBoundary>
       </Suspense>
     </div>
   );

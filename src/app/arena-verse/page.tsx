@@ -38,6 +38,7 @@ import { collection, onSnapshot, query, limit } from "firebase/firestore";
 import { getFirebaseDb } from "@/services/firebase";
 import { ProtectedRoute as AuthGuard } from "@/components/auth/ProtectedRoute";
 import { useAuth } from "@/context/AuthContext";
+import { WebGLErrorBoundary } from "@/components/ui/WebGLErrorBoundary";
 import * as THREE from "three";
 
 // Enhanced WebGL detection hook
@@ -373,8 +374,9 @@ export default function ArenaVersePage() {
               </button>
             </div>
           ) : (
-            <Canvas
-              shadows
+            <WebGLErrorBoundary>
+              <Canvas
+                shadows
               gl={{
                 antialias: false, // Turn off antialiasing for performance
                 alpha: false, // Faster rendering without alpha transparency if possible
@@ -511,6 +513,7 @@ export default function ArenaVersePage() {
                 <Preload all />
               </Suspense>
             </Canvas>
+          </WebGLErrorBoundary>
           )}
         </div>
 
