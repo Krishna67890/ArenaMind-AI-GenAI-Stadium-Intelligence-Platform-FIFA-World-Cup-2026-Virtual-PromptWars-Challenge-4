@@ -85,7 +85,10 @@ export default function LaunchPlatformPage() {
                   Purchase
                   <Rocket className="w-4 h-4 inline-block ml-3 group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform" />
                 </button>
-                <button className="px-10 py-5 bg-white/5 border border-white/10 rounded-2xl font-black uppercase tracking-widest text-sm hover:bg-white/10 transition-all">
+                <button
+                  onClick={() => window.open('/fifa-details', '_blank')}
+                  className="px-10 py-5 bg-white/5 border border-white/10 rounded-2xl font-black uppercase tracking-widest text-sm hover:bg-white/10 transition-all"
+                >
                   Documentation
                 </button>
               </div>
@@ -175,7 +178,10 @@ export default function LaunchPlatformPage() {
                   <p className="text-white/50 mb-8 leading-relaxed">
                     Our multi-stage deployment sequence ensures maximum reliability and security for high-density stadium environments.
                   </p>
-                  <button className="flex items-center gap-3 text-blue-400 font-bold uppercase tracking-widest text-sm group">
+                  <button
+                    onClick={() => window.location.href = '/logistics-report'}
+                    className="flex items-center gap-3 text-blue-400 font-bold uppercase tracking-widest text-sm group"
+                  >
                     View Full Checklist
                     <CheckCircle2 className="w-5 h-5 group-hover:scale-125 transition-transform" />
                   </button>

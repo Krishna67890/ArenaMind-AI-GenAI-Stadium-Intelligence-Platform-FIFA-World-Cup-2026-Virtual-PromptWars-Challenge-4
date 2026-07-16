@@ -89,10 +89,12 @@ export const Copilot = () => {
                 >
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <label className="text-xs font-bold text-white/40 uppercase tracking-widest px-2">{t("ticketID")}</label>
+                      <label htmlFor="ticket-id" className="text-xs font-bold text-white/40 uppercase tracking-widest px-2">{t("ticketID")}</label>
                       <div className="relative">
                         <Ticket className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/20" />
                         <input
+                          id="ticket-id"
+                          name="ticket-id"
                           type="text"
                           placeholder="e.g. FIFA-2026-NY-992"
                           value={formData.ticket}
@@ -102,10 +104,12 @@ export const Copilot = () => {
                       </div>
                     </div>
                     <div className="space-y-2">
-                      <label className="text-xs font-bold text-white/40 uppercase tracking-widest px-2">{t("seatNumber")}</label>
+                      <label htmlFor="seat-number" className="text-xs font-bold text-white/40 uppercase tracking-widest px-2">{t("seatNumber")}</label>
                       <div className="relative">
                         <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/20" />
                         <input
+                          id="seat-number"
+                          name="seat-number"
                           type="text"
                           placeholder="e.g. A-102"
                           value={formData.seat}
@@ -145,10 +149,12 @@ export const Copilot = () => {
                 >
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <label className="text-xs font-bold text-white/40 uppercase tracking-widest px-2">{t("preferredLanguage")}</label>
+                      <label htmlFor="language-select" className="text-xs font-bold text-white/40 uppercase tracking-widest px-2">{t("preferredLanguage")}</label>
                       <div className="relative">
                         <Languages className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/20" />
                         <select
+                          id="language-select"
+                          name="language-select"
                           className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 pl-12 pr-4 text-white appearance-none focus:outline-none focus:border-blue-500/50"
                           value={formData.language}
                           onChange={(e) => setFormData({...formData, language: e.target.value})}
@@ -161,10 +167,12 @@ export const Copilot = () => {
                       </div>
                     </div>
                     <div className="space-y-2">
-                      <label className="text-xs font-bold text-white/40 uppercase tracking-widest px-2">{t("arrivalTime")}</label>
+                      <label htmlFor="arrival-time" className="text-xs font-bold text-white/40 uppercase tracking-widest px-2">{t("arrivalTime")}</label>
                       <div className="relative">
                         <Clock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/20" />
                         <input
+                          id="arrival-time"
+                          name="arrival-time"
                           type="time"
                           value={formData.arrivalTime}
                           onChange={(e) => setFormData({...formData, arrivalTime: e.target.value})}
@@ -173,10 +181,12 @@ export const Copilot = () => {
                       </div>
                     </div>
                     <div className="space-y-2">
-                      <label className="text-xs font-bold text-white/40 uppercase tracking-widest px-2">{t("transportMethod")}</label>
+                      <label htmlFor="transport-method" className="text-xs font-bold text-white/40 uppercase tracking-widest px-2">{t("transportMethod")}</label>
                       <div className="relative">
                         <Bus className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/20" />
                         <select
+                          id="transport-method"
+                          name="transport-method"
                           className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 pl-12 pr-4 text-white appearance-none focus:outline-none focus:border-blue-500/50"
                           value={formData.transport}
                           onChange={(e) => setFormData({...formData, transport: e.target.value})}
@@ -189,10 +199,12 @@ export const Copilot = () => {
                       </div>
                     </div>
                     <div className="space-y-2">
-                      <label className="text-xs font-bold text-white/40 uppercase tracking-widest px-2">{t("foodPreferences")}</label>
+                      <label htmlFor="food-preferences" className="text-xs font-bold text-white/40 uppercase tracking-widest px-2">{t("foodPreferences")}</label>
                       <div className="relative">
                         <Utensils className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/20" />
                         <select
+                          id="food-preferences"
+                          name="food-preferences"
                           className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 pl-12 pr-4 text-white appearance-none focus:outline-none focus:border-blue-500/50"
                           value={formData.food}
                           onChange={(e) => setFormData({...formData, food: e.target.value})}
