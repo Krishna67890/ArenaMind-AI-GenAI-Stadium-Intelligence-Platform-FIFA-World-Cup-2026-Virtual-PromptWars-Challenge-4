@@ -1,63 +1,54 @@
 "use client";
 
-import React, { useState, useEffect, Suspense } from "react";
-import { Canvas } from "@react-three/fiber";
-import { OrbitControls, Sphere, MeshDistortMaterial } from "@react-three/drei";
+import React, { useRef, useMemo, useState } from "react";
+import { Canvas, useFrame } from "@react-three/fiber";
+import { Float, Sphere, MeshDistortMaterial, PerspectiveCamera, Stars } from "@react-three/drei";
+import * as THREE from "three";
 import { WebGLErrorBoundary } from "./WebGLErrorBoundary";
 
 const AnimatedSphere = () => {
   return (
-    <Sphere args={[1, 64, 64]} scale={2.4}>
-      <MeshDistortMaterial
-        color="#3b82f6"
-        attach="material"
-        distort={0.4}
-        speed={1.5}
-        roughness={0}
-      />
-    </Sphere>
+    <Float speed={2} rotationIntensity={1} floatIntensity={2}>
+      <Sphere args={[1, 100, 100]} scale={2.4}>
+        <MeshDistortMaterial
+          color="#2563eb"
+          attach="material"
+          distort={0.4}
+          speed={4}
+          roughness={0}
+          metalness={1}
+        />
+      </Sphere>
+    </Float>
   );
 };
 
-export default function HeroVisual() {
-  const [mounted, setMounted] = useState(false);
-  const [webglSupported, setWebglSupported] = useState<boolean | null>(null);
-
-  useEffect(() => {
-    setMounted(true);
-    const checkWebGL = () => {
-      try {
-        const canvas = document.createElement("canvas");
-        return !!(window.WebGLRenderingContext && (canvas.getContext("webgl") || canvas.getContext("experimental-webgl")));
-      } catch (e) {
-        return false;
-      }
-    };
-    setWebglSupported(checkWebGL());
-  }, []);
-
-  if (!mounted || webglSupported === false) {
-    return (
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <div className="w-[500px] h-[500px] bg-blue-600/20 rounded-full blur-[120px] animate-pulse" />
-        <div className="absolute w-[300px] h-[300px] bg-purple-600/10 rounded-full blur-[100px] animate-bounce" />
-      </div>
-    );
-  }
-
+const Scene = () => {
   return (
-    <div className="absolute inset-0">
-      <Suspense fallback={null}>
-        <WebGLErrorBoundary>
-          <Canvas camera={{ position: [0, 0, 5], fov: 75 }} gl={{ powerPreference: "high-performance" }}>
-            <ambientLight intensity={1.5} />
-            <pointLight position={[10, 10, 10]} />
-            <directionalLight position={[2, 1, 1]} intensity={2} />
-            <AnimatedSphere />
-            <OrbitControls enableZoom={false} />
-          </Canvas>
-        </WebGLErrorBoundary>
-      </Suspense>
+    <>
+      <PerspectiveCamera makeDefault position={[0, 0, 8]} fov={50} />
+      <ambientLight intensity={0.5} />
+      <pointLight position={[10, 10, 10]} intensity={1} />
+      <spotLight position={[-10, 10, 10]} angle={0.15} penumbra={1} intensity={1} />
+
+      <AnimatedSphere />
+      <Stars radius={100} depth={50} count={5000} factor={4} saturation={0} fade speed={1} />
+
+      <fog attach="fog" args={["#000", 5, 15]} />
+    </>
+  );
+};
+
+export const HeroVisual = () => {
+  return (
+    <div className="absolute inset-0 z-0 opacity-60">
+      <WebGLErrorBoundary>
+        <Canvas dpr={[1, 2]}>
+          <Scene />
+        </Canvas>
+      </WebGLErrorBoundary>
     </div>
   );
-}
+};
+
+export default HeroVisual;

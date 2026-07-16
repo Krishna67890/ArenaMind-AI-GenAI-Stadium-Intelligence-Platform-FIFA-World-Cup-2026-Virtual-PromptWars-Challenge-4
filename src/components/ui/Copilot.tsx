@@ -23,20 +23,19 @@ interface Itinerary {
   recommendations: string[];
 }
 
+import { useCopilot } from "@/hooks/useCopilot";
+
 export const Copilot = () => {
   const { t } = useLanguage();
-  const [step, setStep] = useState(1);
-  const [formData, setFormData] = useState({
-    ticket: "",
-    seat: "",
-    language: "English",
-    arrivalTime: "18:30",
-    transport: "Metro",
-    accessibility: "None",
-    food: "Vegetarian"
-  });
-  const [isGenerating, setIsGenerating] = useState(false);
-  const [itinerary, setItinerary] = useState<Itinerary | null>(null);
+  const {
+    step,
+    setStep,
+    formData,
+    setFormData,
+    isGenerating,
+    itinerary,
+    handleGenerate
+  } = useCopilot();
 
   const handleGenerate = async () => {
     setIsGenerating(true);
@@ -251,6 +250,7 @@ export const Copilot = () => {
                     <button
                       onClick={() => setStep(1)}
                       className="flex-1 py-4 bg-white/5 border border-white/10 rounded-2xl font-bold hover:bg-white/10 transition-all"
+                      aria-label="Go back to step 1"
                     >
                       {t("back")}
                     </button>
@@ -325,12 +325,16 @@ export const Copilot = () => {
                   </div>
 
                   <div className="flex gap-4 pt-4 border-t border-white/10">
-                    <button className="flex-1 py-4 bg-white/5 border border-white/10 rounded-2xl font-bold flex items-center justify-center gap-2 hover:bg-white/10 transition-all">
-                      <Download className="w-4 h-4" /> {t("downloadPDF")}
+                    <button
+                      className="flex-1 py-4 bg-white/5 border border-white/10 rounded-2xl font-bold flex items-center justify-center gap-2 hover:bg-white/10 transition-all"
+                      aria-label="Download itinerary as PDF"
+                    >
+                      <Download className="w-4 h-4" aria-hidden="true" /> {t("downloadPDF")}
                     </button>
                     <button
                       onClick={() => setStep(1)}
                       className="flex-1 py-4 bg-blue-600 rounded-2xl font-bold shadow-lg shadow-blue-600/20 hover:bg-blue-500 transition-all"
+                      aria-label="Start over and plan another match"
                     >
                       {t("planAnotherMatch")}
                     </button>

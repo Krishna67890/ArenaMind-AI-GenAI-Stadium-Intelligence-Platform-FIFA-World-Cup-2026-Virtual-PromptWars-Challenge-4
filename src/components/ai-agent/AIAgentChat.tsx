@@ -5,40 +5,12 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Send, Bot, User, X, Maximize2, Minimize2, Sparkles, Loader2, MessageSquare, Mic } from "lucide-react";
 import { askGemini } from "@/services/gemini";
 import { useRouter } from "next/navigation";
+import { useSpeechRecognition } from "@/hooks/useSpeechRecognition";
 
 interface Message {
   role: "user" | "assistant";
   content: string;
   timestamp: Date;
-}
-
-interface SpeechRecognitionEvent extends Event {
-  results: {
-    [index: number]: {
-      [index: number]: {
-        transcript: string;
-      };
-    };
-  };
-}
-
-interface ISpeechRecognition extends EventTarget {
-  continuous: boolean;
-  interimResults: boolean;
-  onresult: (event: SpeechRecognitionEvent) => void;
-  onend: () => void;
-  onerror: (event: Event) => void;
-  start: () => void;
-  stop: () => void;
-}
-
-interface SpeechRecognitionConstructor {
-  new (): ISpeechRecognition;
-}
-
-interface WindowWithSpeechRecognition extends Window {
-  webkitSpeechRecognition?: SpeechRecognitionConstructor;
-  speechRecognition?: SpeechRecognitionConstructor;
 }
 
 export const AIAgentChat = () => {
@@ -54,42 +26,8 @@ export const AIAgentChat = () => {
     }
   ]);
   const [isLoading, setIsLoading] = useState(false);
-  const [isListening, setIsListening] = useState(false);
-  const recognitionRef = useRef<ISpeechRecognition | null>(null);
+  const { isListening, toggleListening } = useSpeechRecognition((text) => setInput(text));
   const messagesEndRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const win = window as unknown as WindowWithSpeechRecognition;
-      const SpeechRecognition = win.webkitSpeechRecognition || win.speechRecognition;
-      if (SpeechRecognition) {
-        recognitionRef.current = new SpeechRecognition();
-        if (recognitionRef.current) {
-          recognitionRef.current.continuous = false;
-          recognitionRef.current.interimResults = false;
-
-          recognitionRef.current.onresult = (event: SpeechRecognitionEvent) => {
-            const text = event.results[0][0].transcript;
-            setInput(text);
-            setIsListening(false);
-          };
-
-          recognitionRef.current.onerror = () => setIsListening(false);
-          recognitionRef.current.onend = () => setIsListening(false);
-        }
-      }
-    }
-  }, []);
-
-  const toggleVoiceInput = () => {
-    if (isListening) {
-      recognitionRef.current?.stop();
-      setIsListening(false);
-    } else {
-      recognitionRef.current?.start();
-      setIsListening(true);
-    }
-  };
 
   const suggestions = [
     "How to play football?",
@@ -138,11 +76,10 @@ export const AIAgentChat = () => {
         window.speechSynthesis.cancel();
         const utterance = new SpeechSynthesisUtterance(textContent);
         const voices = window.speechSynthesis.getVoices();
-        // Prefer a natural-sounding voice if available
         const preferredVoice = voices.find(v => (v.name.includes("Google") || v.name.includes("Natural")) && v.lang.includes("en"));
         if (preferredVoice) utterance.voice = preferredVoice as SpeechSynthesisVoice;
 
-        utterance.rate = 0.95; // Slightly slower for "cinematic" authority
+        utterance.rate = 0.95;
         utterance.pitch = 1.0;
         window.speechSynthesis.speak(utterance);
       }
@@ -151,7 +88,6 @@ export const AIAgentChat = () => {
           const command = response.split("|")[0];
           window.dispatchEvent(new CustomEvent("arena-command", { detail: command }));
 
-          // Navigation Logic for Chat
           if (command.startsWith("NAVIGATE_")) {
             const route = command.replace("NAVIGATE_", "").toLowerCase();
             switch(route) {
@@ -198,7 +134,8 @@ export const AIAgentChat = () => {
           className="fixed bottom-32 right-8 z-[100] w-14 h-14 rounded-2xl bg-white/10 backdrop-blur-xl border border-white/20 flex items-center justify-center group shadow-2xl"
         >
           <div className="absolute inset-0 bg-blue-600/20 rounded-2xl animate-pulse group-hover:bg-blue-600/40 transition-colors" />
-          <MessageSquare className="w-6 h-6 text-white relative z-10" />
+          <MessageSquare className="w-6 h-6 text-white relative z-10" aria-hidden="true" />
+          <span className="sr-only">Open AI Chat</span>
           <div className="absolute -top-1 -right-1 w-3 h-3 bg-blue-500 rounded-full border-2 border-black animate-bounce" />
         </motion.button>
       )}
@@ -234,12 +171,14 @@ export const AIAgentChat = () => {
                 <button
                   onClick={() => setIsMinimized(!isMinimized)}
                   className="p-2 hover:bg-white/5 rounded-lg transition-colors"
+                  aria-label={isMinimized ? "Maximize chat" : "Minimize chat"}
                 >
                   {isMinimized ? <Maximize2 className="w-4 h-4 text-white/40" /> : <Minimize2 className="w-4 h-4 text-white/40" />}
                 </button>
                 <button
                   onClick={() => setIsOpen(false)}
                   className="p-2 hover:bg-white/5 rounded-lg transition-colors text-white/40 hover:text-white"
+                  aria-label="Close chat"
                 >
                   <X className="w-4 h-4" />
                 </button>
@@ -270,7 +209,11 @@ export const AIAgentChat = () => {
                 </div>
 
                 {/* Messages */}
-                <div className="flex-grow overflow-y-auto p-6 space-y-6 scrollbar-hide">
+                <div
+                  className="flex-grow overflow-y-auto p-6 space-y-6 scrollbar-hide"
+                  aria-live="polite"
+                  aria-atomic="false"
+                >
                   {messages.map((msg, i) => (
                     <motion.div
                       key={i}
@@ -319,19 +262,21 @@ export const AIAgentChat = () => {
                     <div className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center gap-2">
                       <button
                         type="button"
-                        onClick={toggleVoiceInput}
+                        onClick={toggleListening}
                         className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all ${
                           isListening ? "bg-red-500 animate-pulse" : "bg-white/5 hover:bg-white/10"
                         }`}
+                        aria-label={isListening ? "Stop listening" : "Start voice input"}
                       >
-                        <Mic className={`w-4 h-4 ${isListening ? "text-white" : "text-white/40"}`} />
+                        <Mic className={`w-4 h-4 ${isListening ? "text-white" : "text-white/40"}`} aria-hidden="true" />
                       </button>
                       <button
                         type="submit"
                         disabled={isLoading || !input.trim()}
                         className="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center hover:bg-blue-500 transition-all disabled:opacity-50"
+                        aria-label="Send message"
                       >
-                        <Send className="w-4 h-4" />
+                        <Send className="w-4 h-4" aria-hidden="true" />
                       </button>
                     </div>
                   </div>
